@@ -1,0 +1,17 @@
+export const theme = {
+  bg: "#131110",
+  card: "#1E1D1B",
+  cardHi: "#2A2826",
+  cream: "#F0E6D3",
+  body: "#B8AFA2",
+  dim: "#807A72",
+  orange: "#D4643A",
+  orangeLt: "#E8805A",
+  white: "#FFF",
+  green: "#5CB06E",
+  blue: "#6C87D9",
+  purple: "#B682D6",
+  serif: "'Instrument Serif', Georgia, serif",
+  sans: "'DM Sans', sans-serif",
+  mono: "'JetBrains Mono', Consolas, monospace",
+};
