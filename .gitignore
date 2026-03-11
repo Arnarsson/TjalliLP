@@ -1,0 +1,12 @@
+.vercel
+node_modules/
+.DS_Store
+*.m4v
+*.pptx.pdf
+*.gif
+dashboard-frame*.png
+frames/
+capture-frames.mjs
+demo-dashboard-raw.mp4
+16296844-*.mp4
+5302616-*.mp4

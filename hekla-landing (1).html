@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hekla — AI-native business infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#131110;--card:#1E1D1B;--card-hi:#2A2826;--cream:#F0E6D3;--body:#B8AFA2;--dim:#807A72;--orange:#D4643A;--orange-lt:#E8805A;--white:#FFF;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',sans-serif;--mono:'JetBrains Mono',Consolas,monospace}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--body);font-family:var(--sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}body::before{content:'';position:fixed;inset:0;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:9999}a{color:var(--orange);text-decoration:none}.c{max-width:1100px;margin:0 auto;padding:0 2.5rem}.label{font-family:var(--mono);font-size:.65rem;color:var(--orange);letter-spacing:.3em;text-transform:uppercase}section{padding:7rem 0;border-top:1px solid var(--card-hi)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(19,17,16,.92);backdrop-filter:blur(24px)}.nav-logo{font-family:var(--serif);font-size:1.5rem;color:var(--cream)}.nav-r{display:flex;gap:2rem;align-items:center}.nav-r a{font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;transition:color .3s}.nav-r a:hover{color:var(--cream)}.nav-cta{background:var(--orange)!important;color:var(--white)!important;padding:.5rem 1.2rem;transition:background .3s!important}.nav-cta:hover{background:var(--orange-lt)!important}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 7rem;position:relative;overflow:hidden;border-top:none}.hero-glow{position:absolute;top:15%;right:-8%;width:650px;height:650px;background:radial-gradient(circle,rgba(212,100,58,.06) 0%,transparent 65%);pointer-events:none}.hero .c{position:relative;z-index:2}.hero h1{font-family:var(--serif);font-size:clamp(2.8rem,5.5vw,4.5rem);color:var(--cream);font-weight:400;line-height:1.1;margin-bottom:1.5rem}.hero h1 em{color:var(--orange);font-style:italic}.hero p{font-size:1.15rem;max-width:550px;margin-bottom:2.5rem;line-height:1.75}
+.btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--orange);color:var(--white);font-family:var(--mono);font-size:.82rem;padding:1rem 2rem;letter-spacing:.04em;transition:all .3s}.btn:hover{background:var(--orange-lt);color:var(--white);transform:translateY(-2px)}
+
+/* Editorial split */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}.split.r{direction:rtl}.split.r>*{direction:ltr}
+.split h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--cream);font-weight:400;line-height:1.25;margin-bottom:1rem}
+.split p{font-size:1rem;line-height:1.75;max-width:480px;margin-bottom:1rem}
+.split .hl{font-family:var(--serif);font-size:1.2rem;color:var(--cream);font-style:italic;padding-left:1.25rem;border-left:2px solid var(--orange);margin:1.5rem 0;max-width:450px;line-height:1.5}
+.visual{background:var(--card);aspect-ratio:4/3;position:relative;overflow:hidden}.visual::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 49px,rgba(212,100,58,.02) 49px,rgba(212,100,58,.02) 50px),repeating-linear-gradient(90deg,transparent,transparent 49px,rgba(212,100,58,.02) 49px,rgba(212,100,58,.02) 50px)}
+
+/* Products */
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+.prod{background:var(--card);padding:2.5rem 2rem;transition:transform .3s;position:relative}.prod:hover{transform:translateY(-3px)}.prod.feat{border:1px solid var(--orange)}
+.prod .tier{font-family:var(--mono);font-size:.62rem;color:var(--orange);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1rem}
+.prod h3{font-family:var(--serif);font-size:1.4rem;color:var(--cream);font-weight:400;margin-bottom:.65rem}
+.prod .d{font-size:.88rem;margin-bottom:1.5rem;line-height:1.65}
+.prod ul{list-style:none}.prod li{font-size:.83rem;padding:.35rem 0 .35rem 1.15rem;position:relative}.prod li::before{content:'▸';position:absolute;left:0;color:var(--orange)}
+.prod .price{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--card-hi);font-family:var(--mono);font-size:.9rem;color:var(--orange)}
+
+/* FAQ */
+.faq-list{max-width:700px;margin-top:2rem}.faq-item{border-bottom:1px solid var(--card-hi);padding:1.15rem 0}.faq-q{display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:1rem}.faq-q h3{font-family:var(--sans);font-size:.95rem;color:var(--cream);font-weight:500}.faq-toggle{font-size:1.1rem;color:var(--dim);transition:transform .3s;user-select:none}.faq-item.open .faq-toggle{transform:rotate(45deg)}.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}.faq-item.open .faq-a{max-height:250px;padding-top:.75rem}.faq-a p{font-size:.9rem;line-height:1.7}
+
+/* CTA */
+.final-cta{text-align:center;padding:8rem 0;position:relative}.final-cta::before{content:'';position:absolute;top:-2rem;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(circle,rgba(212,100,58,.04) 0%,transparent 65%);pointer-events:none}.final-cta h2,.final-cta p,.final-cta .btn{position:relative}.final-cta h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);color:var(--cream);font-weight:400;margin-bottom:1rem}.final-cta p{max-width:480px;margin:0 auto 2.5rem;font-size:1.05rem}
+
+footer{padding:2rem 0;border-top:1px solid var(--card-hi)}footer .c{display:flex;justify-content:space-between;align-items:center}.footer-brand{font-family:var(--serif);font-size:1rem;color:var(--dim)}.footer-links{display:flex;gap:2rem}.footer-links a{font-family:var(--mono);font-size:.65rem;color:var(--dim);letter-spacing:.08em}
+
+@media(max-width:800px){.split,.prod-grid{grid-template-columns:1fr}.split.r{direction:ltr}.nav-r{display:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}.anim{opacity:0}.anim.v{animation:fadeUp .7s ease-out forwards}
+</style>
+</head>
+<body>
+
+<nav><a href="/" class="nav-logo">Hekla</a><div class="nav-r"><a href="#platform">Platform</a><a href="#products">Products</a><a href="/launch" style="color:var(--cream)">20 Units →</a><a href="#cta" class="nav-cta">Get started</a></div></nav>
+
+<section class="hero"><div class="hero-glow"></div><div class="c">
+  <p class="label" style="margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .2s forwards">AI-NATIVE BUSINESS INFRASTRUCTURE</p>
+  <h1 style="opacity:0;animation:fadeUp .8s .4s forwards">Your business has a brain.<br>It just doesn't <em>remember</em> anything.</h1>
+  <p style="opacity:0;animation:fadeUp .8s .6s forwards">HEKLA gives your team persistent memory, autonomous agents, and private infrastructure — so the intelligence you build actually compounds. No cloud. No resets. No compromise.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .8s forwards"><a href="#cta" class="btn">Book a setup call →</a></div>
+</div></section>
+
+<section id="platform"><div class="c"><div class="split">
+  <div><p class="label" style="margin-bottom:1.5rem">THE SHIFT</p>
+  <h2>Chat answers questions.<br>HEKLA runs your business.</h2>
+  <p>ChatGPT resets every session. Your CRM doesn't know what happened in Monday's meeting. Your calendar doesn't talk to your inbox. Everything is fragmented.</p>
+  <div class="hl">HEKLA remembers everything. Acts on it. And gets sharper every day.</div>
+  <p>Private. Persistent. Tuned to your workflows. Running on hardware you own.</p></div>
+  <div class="visual"></div>
+</div></div></section>
+
+<section><div class="c"><div class="split r">
+  <div><p class="label" style="margin-bottom:1.5rem">MEMORY</p>
+  <h2>Every conversation. Every decision. Every relationship. Remembered.</h2>
+  <p>Import years of ChatGPT, Claude, and file history. Build a knowledge layer that never resets. The longer you use it, the more valuable it becomes.</p>
+  <div class="hl">The switching cost is permanent — because your knowledge lives here.</div></div>
+  <div class="visual"></div>
+</div></div></section>
+
+<section><div class="c"><div class="split">
+  <div><p class="label" style="margin-bottom:1.5rem">AGENTS</p>
+  <h2>They draft. You approve. They learn.</h2>
+  <p>Meeting prep, research, follow-ups, CRM updates, document generation — agents handle the predictable while you focus on decisions. Edge cases route to you.</p>
+  <p>Send a task from your phone. The agent executes and reports back. No coding. Natural language in, working systems out.</p></div>
+  <div class="visual"></div>
+</div></div></section>
+
+<section><div class="c"><div class="split r">
+  <div><p class="label" style="margin-bottom:1.5rem">PRIVATE BY DESIGN</p>
+  <h2>Your data. Your hardware. Your rules.</h2>
+  <p>Encrypted. On your VPN. On your own Mac mini. No cloud dependency. No third-party access. Every agent action logged and auditable.</p>
+  <div class="hl">EU sovereignty is the architecture, not a checkbox.</div></div>
+  <div class="visual"></div>
+</div></div></section>
+
+<section id="products"><div class="c">
+  <p class="label" style="margin-bottom:1.5rem">PRODUCTS</p>
+  <h2 style="font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.8rem);color:var(--cream);font-weight:400;margin-bottom:.5rem">Start small. Prove ROI. Scale.</h2>
+  <p style="max-width:550px;margin-bottom:0">One install base. Hardware, agents, workflows, and managed service.</p>
+  <div class="prod-grid">
+    <div class="prod"><div class="tier">PERSONAL</div><h3>Your encrypted second brain</h3><p class="d">For the people who refuse to lose context.</p><ul><li>Personal CRM with long-term memory</li><li>Memory API (import ChatGPT / Claude / files)</li><li>Unified inbox across all channels</li><li>Proactive meeting prep + alerts</li><li>Task → Agent from your phone</li><li>100% local on your hardware</li></ul><div class="price">From 20,000 DKK ex. VAT</div></div>
+    <div class="prod feat"><div class="tier">TEAM</div><h3>Shared intelligence. Individual privacy.</h3><p class="d">For teams that need to think together and act apart.</p><ul><li>Shared knowledge base — always current</li><li>Private context per person</li><li>Agent handoffs across workflows</li><li>Role-based access + audit logs</li><li>One cluster, everyone in sync</li><li>Mac mini per seat included</li></ul><div class="price">Pilot pricing available</div></div>
+    <div class="prod"><div class="tier">CLUSTER</div><h3>Your own AI datacenter</h3><p class="d">For regulated teams and AI-native firms.</p><ul><li>On-prem Mac mini cluster</li><li>Vector DB + data warehouse</li><li>Local models + heavy agents</li><li>"Hive mode" across nodes</li><li>Remote setup + managed ops</li><li>EU sovereignty by design</li></ul><div class="price">Custom engagement</div></div>
+  </div>
+</div></section>
+
+<section><div class="c">
+  <p class="label" style="margin-bottom:2rem">FAQ</p>
+  <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--cream);font-weight:400;margin-bottom:1rem">Questions we get asked.</h2>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><h3>What is HEKLA?</h3><span class="faq-toggle">+</span></div><div class="faq-a"><p>AI infrastructure on your own hardware. Persistent memory, autonomous agents, coordinated workflows — all encrypted and private. Not a chatbot. The infrastructure layer beneath it.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><h3>How is this different from ChatGPT?</h3><span class="faq-toggle">+</span></div><div class="faq-a"><p>ChatGPT resets every session and lives in the cloud. HEKLA is private, persistent, and agentic. It remembers everything, runs on your hardware, and executes tasks while you sleep.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><h3>Do I need technical skills?</h3><span class="faq-toggle">+</span></div><div class="faq-a"><p>No. You interact through natural language — from your phone, Slack, or Telegram. We handle everything. You're running within 7 days.</p></div></div>
+    <div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')"><h3>What about GDPR?</h3><span class="faq-toggle">+</span></div><div class="faq-a"><p>All data stays on your infrastructure. No cloud. Every agent action logged. EU sovereignty is the default architecture, not an add-on.</p></div></div>
+  </div>
+</div></section>
+
+<section class="final-cta" id="cta">
+  <div class="c">
+    <p class="label" style="margin-bottom:1.5rem">READY?</p>
+    <h2>The world gets HEKLA later.<br>You can own it now.</h2>
+    <p>Book a 20-minute intro. Or reserve one of the 20 launch units.</p>
+    <a href="mailto:hello@hekla.is" class="btn">hello@hekla.is →</a>
+  </div>
+</section>
+
+<footer><div class="c"><div class="footer-brand">Hekla</div><div class="footer-links"><a href="/launch">Launch</a><a href="mailto:hello@hekla.is">hello@hekla.is</a><a href="#">hekla.is</a></div></div></footer>
+
+<script>const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('v')})},{threshold:.08});document.querySelectorAll('.split,.prod,.faq-item').forEach(el=>{el.classList.add('anim');obs.observe(el)});</script>
+</body>
+</html>

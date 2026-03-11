@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet HEKLA — The Future is Personal</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#131110; --card:#1E1D1B; --card-hi:#2A2826;
+  --cream:#F0E6D3; --body:#B8AFA2; --dim:#807A72;
+  --orange:#D4643A; --orange-lt:#E8805A; --white:#FFF;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'JetBrains Mono',Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font-family:var(--sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* Grain */
+body::before{content:'';position:fixed;inset:0;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:9999}
+
+a{color:var(--orange);text-decoration:none}
+.c{max-width:1100px;margin:0 auto;padding:0 2.5rem}
+.label{font-family:var(--mono);font-size:.65rem;color:var(--orange);letter-spacing:.3em;text-transform:uppercase}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(19,17,16,.92);backdrop-filter:blur(24px)}
+.nav-logo{font-family:var(--serif);font-size:1.5rem;color:var(--cream)}
+.nav-r{display:flex;gap:2rem;align-items:center}
+.nav-r a{font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;transition:color .3s}
+.nav-r a:hover{color:var(--cream)}
+.nav-live{display:flex;align-items:center;gap:.5rem}
+.nav-live::before{content:'';width:8px;height:8px;background:var(--orange);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ═══ HERO — full viewport, cinematic ═══ */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 6rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(19,17,16,0) 0%,rgba(19,17,16,.3) 40%,rgba(19,17,16,.95) 80%,var(--bg) 100%);z-index:1}
+.hero .c{position:relative;z-index:2}
+.hero-pre{font-family:var(--mono);font-size:.7rem;color:var(--orange);letter-spacing:.35em;margin-bottom:1.5rem;text-transform:uppercase;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero h1{font-family:var(--serif);font-size:clamp(3.5rem,8vw,7rem);color:var(--cream);font-weight:400;line-height:1;margin-bottom:1rem;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero h1 em{color:var(--orange);font-style:italic}
+.hero-sub{font-size:1.15rem;max-width:500px;opacity:0;animation:fadeUp .8s .6s forwards}
+
+/* ═══ MANIFESTO — big editorial text ═══ */
+.manifesto{padding:8rem 0;border-top:1px solid var(--card-hi)}
+.manifesto h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);font-weight:400;line-height:1.3;max-width:800px;margin-bottom:2rem}
+.manifesto p{font-size:1.1rem;max-width:650px;line-height:1.8;margin-bottom:1.5rem}
+.manifesto p strong{color:var(--cream)}
+.manifesto .highlight{font-family:var(--serif);font-size:1.4rem;color:var(--cream);font-style:italic;margin:2.5rem 0;padding-left:1.5rem;border-left:2px solid var(--orange);max-width:600px;line-height:1.5}
+
+/* ═══ PRODUCT TIERS — editorial, not grid ═══ */
+.tier{padding:6rem 0;border-top:1px solid var(--card-hi)}
+.tier-split{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.tier-content .label{margin-bottom:1.5rem}
+.tier-content h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--cream);font-weight:400;line-height:1.2;margin-bottom:1.5rem}
+.tier-content p{margin-bottom:1.25rem;line-height:1.75}
+.tier-features{list-style:none;margin:2rem 0}
+.tier-features li{padding:.6rem 0 .6rem 1.5rem;position:relative;font-size:.95rem;border-bottom:1px solid rgba(42,40,38,.5)}
+.tier-features li::before{content:'▸';position:absolute;left:0;color:var(--orange)}
+.tier-features li:last-child{border:none}
+.tier-price{font-family:var(--mono);font-size:1.5rem;color:var(--orange);margin-top:2rem}
+.tier-price-note{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-top:.35rem}
+.tier-badge{display:inline-block;margin-top:1.5rem;padding:.6rem 1.5rem;border:1px solid var(--orange);font-family:var(--mono);font-size:.72rem;color:var(--orange);letter-spacing:.15em;text-transform:uppercase}
+
+/* Photo placeholder */
+.tier-photo{background:var(--card);aspect-ratio:3/4;position:relative;overflow:hidden}
+.tier-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,var(--bg) 100%)}
+.tier-photo .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.65rem;color:var(--dim);letter-spacing:.15em;opacity:.5}
+
+/* ═══ EVERYWHERE — lifestyle section ═══ */
+.everywhere{padding:8rem 0;border-top:1px solid var(--card-hi)}
+.everywhere h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);color:var(--cream);font-weight:400;margin-bottom:3rem;max-width:700px}
+.scene-list{display:grid;gap:0;max-width:700px}
+.scene{display:grid;grid-template-columns:140px 1fr;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--card-hi);align-items:baseline}
+.scene-where{font-family:var(--serif);font-size:1.1rem;color:var(--cream);font-style:italic}
+.scene-what{font-size:.95rem}
+.scene:last-child{border:none}
+
+/* ═══ CTA — scarcity-driven close ═══ */
+.final{padding:8rem 0;border-top:1px solid var(--card-hi)}
+.final h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);color:var(--cream);font-weight:400;margin-bottom:1rem}
+.final p{font-size:1.1rem;max-width:550px;margin-bottom:2.5rem}
+.final-box{background:var(--card);border:1px solid var(--orange);padding:3rem;max-width:600px}
+.final-box h3{font-family:var(--serif);font-size:1.8rem;color:var(--cream);font-weight:400;margin-bottom:.5rem}
+.final-box .sub{font-family:var(--mono);font-size:.75rem;color:var(--orange);letter-spacing:.12em;margin-bottom:1.5rem}
+.final-box a{display:inline-flex;align-items:center;gap:.7rem;background:var(--orange);color:var(--white);font-family:var(--mono);font-size:.85rem;padding:1rem 2.25rem;letter-spacing:.04em;transition:all .3s}
+.final-box a:hover{background:var(--orange-lt);color:var(--white);transform:translateY(-2px)}
+.final-note{font-family:var(--mono);font-size:.7rem;color:var(--dim);margin-top:2rem;max-width:500px;line-height:1.6}
+
+/* ═══ FOOTER ═══ */
+footer{padding:2rem 0;border-top:1px solid var(--card-hi)}
+footer .c{display:flex;justify-content:space-between;align-items:center}
+.footer-brand{font-family:var(--serif);font-size:1rem;color:var(--dim)}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-family:var(--mono);font-size:.65rem;color:var(--dim);letter-spacing:.08em}
+
+/* ═══ Responsive ═══ */
+@media(max-width:800px){
+  .tier-split{grid-template-columns:1fr}
+  .tier-photo{aspect-ratio:16/9}
+  .scene{grid-template-columns:1fr;gap:.3rem}
+  .nav-r{display:none}
+}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.anim{opacity:0}
+.anim.visible{animation:fadeUp .7s ease-out forwards}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Hekla</a>
+  <div class="nav-r">
+    <span class="nav-live label">20 UNITS — SPRING 2026</span>
+    <a href="#reserve">Reserve yours</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="c">
+    <div class="hero-pre">THE FUTURE IS PERSONAL</div>
+    <h1>Meet<br><em>HEKLA</em></h1>
+    <p class="hero-sub">The world gets HEKLA later. You can own it now.</p>
+  </div>
+</section>
+
+<!-- ═══ MANIFESTO ═══ -->
+<section class="manifesto">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">HEKLA PERSONAL</p>
+    <h2>The most powerful person in any room is the one who controls the time of the top.</h2>
+    <p>Every great CEO has always had one person who knows everything. And reminds them of everything.</p>
+    <p>Their schedule. Their people. Their priorities. Their inbox.</p>
+    <p><strong>That person was always called PA. We call it HEKLA.</strong></p>
+    <div class="highlight">This is not a subscription to a chatbot. This is infrastructure for how you perform.</div>
+    <p>We are releasing 20 units this spring. 15 HEKLA Personal. 5 HEKLA High Performance. That is it.</p>
+    <p style="color:var(--dim)">Next units will not be available for now. HEKLA Teams & HEKLA Teams High-Performance Pilots — autumn 2026.</p>
+  </div>
+</section>
+
+<!-- ═══ HEKLA PERSONAL ═══ -->
+<section class="tier">
+  <div class="c">
+    <div class="tier-split">
+      <div class="tier-content">
+        <p class="label">HEKLA PERSONAL</p>
+        <h2>Your encrypted second brain.</h2>
+        <ul class="tier-features">
+          <li>Personal CRM with long-term memory — remembers everyone, everything, always</li>
+          <li>Memory API: feed HEKLA with years of ChatGPT, emails, and your files</li>
+          <li>Unified inbox: LinkedIn, WhatsApp, Emails — one priority view</li>
+          <li>Proactive meeting prep, smart alerts and task execution</li>
+          <li>Works from your phone — task becomes agent action instantly</li>
+          <li>Runs privately on your own local hardware</li>
+        </ul>
+        <div class="tier-price">20,000 DKK</div>
+        <div class="tier-price-note">ex. VAT · ex. hardware</div>
+        <p style="font-size:.88rem;margin-top:.75rem">Hardware available as an add-on — your system, your data, your control.</p>
+        <div class="tier-badge">15 UNITS AVAILABLE — SPRING 2026</div>
+      </div>
+      <div class="tier-photo"><div class="ph">EDITORIAL PHOTOGRAPHY</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HEKLA HIGH PERFORMANCE ═══ -->
+<section class="tier">
+  <div class="c">
+    <div class="tier-split" style="direction:rtl">
+      <div class="tier-content" style="direction:ltr">
+        <p class="label">HEKLA PERSONAL — HIGH PERFORMANCE</p>
+        <h2>For the people who operate at full speed.</h2>
+        <ul class="tier-features">
+          <li>Everything in HEKLA Personal</li>
+          <li>Custom agent training on your decisions and communication style</li>
+          <li>Full command layer: inbox, calendar, contacts — always in sync</li>
+          <li>Dedicated online onboarding sprint and hardware optimisation session</li>
+          <li>Monthly performance review with the HEKLA team in 2026</li>
+          <li>HEKLA Ambient — (BETA)</li>
+          <li>Direct line to the team in 2026</li>
+          <li>Volcano Club membership *</li>
+        </ul>
+        <div class="tier-price">60,000 DKK</div>
+        <div class="tier-price-note">ex. VAT · ex. hardware</div>
+        <p style="font-size:.88rem;margin-top:.75rem">Hardware upgrade available as an add-on — your system, your data, your control.</p>
+        <div class="tier-badge">5 UNITS AVAILABLE — SPRING 2026</div>
+        <p style="font-size:.78rem;color:var(--dim);margin-top:1.5rem;font-style:italic">* Volcano Club members are first in line when HEKLA opens to investors.</p>
+      </div>
+      <div class="tier-photo" style="direction:ltr"><div class="ph">EDITORIAL PHOTOGRAPHY</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EVERYWHERE ═══ -->
+<section class="everywhere">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">THE FUTURE IS PERSONAL</p>
+    <h2>Your personal assistant. Everywhere you are.</h2>
+    <div class="scene-list">
+      <div class="scene"><div class="scene-where">At home</div><div class="scene-what">Briefed, prepared, inbox cleared before you sit down.</div></div>
+      <div class="scene"><div class="scene-where">At work</div><div class="scene-what">Every meeting prepped, every priority surfaced.</div></div>
+      <div class="scene"><div class="scene-where">At the gym</div><div class="scene-what">Your day is managed while you are away from the screen.</div></div>
+      <div class="scene"><div class="scene-where">In the supermarket</div><div class="scene-what">Finds discounted goods. Checks your list. Orders what's missing.</div></div>
+      <div class="scene"><div class="scene-where">Right now</div><div class="scene-what">Now let me call your mum — it's her birthday.</div></div>
+    </div>
+    <div class="highlight" style="font-family:var(--serif);font-size:1.3rem;color:var(--cream);font-style:italic;margin-top:3rem;padding-left:1.5rem;border-left:2px solid var(--orange);max-width:550px">Hardware you own. Data that never leaves. Intelligence that is yours.</div>
+  </div>
+</section>
+
+<!-- ═══ RESERVE ═══ -->
+<section class="final" id="reserve">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">LIMITED AVAILABILITY</p>
+    <h2>The window is tiny. Meet HEKLA.</h2>
+    <p>15 Personal + 5 High Performance units. Every unit configured one-to-one by the HEKLA team. Launch pricing and features — some might not be available again.</p>
+    <div class="final-box">
+      <h3>Reply to reserve your unit.</h3>
+      <div class="sub">20 units · The future is here</div>
+      <a href="mailto:hello@hekla.is?subject=HEKLA — Reserve my unit">Reserve now →</a>
+    </div>
+    <p class="final-note">We don't ship until it's right. You'll be kept informed every step of the way. Next units: we honestly don't know.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="c">
+    <div class="footer-brand">Hekla</div>
+    <div class="footer-links">
+      <a href="mailto:hello@hekla.is">hello@hekla.is</a>
+      <a href="#">hekla.is</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll-triggered animations
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.anim,.tier-content,.scene').forEach(el => {
+  el.classList.add('anim');
+  obs.observe(el);
+});
+</script>
+</body>
+</html>

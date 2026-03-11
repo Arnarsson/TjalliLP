@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEKLA Personal — Your encrypted second brain</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#131110;--card:#1E1D1B;--card-hi:#2A2826;--cream:#F0E6D3;--body:#B8AFA2;--dim:#807A72;--orange:#D4643A;--orange-lt:#E8805A;--white:#FFF;--serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',sans-serif;--mono:'JetBrains Mono',Consolas,monospace}*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--body);font-family:var(--sans);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}body::before{content:'';position:fixed;inset:0;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:9999}a{color:var(--orange);text-decoration:none}.c{max-width:1000px;margin:0 auto;padding:0 2.5rem}.label{font-family:var(--mono);font-size:.65rem;color:var(--orange);letter-spacing:.3em;text-transform:uppercase}section{padding:6rem 0;border-top:1px solid var(--card-hi)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(19,17,16,.92);backdrop-filter:blur(24px)}.nav-logo{font-family:var(--serif);font-size:1.5rem;color:var(--cream)}.nav-r{display:flex;gap:2rem;align-items:center}.nav-r a{font-family:var(--mono);font-size:.68rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;transition:color .3s}.nav-r a:hover{color:var(--cream)}
+
+.hero{min-height:85vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 6rem;position:relative;border-top:none}.hero .c{position:relative;z-index:2}.hero h1{font-family:var(--serif);font-size:clamp(2.5rem,5vw,3.8rem);color:var(--cream);font-weight:400;line-height:1.1;margin-bottom:1.25rem}.hero h1 em{color:var(--orange);font-style:italic}.hero p{font-size:1.1rem;max-width:530px;margin-bottom:2rem;line-height:1.75}
+.btn{display:inline-flex;align-items:center;gap:.65rem;background:var(--orange);color:var(--white);font-family:var(--mono);font-size:.82rem;padding:1rem 2rem;letter-spacing:.04em;transition:all .3s}.btn:hover{background:var(--orange-lt);color:var(--white);transform:translateY(-2px)}.btn-g{background:transparent;border:1px solid var(--card-hi);color:var(--body)}.btn-g:hover{border-color:var(--orange);color:var(--cream);background:transparent;transform:none}
+
+/* Features as editorial list */
+.feat-list{max-width:700px;margin-top:2.5rem}.feat{display:grid;grid-template-columns:140px 1fr;gap:1.5rem;padding:1.25rem 0;border-bottom:1px solid var(--card-hi);align-items:baseline}.feat-label{font-family:var(--serif);font-size:1.05rem;color:var(--cream);font-style:italic}.feat-desc{font-size:.95rem}.feat:last-child{border:none}
+
+/* Pricing */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem}
+.price-card{background:var(--card);padding:2.5rem 2rem;position:relative}.price-card.feat{border:1px solid var(--orange)}
+.price-card .tier{font-family:var(--mono);font-size:.6rem;color:var(--orange);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1rem}
+.price-card h3{font-family:var(--serif);font-size:1.4rem;color:var(--cream);font-weight:400;margin-bottom:.75rem}
+.price-card p{font-size:.88rem;margin-bottom:1rem;line-height:1.65}
+.price-card ul{list-style:none;margin-bottom:1.5rem}.price-card li{font-size:.82rem;padding:.3rem 0 .3rem 1rem;position:relative}.price-card li::before{content:'▸';position:absolute;left:0;color:var(--orange)}
+.price-amount{font-family:var(--mono);font-size:1.4rem;color:var(--orange);margin-bottom:.25rem}
+.price-note{font-family:var(--mono);font-size:.65rem;color:var(--dim)}
+.price-badge{display:inline-block;margin-top:1.25rem;padding:.5rem 1.25rem;border:1px solid var(--orange);font-family:var(--mono);font-size:.68rem;color:var(--orange);letter-spacing:.12em;text-transform:uppercase}
+
+/* Scene list */
+.scenes{max-width:650px;margin-top:2.5rem}.sc{display:grid;grid-template-columns:120px 1fr;gap:1.25rem;padding:1rem 0;border-bottom:1px solid var(--card-hi);align-items:baseline}.sc-w{font-family:var(--serif);font-size:1.05rem;color:var(--cream);font-style:italic}.sc:last-child{border:none}
+
+/* Highlight quote */
+.hl{font-family:var(--serif);font-size:1.25rem;color:var(--cream);font-style:italic;padding-left:1.5rem;border-left:2px solid var(--orange);margin:2rem 0;max-width:550px;line-height:1.5}
+
+/* CTA */
+.final{padding:7rem 0;border-top:1px solid var(--card-hi)}.final-box{background:var(--card);border:1px solid var(--orange);padding:2.5rem;max-width:550px}.final-box h3{font-family:var(--serif);font-size:1.6rem;color:var(--cream);font-weight:400;margin-bottom:.4rem}.final-box .sub{font-family:var(--mono);font-size:.72rem;color:var(--orange);letter-spacing:.1em;margin-bottom:1.25rem}
+
+footer{padding:1.75rem 0;border-top:1px solid var(--card-hi)}footer .c{display:flex;justify-content:space-between;align-items:center}.footer-brand{font-family:var(--serif);font-size:1rem;color:var(--dim)}.footer-meta{font-family:var(--mono);font-size:.62rem;color:var(--dim)}
+
+@media(max-width:700px){.pricing-grid{grid-template-columns:1fr}.feat,.sc{grid-template-columns:1fr;gap:.3rem}.nav-r{display:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<nav><a href="/" class="nav-logo">Hekla</a><div class="nav-r"><a href="/">← Platform</a><a href="/launch" style="color:var(--cream)">20 Units →</a></div></nav>
+
+<section class="hero" style="border-top:none"><div class="c">
+  <p class="label" style="margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .2s forwards">HEKLA PERSONAL</p>
+  <h1 style="opacity:0;animation:fadeUp .8s .3s forwards">Every great leader had someone who remembered <em>everything.</em></h1>
+  <p style="opacity:0;animation:fadeUp .8s .5s forwards">Their schedule. Their people. Their priorities. Their inbox. That person was always called PA. We call it HEKLA.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .7s forwards"><a href="#pricing" class="btn">See pricing →</a><a href="#features" class="btn btn-g">What's included</a></div>
+</div></section>
+
+<section id="features"><div class="c">
+  <p class="label" style="margin-bottom:2rem">WHAT HEKLA DOES FOR YOU</p>
+  <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--cream);font-weight:400;margin-bottom:.5rem">Your encrypted second brain.</h2>
+  <p style="max-width:600px;margin-bottom:0">Configured to you — your clients, your projects, your communication style. Running on your own hardware.</p>
+  <div class="feat-list">
+    <div class="feat"><div class="feat-label">Memory</div><div class="feat-desc">Remembers everyone, everything, always. Personal CRM with long-term context that compounds across every conversation.</div></div>
+    <div class="feat"><div class="feat-label">Import</div><div class="feat-desc">Feed HEKLA with years of ChatGPT, emails, and your files. Your history becomes searchable intelligence.</div></div>
+    <div class="feat"><div class="feat-label">Inbox</div><div class="feat-desc">LinkedIn, WhatsApp, Emails — one priority view. Never miss what matters. Everything else, handled.</div></div>
+    <div class="feat"><div class="feat-label">Prep</div><div class="feat-desc">Proactive meeting briefings, smart alerts, and task execution. Walk into every room prepared.</div></div>
+    <div class="feat"><div class="feat-label">Execute</div><div class="feat-desc">Works from your phone — task becomes agent action instantly. No coding. Natural language in, results out.</div></div>
+    <div class="feat"><div class="feat-label">Private</div><div class="feat-desc">Runs on your own local hardware. No cloud. No third parties. NDA-safe from day one. Your data never leaves.</div></div>
+  </div>
+</div></section>
+
+<section><div class="c">
+  <p class="label" style="margin-bottom:2rem">EVERYWHERE YOU ARE</p>
+  <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--cream);font-weight:400;margin-bottom:.5rem">Your personal assistant. Always on.</h2>
+  <div class="scenes">
+    <div class="sc"><div class="sc-w">At home</div><div>Briefed, prepared, inbox cleared before you sit down.</div></div>
+    <div class="sc"><div class="sc-w">At work</div><div>Every meeting prepped, every priority surfaced.</div></div>
+    <div class="sc"><div class="sc-w">At the gym</div><div>Your day is managed while you are away from the screen.</div></div>
+    <div class="sc"><div class="sc-w">In the store</div><div>Finds deals. Checks your list. Orders what's missing.</div></div>
+    <div class="sc"><div class="sc-w">Right now</div><div>Now let me call your mum — it's her birthday.</div></div>
+  </div>
+  <div class="hl" style="margin-top:3rem">Hardware you own. Data that never leaves. Intelligence that is yours.</div>
+</div></section>
+
+<section id="pricing"><div class="c">
+  <p class="label" style="margin-bottom:2rem">SPRING 2026</p>
+  <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--cream);font-weight:400;margin-bottom:.5rem">20 units. That's it.</h2>
+  <p style="max-width:550px">This is not a subscription to a chatbot. This is infrastructure for how you perform. Launch pricing — some features might not be available again.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="tier">HEKLA PERSONAL</div>
+      <h3>Your encrypted second brain.</h3>
+      <p>Everything you need to operate at a higher level — memory, inbox, agents, execution.</p>
+      <ul>
+        <li>Personal CRM with long-term memory</li>
+        <li>Memory API: import years of history</li>
+        <li>Unified inbox: LinkedIn, WhatsApp, Email</li>
+        <li>Proactive meeting prep + alerts</li>
+        <li>Task → Agent execution from your phone</li>
+        <li>Runs on your own local hardware</li>
+      </ul>
+      <div class="price-amount">20,000 DKK</div>
+      <div class="price-note">ex. VAT · ex. hardware · Hardware as add-on</div>
+      <div class="price-badge">15 UNITS — SPRING 2026</div>
+    </div>
+    <div class="price-card feat">
+      <div class="tier">HEKLA HIGH PERFORMANCE</div>
+      <h3>For the people who operate at full speed.</h3>
+      <p>Everything in Personal, plus custom training, full command layer, and direct access to the team.</p>
+      <ul>
+        <li>Everything in HEKLA Personal</li>
+        <li>Custom agent training on your style</li>
+        <li>Full command: inbox, calendar, contacts</li>
+        <li>Dedicated onboarding sprint</li>
+        <li>Monthly review with HEKLA team</li>
+        <li>HEKLA Ambient (BETA)</li>
+        <li>Direct line to the team in 2026</li>
+        <li>Volcano Club membership *</li>
+      </ul>
+      <div class="price-amount">60,000 DKK</div>
+      <div class="price-note">ex. VAT · ex. hardware · Hardware upgrade as add-on</div>
+      <div class="price-badge">5 UNITS — SPRING 2026</div>
+      <p style="font-size:.75rem;color:var(--dim);margin-top:1.25rem;font-style:italic">* Volcano Club members are first in line when HEKLA opens to investors.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="final"><div class="c">
+  <p class="label" style="margin-bottom:2rem">LIMITED AVAILABILITY</p>
+  <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--cream);font-weight:400;margin-bottom:1rem">The window is tiny. Meet HEKLA.</h2>
+  <p style="max-width:500px;margin-bottom:2rem">Every unit configured one-to-one by the HEKLA team. Next units: we honestly don't know.</p>
+  <div class="final-box">
+    <h3>Reply to reserve your unit.</h3>
+    <div class="sub">20 units · The future is personal</div>
+    <a href="mailto:hello@hekla.is?subject=HEKLA Personal — Reserve" class="btn">Reserve now →</a>
+  </div>
+  <p style="font-family:var(--mono);font-size:.7rem;color:var(--dim);margin-top:2rem;line-height:1.6;max-width:450px">We don't ship until it's right. You'll be kept informed every step of the way.</p>
+</div></section>
+
+<footer><div class="c"><div class="footer-brand">Hekla</div><div class="footer-meta">Hekla · Copenhagen · © 2026</div></div></footer>
+</body>
+</html>

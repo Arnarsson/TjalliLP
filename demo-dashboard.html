@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEKLA Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #131110;
+  --card: #1E1D1B;
+  --card-hi: #2A2826;
+  --cream: #F0E6D3;
+  --body: #B8AFA2;
+  --dim: #807A72;
+  --orange: #D4643A;
+  --orange-lt: #E8805A;
+  --white: #FFF;
+  --green: #5CB06E;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  width: 1440px;
+  height: 900px;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Film grain overlay like HEKLA site */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: .015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ═══════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes barGrow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes cursorBlink {
+  0%, 100% { border-right-color: var(--orange); }
+  50% { border-right-color: transparent; }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,100,58,0); }
+  50% { box-shadow: 0 0 20px 4px rgba(212,100,58,.12); }
+}
+
+@keyframes borderDraw {
+  from { border-color: transparent; }
+  to { border-color: var(--orange); }
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+  to { width: var(--progress); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: .5; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes navReveal {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes accentLine {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar {
+  width: 220px;
+  background: var(--bg);
+  border-right: 1px solid var(--card-hi);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  flex-shrink: 0;
+  animation: fadeIn .6s ease-out;
+}
+
+.sidebar-brand {
+  padding: 0 1.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  animation: slideRight .7s ease-out .2s both;
+}
+
+.sidebar-logo {
+  width: 28px;
+  height: 28px;
+  background: var(--orange);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 400;
+  animation: scaleIn .5s ease-out .3s both;
+}
+
+.sidebar-brand-text {
+  font-family: var(--mono);
+  font-size: .75rem;
+  color: var(--cream);
+  letter-spacing: .15em;
+  font-weight: 600;
+}
+
+.sidebar-brand-sub {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--dim);
+  letter-spacing: .04em;
+  margin-top: 1px;
+}
+
+.sidebar-nav { flex: 1; padding: .5rem 0; }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .65rem 1.5rem;
+  color: var(--dim);
+  font-size: .82rem;
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+  opacity: 0;
+  animation: navReveal .5s ease-out both;
+}
+
+.nav-item:nth-child(1) { animation-delay: .4s; }
+.nav-item:nth-child(2) { animation-delay: .5s; }
+.nav-item:nth-child(3) { animation-delay: .6s; }
+.nav-item:nth-child(4) { animation-delay: .7s; }
+.nav-item:nth-child(5) { animation-delay: .8s; }
+.nav-item:nth-child(6) { animation-delay: .9s; }
+.nav-item:nth-child(7) { animation-delay: 1.0s; }
+.nav-item:nth-child(8) { animation-delay: 1.1s; }
+.nav-item:nth-child(9) { animation-delay: 1.2s; }
+
+.nav-item.active {
+  color: var(--cream);
+  background: var(--card);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--orange);
+  border-radius: 0 2px 2px 0;
+  animation: accentLine .4s ease-out .5s both;
+  transform-origin: top;
+}
+
+.nav-icon {
+  width: 18px;
+  height: 18px;
+  opacity: .6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .7rem;
+}
+
+.nav-item.active .nav-icon { opacity: 1; color: var(--orange); }
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: .55rem;
+  padding: .15rem .45rem;
+  border-radius: 10px;
+  font-weight: 600;
+  animation: scaleIn .3s ease-out 1.4s both;
+}
+
+/* Quick actions card */
+.sidebar-actions {
+  margin: .75rem 1rem;
+  background: rgba(212,100,58,.08);
+  border: 1px solid rgba(212,100,58,.2);
+  border-radius: 8px;
+  padding: .75rem 1rem;
+  animation: fadeUp .6s ease-out 1.6s both;
+}
+
+.sidebar-actions-title {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--orange);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .3rem 0;
+  font-size: .72rem;
+  color: var(--cream);
+}
+
+.action-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--orange);
+  border-radius: 50%;
+}
+
+.sidebar-section {
+  padding: .75rem 1.5rem .5rem;
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--dim);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeIn .5s ease-out 1.8s both;
+}
+
+.sidebar-recent-item {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .45rem 1.5rem;
+  color: var(--dim);
+  font-size: .78rem;
+  animation: navReveal .4s ease-out 2s both;
+}
+
+.sidebar-recent-item:nth-child(2) { animation-delay: 2.1s; }
+
+.recent-icon {
+  width: 16px;
+  height: 16px;
+  background: var(--card-hi);
+  border-radius: 3px;
+}
+
+/* ═══ MAIN ═══ */
+.main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+/* Top bar */
+.top-bar {
+  background: var(--card);
+  border-bottom: 1px solid var(--card-hi);
+  padding: .6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: .7rem;
+  animation: fadeIn .5s ease-out .3s both;
+}
+
+.top-bar-left {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.top-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: dotPulse 2s ease-in-out infinite .5s;
+}
+
+.top-priority {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: var(--dim);
+}
+
+.top-done { color: var(--green); }
+
+/* Header */
+.header {
+  padding: 2rem 2.5rem 1.5rem;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.header-date {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--dim);
+  letter-spacing: .12em;
+  margin-bottom: .5rem;
+  animation: fadeIn .6s ease-out .5s both;
+}
+
+.header-greeting {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.1;
+  animation: fadeUp .8s ease-out .6s both;
+}
+
+.header-greeting em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.header-sub {
+  font-family: var(--sans);
+  font-size: .85rem;
+  color: var(--dim);
+  margin-top: .4rem;
+  animation: fadeUp .8s ease-out .8s both;
+}
+
+.header-right {
+  text-align: right;
+}
+
+.header-time {
+  font-family: var(--mono);
+  font-size: 2.8rem;
+  color: var(--cream);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.02em;
+  animation: fadeIn .6s ease-out .5s both;
+}
+
+.header-status {
+  font-family: var(--mono);
+  font-size: .6rem;
+  color: var(--dim);
+  letter-spacing: .15em;
+  margin-top: .4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .4rem;
+  animation: fadeIn .4s ease-out .7s both;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Stats bar */
+.stats {
+  display: flex;
+  gap: 0;
+  padding: 0 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: .8rem 1.5rem .8rem 0;
+  border-right: 1px solid var(--card-hi);
+  min-width: 120px;
+}
+
+.stat:last-child { border-right: none; }
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--dim);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: .25rem;
+  animation: fadeIn .5s ease-out 1s both;
+}
+
+.stat-num {
+  font-family: var(--mono);
+  font-size: 1.8rem;
+  color: var(--cream);
+  font-weight: 600;
+  line-height: 1;
+  animation: countUp .6s ease-out both;
+}
+
+.stat:nth-child(1) .stat-num { animation-delay: 1.1s; }
+.stat:nth-child(2) .stat-num { animation-delay: 1.2s; }
+.stat:nth-child(3) .stat-num { animation-delay: 1.3s; }
+.stat:nth-child(4) .stat-num { animation-delay: 1.4s; }
+.stat:nth-child(5) .stat-num { animation-delay: 1.5s; }
+
+.stat-change {
+  font-family: var(--mono);
+  font-size: .6rem;
+  margin-top: .2rem;
+  animation: fadeIn .4s ease-out 1.8s both;
+}
+
+.stat-change.up { color: var(--green); }
+.stat-change.down { color: var(--orange); }
+
+/* ═══ CONTENT GRID ═══ */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1.25rem;
+  margin: 0 2.5rem 1.5rem;
+}
+
+/* Agent Activity */
+.agent-panel {
+  background: var(--card);
+  border: 1px solid var(--card-hi);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  animation: fadeUp .7s ease-out 1.5s both;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--dim);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.section-title span { color: var(--orange); }
+
+.section-link {
+  font-family: var(--mono);
+  font-size: .6rem;
+  color: var(--orange);
+  letter-spacing: .06em;
+}
+
+/* Agent items */
+.agent-item {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .65rem 0;
+  border-bottom: 1px solid var(--card-hi);
+  opacity: 0;
+  animation: slideRight .5s ease-out both;
+}
+
+.agent-item:nth-child(2) { animation-delay: 1.7s; }
+.agent-item:nth-child(3) { animation-delay: 1.9s; }
+.agent-item:nth-child(4) { animation-delay: 2.1s; }
+.agent-item:nth-child(5) { animation-delay: 2.3s; }
+
+.agent-item:last-child { border-bottom: none; }
+
+.agent-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: .6rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.agent-avatar.inbox { background: rgba(212,100,58,.15); color: var(--orange); }
+.agent-avatar.research { background: rgba(92,176,110,.15); color: var(--green); }
+.agent-avatar.calendar { background: rgba(108,135,217,.15); color: #6C87D9; }
+.agent-avatar.crm { background: rgba(182,130,214,.15); color: #B682D6; }
+
+.agent-info { flex: 1; min-width: 0; }
+
+.agent-name {
+  font-size: .82rem;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.agent-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.agent-status-dot.running { background: var(--green); animation: pulse 2s ease-in-out infinite; }
+.agent-status-dot.idle { background: var(--dim); }
+.agent-status-dot.queued { background: var(--orange); animation: pulse 1.5s ease-in-out infinite; }
+
+.agent-desc {
+  font-size: .7rem;
+  color: var(--dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agent-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.agent-time {
+  font-family: var(--mono);
+  font-size: .6rem;
+  color: var(--dim);
+}
+
+.agent-count {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--orange);
+  margin-top: .1rem;
+}
+
+/* Timeline / Work Stream */
+.timeline-panel {
+  background: var(--card);
+  border: 1px solid var(--card-hi);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  animation: fadeUp .7s ease-out 1.7s both;
+}
+
+.timeline-item {
+  display: flex;
+  gap: .75rem;
+  padding: .6rem 0;
+  position: relative;
+  opacity: 0;
+  animation: slideLeft .5s ease-out both;
+}
+
+.timeline-item:nth-child(2) { animation-delay: 2s; }
+.timeline-item:nth-child(3) { animation-delay: 2.2s; }
+.timeline-item:nth-child(4) { animation-delay: 2.4s; }
+.timeline-item:nth-child(5) { animation-delay: 2.6s; }
+.timeline-item:nth-child(6) { animation-delay: 2.8s; }
+
+.timeline-dot-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--card-hi);
+  border: 2px solid var(--dim);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.timeline-dot.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.timeline-line {
+  width: 1px;
+  flex: 1;
+  background: var(--card-hi);
+  margin-top: 4px;
+}
+
+.timeline-content { flex: 1; min-width: 0; }
+
+.timeline-title {
+  font-size: .8rem;
+  color: var(--cream);
+}
+
+.timeline-sub {
+  font-size: .65rem;
+  color: var(--dim);
+  margin-top: .1rem;
+}
+
+.timeline-time {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--dim);
+  margin-top: .2rem;
+}
+
+/* ═══ BOTTOM ROW ═══ */
+.bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem;
+  margin: 0 2.5rem 2rem;
+}
+
+/* Issues card */
+.issues-card {
+  background: var(--card);
+  border: 1px solid var(--card-hi);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  animation: fadeUp .7s ease-out 2s both;
+}
+
+.issues-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+}
+
+.issue-mini {
+  padding: .6rem .75rem;
+  border-radius: 6px;
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--card-hi);
+  opacity: 0;
+  animation: scaleIn .4s ease-out both;
+}
+
+.issue-mini:nth-child(1) { animation-delay: 2.3s; }
+.issue-mini:nth-child(2) { animation-delay: 2.4s; }
+.issue-mini:nth-child(3) { animation-delay: 2.5s; }
+.issue-mini:nth-child(4) { animation-delay: 2.6s; }
+
+.issue-mini.active {
+  border-color: var(--orange);
+  background: rgba(212,100,58,.06);
+}
+
+.issue-mini-num {
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  color: var(--cream);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.issue-mini.active .issue-mini-num { color: var(--orange); }
+
+.issue-mini-label {
+  font-family: var(--mono);
+  font-size: .5rem;
+  color: var(--dim);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-top: .2rem;
+}
+
+.issue-mini.active .issue-mini-label { color: var(--orange); }
+
+/* Memory card */
+.memory-card {
+  background: var(--card);
+  border: 1px solid var(--card-hi);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  animation: fadeUp .7s ease-out 2.2s both;
+}
+
+.memory-bar {
+  margin-top: .75rem;
+}
+
+.memory-bar-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .35rem;
+}
+
+.memory-bar-text {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--dim);
+  letter-spacing: .06em;
+}
+
+.memory-bar-num {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--cream);
+}
+
+.memory-track {
+  height: 4px;
+  background: var(--card-hi);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: .6rem;
+}
+
+.memory-fill {
+  height: 100%;
+  border-radius: 2px;
+  --progress: 0%;
+  width: 0;
+  animation: progressFill .8s ease-out both;
+}
+
+.memory-fill.orange { background: var(--orange); }
+.memory-fill.green { background: var(--green); }
+.memory-fill.blue { background: #6C87D9; }
+
+.memory-bar:nth-child(2) .memory-fill { animation-delay: 2.6s; }
+.memory-bar:nth-child(3) .memory-fill { animation-delay: 2.8s; }
+.memory-bar:nth-child(4) .memory-fill { animation-delay: 3.0s; }
+
+.memory-stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .75rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--card-hi);
+}
+
+.memory-stat-item {
+  text-align: center;
+}
+
+.memory-stat-val {
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.memory-stat-label {
+  font-family: var(--mono);
+  font-size: .5rem;
+  color: var(--dim);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Insights card */
+.insights-card {
+  background: var(--card);
+  border: 1px solid var(--card-hi);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  animation: fadeUp .7s ease-out 2.4s both;
+}
+
+.insights-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 60px;
+  margin-top: .75rem;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--card-hi);
+}
+
+.chart-bar {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  transform-origin: bottom;
+  animation: barGrow .6s ease-out both;
+}
+
+.chart-bar:nth-child(1) { animation-delay: 2.8s; }
+.chart-bar:nth-child(2) { animation-delay: 2.85s; }
+.chart-bar:nth-child(3) { animation-delay: 2.9s; }
+.chart-bar:nth-child(4) { animation-delay: 2.95s; }
+.chart-bar:nth-child(5) { animation-delay: 3.0s; }
+.chart-bar:nth-child(6) { animation-delay: 3.05s; }
+.chart-bar:nth-child(7) { animation-delay: 3.1s; }
+.chart-bar:nth-child(8) { animation-delay: 3.15s; }
+.chart-bar:nth-child(9) { animation-delay: 3.2s; }
+.chart-bar:nth-child(10) { animation-delay: 3.25s; }
+.chart-bar:nth-child(11) { animation-delay: 3.3s; }
+.chart-bar:nth-child(12) { animation-delay: 3.35s; }
+.chart-bar:nth-child(13) { animation-delay: 3.4s; }
+.chart-bar:nth-child(14) { animation-delay: 3.45s; }
+
+.chart-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .3rem;
+}
+
+.chart-label-text {
+  font-family: var(--mono);
+  font-size: .45rem;
+  color: var(--dim);
+  letter-spacing: .06em;
+}
+
+.insights-summary {
+  margin-top: .75rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.insight-stat {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.insight-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.insight-text {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--dim);
+}
+
+.insight-val {
+  color: var(--cream);
+  font-weight: 600;
+}
+
+/* Command input */
+.command-bar {
+  position: fixed;
+  bottom: 0;
+  left: 220px;
+  right: 0;
+  background: var(--card);
+  border-top: 1px solid var(--card-hi);
+  padding: .65rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  animation: fadeUp .5s ease-out 3s both;
+}
+
+.command-prompt {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--orange);
+}
+
+.command-text {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--dim);
+  flex: 1;
+  overflow: hidden;
+}
+
+.command-typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 2s steps(40) 3.5s both;
+  border-right: 2px solid var(--orange);
+  animation: typewriter 2s steps(40) 3.5s both, cursorBlink .8s step-end infinite;
+}
+
+.command-keys {
+  display: flex;
+  gap: .4rem;
+}
+
+.key {
+  font-family: var(--mono);
+  font-size: .55rem;
+  color: var(--dim);
+  background: var(--card-hi);
+  padding: .2rem .4rem;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+/* Subtle glow behind header */
+.header-glow {
+  position: absolute;
+  top: -50px;
+  right: 100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
+  pointer-events: none;
+  animation: fadeIn 2s ease-out 1s both;
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-logo">H</div>
+    <div>
+      <div class="sidebar-brand-text">HEKLA</div>
+      <div class="sidebar-brand-sub">Private Assistant</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-item active">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+      Today
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></div>
+      Inbox
+      <span class="nav-badge">23</span>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+      Calendar
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      CRM
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      Issues
+      <span class="nav-badge">12</span>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+      Insights
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
+      Transcribe
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+      Agents
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+      Memory
+    </div>
+  </nav>
+
+  <div class="sidebar-actions">
+    <div class="sidebar-actions-title">Quick Actions</div>
+    <div class="action-item"><div class="action-dot"></div> Draft investor update</div>
+    <div class="action-item"><div class="action-dot"></div> Prep board meeting</div>
+  </div>
+
+  <div class="sidebar-section">RECENT <span style="cursor:pointer;color:var(--dim)">^</span></div>
+  <div class="sidebar-recent-item"><div class="recent-icon"></div> Meridian CRM</div>
+  <div class="sidebar-recent-item"><div class="recent-icon"></div> Q1 Pipeline</div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<div class="main" style="position:relative">
+  <div class="header-glow"></div>
+
+  <!-- Top notification bar -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <div class="top-dot"></div>
+      <span class="top-priority">P0</span>
+      <span style="color:var(--cream)">[Action] Review partnership agreement with Boreal Labs</span>
+    </div>
+    <div class="top-bar-right">
+      <span>4h</span>
+      <span class="top-done">Done</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="header-date">11 MAR 2026 / TUESDAY</div>
+        <div class="header-greeting">Good evening, <em>Elena</em></div>
+        <div class="header-sub">3 agents running &middot; 2 meetings today &middot; inbox clear</div>
+      </div>
+      <div class="header-right">
+        <div class="header-time">21:42</div>
+        <div class="header-status">
+          <div class="status-dot"></div>
+          ALL SYSTEMS ACTIVE
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">TASKS</div>
+      <div class="stat-num">34</div>
+      <div class="stat-change up">+3 today</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">PROCESSED</div>
+      <div class="stat-num">847</div>
+      <div class="stat-change up">92% auto</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">MEETINGS</div>
+      <div class="stat-num">2</div>
+      <div class="stat-change">next: 10:00</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">CONTACTS</div>
+      <div class="stat-num">216</div>
+      <div class="stat-change up">+8 this week</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">MEMORY</div>
+      <div class="stat-num">1.2k</div>
+      <div class="stat-change">entries</div>
+    </div>
+  </div>
+
+  <!-- Content Grid -->
+  <div class="content-grid">
+    <!-- Agent Activity -->
+    <div class="agent-panel">
+      <div class="section-header">
+        <div class="section-title">AGENT ACTIVITY <span>(3 running)</span></div>
+        <div class="section-link">Manage &rarr;</div>
+      </div>
+      <div class="agent-item">
+        <div class="agent-avatar inbox">IN</div>
+        <div class="agent-info">
+          <div class="agent-name">
+            Inbox Agent
+            <div class="agent-status-dot running"></div>
+          </div>
+          <div class="agent-desc">Triaging 23 emails &middot; 4 flagged for review</div>
+        </div>
+        <div class="agent-meta">
+          <div class="agent-time">2m ago</div>
+          <div class="agent-count">847 processed</div>
+        </div>
+      </div>
+      <div class="agent-item">
+        <div class="agent-avatar research">RE</div>
+        <div class="agent-info">
+          <div class="agent-name">
+            Research Agent
+            <div class="agent-status-dot running"></div>
+          </div>
+          <div class="agent-desc">Compiling brief on Nordic Ventures fund</div>
+        </div>
+        <div class="agent-meta">
+          <div class="agent-time">8m ago</div>
+          <div class="agent-count">12 sources</div>
+        </div>
+      </div>
+      <div class="agent-item">
+        <div class="agent-avatar calendar">CA</div>
+        <div class="agent-info">
+          <div class="agent-name">
+            Calendar Agent
+            <div class="agent-status-dot running"></div>
+          </div>
+          <div class="agent-desc">Optimized 2 conflicts &middot; 3 prep notes ready</div>
+        </div>
+        <div class="agent-meta">
+          <div class="agent-time">15m ago</div>
+          <div class="agent-count">6 synced</div>
+        </div>
+      </div>
+      <div class="agent-item">
+        <div class="agent-avatar crm">CR</div>
+        <div class="agent-info">
+          <div class="agent-name">
+            CRM Agent
+            <div class="agent-status-dot idle"></div>
+          </div>
+          <div class="agent-desc">Last run: Updated 14 contact records</div>
+        </div>
+        <div class="agent-meta">
+          <div class="agent-time">1h ago</div>
+          <div class="agent-count">idle</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-panel">
+      <div class="section-header">
+        <div class="section-title">TIMELINE</div>
+        <div class="section-link">All &rarr;</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot-wrapper">
+          <div class="timeline-dot active"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">Investor deck v3 finalized</div>
+          <div class="timeline-sub">Research Agent compiled competitive analysis</div>
+          <div class="timeline-time">12 min ago</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot-wrapper">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">Meeting with Apex Partners rescheduled</div>
+          <div class="timeline-sub">Calendar Agent moved to Thursday 14:00</div>
+          <div class="timeline-time">45 min ago</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot-wrapper">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">3 follow-ups sent automatically</div>
+          <div class="timeline-sub">Inbox Agent drafted and sent on approval</div>
+          <div class="timeline-time">2h ago</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot-wrapper">
+          <div class="timeline-dot"></div>
+          <div class="timeline-line"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">New contact: Freya Lindqvist added</div>
+          <div class="timeline-sub">CRM Agent enriched from LinkedIn + email</div>
+          <div class="timeline-time">3h ago</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot-wrapper">
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-title">Daily brief generated</div>
+          <div class="timeline-sub">4 priorities, 2 decisions pending</div>
+          <div class="timeline-time">8:00 AM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Row -->
+  <div class="bottom-grid">
+    <!-- Issues -->
+    <div class="issues-card">
+      <div class="section-header">
+        <div class="section-title">ISSUES <span>(12)</span></div>
+        <div class="section-link">Board &rarr;</div>
+      </div>
+      <div class="issues-mini-grid">
+        <div class="issue-mini">
+          <div class="issue-mini-num">5</div>
+          <div class="issue-mini-label">OPEN</div>
+        </div>
+        <div class="issue-mini active">
+          <div class="issue-mini-num">4</div>
+          <div class="issue-mini-label">IN PROGRESS</div>
+        </div>
+        <div class="issue-mini">
+          <div class="issue-mini-num">1</div>
+          <div class="issue-mini-label">BLOCKED</div>
+        </div>
+        <div class="issue-mini">
+          <div class="issue-mini-num">2</div>
+          <div class="issue-mini-label">DONE TODAY</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Memory -->
+    <div class="memory-card">
+      <div class="section-header">
+        <div class="section-title">MEMORY</div>
+        <div class="section-link">Browse &rarr;</div>
+      </div>
+      <div class="memory-bar">
+        <div class="memory-bar-label">
+          <span class="memory-bar-text">Contacts & CRM</span>
+          <span class="memory-bar-num">216</span>
+        </div>
+        <div class="memory-track">
+          <div class="memory-fill orange" style="--progress: 72%"></div>
+        </div>
+      </div>
+      <div class="memory-bar">
+        <div class="memory-bar-label">
+          <span class="memory-bar-text">Decisions & Notes</span>
+          <span class="memory-bar-num">584</span>
+        </div>
+        <div class="memory-track">
+          <div class="memory-fill green" style="--progress: 48%"></div>
+        </div>
+      </div>
+      <div class="memory-bar">
+        <div class="memory-bar-label">
+          <span class="memory-bar-text">Research & Briefs</span>
+          <span class="memory-bar-num">412</span>
+        </div>
+        <div class="memory-track">
+          <div class="memory-fill blue" style="--progress: 34%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Insights -->
+    <div class="insights-card">
+      <div class="section-header">
+        <div class="section-title">WEEKLY ACTIVITY</div>
+      </div>
+      <div class="insights-chart">
+        <div class="chart-bar" style="height:25px;background:var(--orange)"></div>
+        <div class="chart-bar" style="height:38px;background:var(--orange)"></div>
+        <div class="chart-bar" style="height:30px;background:var(--orange)"></div>
+        <div class="chart-bar" style="height:45px;background:var(--orange)"></div>
+        <div class="chart-bar" style="height:52px;background:var(--orange)"></div>
+        <div class="chart-bar" style="height:35px;background:var(--green)"></div>
+        <div class="chart-bar" style="height:48px;background:var(--green)"></div>
+        <div class="chart-bar" style="height:55px;background:var(--green)"></div>
+        <div class="chart-bar" style="height:42px;background:var(--green)"></div>
+        <div class="chart-bar" style="height:58px;background:var(--green)"></div>
+        <div class="chart-bar" style="height:50px;background:rgba(108,135,217,.8)"></div>
+        <div class="chart-bar" style="height:40px;background:rgba(108,135,217,.8)"></div>
+        <div class="chart-bar" style="height:46px;background:rgba(108,135,217,.8)"></div>
+        <div class="chart-bar" style="height:32px;background:rgba(108,135,217,.6)"></div>
+      </div>
+      <div class="chart-labels">
+        <span class="chart-label-text">MON</span>
+        <span class="chart-label-text">WED</span>
+        <span class="chart-label-text">FRI</span>
+        <span class="chart-label-text">SUN</span>
+      </div>
+      <div class="insights-summary">
+        <div class="insight-stat">
+          <div class="insight-dot" style="background:var(--orange)"></div>
+          <span class="insight-text"><span class="insight-val">142</span> actions</span>
+        </div>
+        <div class="insight-stat">
+          <div class="insight-dot" style="background:var(--green)"></div>
+          <span class="insight-text"><span class="insight-val">89</span> auto</span>
+        </div>
+        <div class="insight-stat">
+          <div class="insight-dot" style="background:#6C87D9"></div>
+          <span class="insight-text"><span class="insight-val">53</span> manual</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Command Bar -->
+<div class="command-bar">
+  <span class="command-prompt">~</span>
+  <div class="command-text">
+    <span class="command-typing">summarize today and draft the evening report...</span>
+  </div>
+  <div class="command-keys">
+    <span class="key">⌘K</span>
+    <span class="key">ESC</span>
+  </div>
+</div>
+
+</body>
+</html>

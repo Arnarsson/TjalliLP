@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEKLA — AI-native business infrastructure</title>
+<meta name="description" content="Persistent memory, autonomous agents, and private infrastructure on your own hardware. No cloud. No resets. No compromise.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #131110;
+  --card: #1E1D1B;
+  --card-hi: #2A2826;
+  --cream: #F0E6D3;
+  --body: #B8AFA2;
+  --dim: #807A72;
+  --orange: #D4643A;
+  --orange-lt: #E8805A;
+  --white: #FFF;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Film grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: .018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--orange); text-decoration: none; }
+
+.c { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+
+.label {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--orange);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+
+section { padding: 7rem 0; border-top: 1px solid var(--card-hi); }
+
+/* ═══════════════════════════════
+   NAV
+   ═══════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(19,17,16,0);
+  backdrop-filter: blur(0px);
+  transition: background .4s, backdrop-filter .4s;
+}
+
+nav.scrolled {
+  background: rgba(19,17,16,.92);
+  backdrop-filter: blur(24px);
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--cream);
+  transition: opacity .3s;
+}
+
+.nav-r {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-r a {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--dim);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: color .3s;
+}
+
+.nav-r a:hover { color: var(--cream); }
+
+.nav-live {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.nav-live::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
+.nav-cta {
+  background: var(--orange) !important;
+  color: var(--white) !important;
+  padding: .5rem 1.2rem;
+  transition: background .3s !important;
+}
+
+.nav-cta:hover { background: var(--orange-lt) !important; }
+
+/* ═══════════════════════════════
+   HERO — cinematic video
+   ═══════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 6rem;
+  position: relative;
+  overflow: hidden;
+  border-top: none;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .35;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(19,17,16,.1) 0%,
+    rgba(19,17,16,.3) 30%,
+    rgba(19,17,16,.85) 70%,
+    var(--bg) 100%
+  );
+  z-index: 1;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 20%; right: -10%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(212,100,58,.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero .c { position: relative; z-index: 2; }
+
+.hero-pre {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--orange);
+  letter-spacing: .35em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp .8s .3s forwards;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.08;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp .8s .5s forwards;
+}
+
+.hero h1 em {
+  color: var(--orange);
+  font-style: italic;
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  max-width: 520px;
+  line-height: 1.75;
+  opacity: 0;
+  animation: fadeUp .8s .7s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  opacity: 0;
+  animation: fadeUp .8s .9s forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: .82rem;
+  padding: 1rem 2rem;
+  letter-spacing: .04em;
+  transition: all .3s;
+}
+
+.btn:hover {
+  background: var(--orange-lt);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--card-hi);
+  color: var(--body);
+}
+
+.btn-ghost:hover {
+  border-color: var(--orange);
+  color: var(--cream);
+  background: transparent;
+  transform: none;
+}
+
+/* ═══════════════════════════════
+   MANIFESTO — editorial text
+   ═══════════════════════════════ */
+.manifesto { padding: 8rem 0; }
+
+.manifesto h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.3;
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.manifesto p {
+  font-size: 1.1rem;
+  max-width: 650px;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.manifesto p strong { color: var(--cream); }
+
+.highlight {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--cream);
+  font-style: italic;
+  margin: 2.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--orange);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════
+   EDITORIAL SPLITS
+   ═══════════════════════════════ */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.split.reverse { direction: rtl; }
+.split.reverse > * { direction: ltr; }
+
+.split h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.split p {
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 480px;
+  margin-bottom: 1rem;
+}
+
+.split .hl {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  color: var(--cream);
+  font-style: italic;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--orange);
+  margin: 1.5rem 0;
+  max-width: 450px;
+  line-height: 1.5;
+}
+
+.visual {
+  background: var(--card);
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(212,100,58,.02) 49px, rgba(212,100,58,.02) 50px),
+    repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(212,100,58,.02) 49px, rgba(212,100,58,.02) 50px);
+}
+
+.visual video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .9;
+}
+
+/* ═══════════════════════════════
+   FEATURES — editorial list
+   ═══════════════════════════════ */
+.feat-list {
+  max-width: 700px;
+  margin-top: 2.5rem;
+}
+
+.feat {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--card-hi);
+  align-items: baseline;
+}
+
+.feat:last-child { border: none; }
+
+.feat-label {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  color: var(--cream);
+  font-style: italic;
+}
+
+.feat-desc { font-size: .95rem; }
+
+/* ═══════════════════════════════
+   PRODUCTS — two tiers
+   ═══════════════════════════════ */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+.price-card {
+  background: var(--card);
+  padding: 2.5rem 2rem;
+  position: relative;
+  transition: transform .3s;
+}
+
+.price-card:hover { transform: translateY(-3px); }
+
+.price-card.featured { border: 1px solid var(--orange); }
+
+.price-card .tier-label {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--orange);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.price-card h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: .75rem;
+}
+
+.price-card .desc {
+  font-size: .88rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.65;
+}
+
+.price-card ul { list-style: none; margin-bottom: 1.5rem; }
+
+.price-card li {
+  font-size: .83rem;
+  padding: .35rem 0 .35rem 1.15rem;
+  position: relative;
+}
+
+.price-card li::before {
+  content: '\25B8';
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+}
+
+.price-amount {
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  color: var(--orange);
+  margin-bottom: .25rem;
+}
+
+.price-note {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--dim);
+}
+
+.price-badge {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: .5rem 1.25rem;
+  border: 1px solid var(--orange);
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--orange);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════
+   LIFESTYLE SCENES
+   ═══════════════════════════════ */
+.scenes { max-width: 650px; margin-top: 2.5rem; }
+
+.scene {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--card-hi);
+  align-items: baseline;
+}
+
+.scene:last-child { border: none; }
+
+.scene-where {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--cream);
+  font-style: italic;
+}
+
+.scene-what { font-size: .95rem; }
+
+/* ═══════════════════════════════
+   FAQ
+   ═══════════════════════════════ */
+.faq-list { max-width: 700px; margin-top: 2rem; }
+
+.faq-item { border-bottom: 1px solid var(--card-hi); padding: 1.15rem 0; }
+
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  gap: 1rem;
+  user-select: none;
+}
+
+.faq-q h3 {
+  font-family: var(--sans);
+  font-size: .95rem;
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.faq-toggle {
+  font-size: 1.1rem;
+  color: var(--dim);
+  transition: transform .3s;
+  flex-shrink: 0;
+}
+
+.faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease, padding .4s ease;
+}
+
+.faq-item.open .faq-a {
+  max-height: 300px;
+  padding-top: .75rem;
+}
+
+.faq-a p {
+  font-size: .9rem;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════
+   FINAL CTA
+   ═══════════════════════════════ */
+.final-cta {
+  padding: 8rem 0;
+  position: relative;
+}
+
+.final-cta::before {
+  content: '';
+  position: absolute;
+  top: -2rem; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 500px;
+  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.final-cta .c { position: relative; }
+
+.final-cta h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.final-cta p {
+  font-size: 1.1rem;
+  max-width: 550px;
+  margin-bottom: 2.5rem;
+}
+
+.final-box {
+  background: var(--card);
+  border: 1px solid var(--orange);
+  padding: 3rem;
+  max-width: 600px;
+}
+
+.final-box h3 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: .5rem;
+}
+
+.final-box .sub {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--orange);
+  letter-spacing: .12em;
+  margin-bottom: 1.5rem;
+}
+
+.final-note {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--dim);
+  margin-top: 2rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════
+   FOOTER
+   ═══════════════════════════════ */
+footer {
+  padding: 2rem 0;
+  border-top: 1px solid var(--card-hi);
+}
+
+footer .c {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-brand {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--dim);
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-links a {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--dim);
+  letter-spacing: .08em;
+  transition: color .3s;
+}
+
+.footer-links a:hover { color: var(--cream); }
+
+/* ═══════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════ */
+@media (max-width: 800px) {
+  .split,
+  .pricing-grid { grid-template-columns: 1fr; }
+  .split.reverse { direction: ltr; }
+  .feat, .scene { grid-template-columns: 1fr; gap: .3rem; }
+  .nav-r { display: none; }
+  .hero h1 { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+  section { padding: 5rem 0; }
+  .manifesto { padding: 5rem 0; }
+  .final-cta { padding: 5rem 0 8rem; }
+  .final-box { padding: 2rem; }
+  .avail-bar { padding: .65rem 1.5rem; }
+  .avail-text { font-size: .65rem; }
+}
+
+/* ═══════════════════════════════
+   AVAILABILITY BAR — persistent bottom
+   ═══════════════════════════════ */
+.avail-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(19,17,16,.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--orange);
+  padding: .75rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avail-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avail-dot {
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.avail-text {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--cream);
+  letter-spacing: .08em;
+}
+
+.avail-text strong { color: var(--orange); }
+
+.avail-cta {
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: .72rem;
+  padding: .5rem 1.4rem;
+  letter-spacing: .04em;
+  transition: background .3s;
+  flex-shrink: 0;
+}
+
+.avail-cta:hover { background: var(--orange-lt); color: var(--white); }
+
+/* ═══════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.anim { opacity: 0; }
+.anim.visible { animation: fadeUp .7s ease-out forwards; }
+
+/* Stagger children */
+.anim.visible:nth-child(2) { animation-delay: .1s; }
+.anim.visible:nth-child(3) { animation-delay: .2s; }
+.anim.visible:nth-child(4) { animation-delay: .3s; }
+.anim.visible:nth-child(5) { animation-delay: .4s; }
+</style>
+</head>
+<body>
+
+<!-- ═══ PERSISTENT AVAILABILITY BAR ═══ -->
+<div class="avail-bar">
+  <div class="avail-left">
+    <div class="avail-dot"></div>
+    <div class="avail-text"><strong>20 units</strong> &mdash; Spring 2026 &mdash; Next batch: we honestly don't know</div>
+  </div>
+  <a href="#reserve" class="avail-cta">Reserve yours &rarr;</a>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="index.html" class="nav-logo">Hekla</a>
+  <div class="nav-r">
+    <span class="nav-live label">20 UNITS — SPRING 2026</span>
+    <a href="#platform">Platform</a>
+    <a href="personal.html">Private</a>
+    <a href="/meet-hekla" style="color:var(--cream)">Meet HEKLA &rarr;</a>
+    <a href="#reserve" class="nav-cta">Reserve yours</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-video">
+    <video autoplay muted loop playsinline>
+      <source src="hero-index.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="c">
+    <div class="hero-pre">AI-NATIVE BUSINESS INFRASTRUCTURE</div>
+    <h1>Your business has a brain.<br>It just doesn't <em>remember</em> anything.</h1>
+    <p class="hero-sub">HEKLA gives your team persistent memory, autonomous agents, and private infrastructure — so the intelligence you build actually compounds.</p>
+    <div class="hero-actions">
+      <a href="#reserve" class="btn">Reserve your unit &rarr;</a>
+      <a href="#platform" class="btn btn-ghost">How it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MANIFESTO ═══ -->
+<section class="manifesto" id="platform">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">THE SHIFT</p>
+    <h2>Chat answers questions.<br>HEKLA runs your business.</h2>
+    <p>ChatGPT resets every session. Your CRM doesn't know what happened in Monday's meeting. Your calendar doesn't talk to your inbox. Everything is fragmented.</p>
+    <p><strong>Every great leader had someone who remembered everything.</strong> Their schedule. Their people. Their priorities. Their inbox. That person was always called PA.</p>
+    <p><strong>We call it HEKLA.</strong></p>
+    <div class="highlight">This is not a subscription to a chatbot. This is infrastructure for how you perform.</div>
+  </div>
+</section>
+
+<!-- ═══ MEMORY ═══ -->
+<section>
+  <div class="c">
+    <div class="split">
+      <div>
+        <p class="label" style="margin-bottom:1.5rem">MEMORY</p>
+        <h2>Every conversation. Every decision. Every relationship. Remembered.</h2>
+        <p>Import years of ChatGPT, Claude, and file history. Build a knowledge layer that never resets. The longer you use it, the more valuable it becomes.</p>
+        <div class="hl">The switching cost is permanent — because your knowledge lives here.</div>
+      </div>
+      <div class="visual">
+        <video autoplay muted loop playsinline poster="demo-dashboard-poster.jpg">
+          <source src="demo-dashboard.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AGENTS ═══ -->
+<section>
+  <div class="c">
+    <div class="split reverse">
+      <div>
+        <p class="label" style="margin-bottom:1.5rem">AGENTS</p>
+        <h2>They draft. You approve. They learn.</h2>
+        <p>Meeting prep, research, follow-ups, CRM updates, document generation — agents handle the predictable while you focus on decisions. Edge cases route to you.</p>
+        <p>Send a task from your phone. The agent executes and reports back. No coding. Natural language in, working systems out.</p>
+      </div>
+      <div class="visual">
+        <video autoplay muted loop playsinline poster="demo-dashboard-poster.jpg">
+          <source src="demo-dashboard.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRIVATE ═══ -->
+<section>
+  <div class="c">
+    <div class="split">
+      <div>
+        <p class="label" style="margin-bottom:1.5rem">PRIVATE BY DESIGN</p>
+        <h2>Your data. Your hardware. Your rules.</h2>
+        <p>Encrypted. On your VPN. On your own Mac mini. No cloud dependency. No third-party access. Every agent action logged and auditable.</p>
+        <div class="hl">EU sovereignty is the architecture, not a checkbox.</div>
+      </div>
+      <div class="visual">
+        <video autoplay muted loop playsinline poster="demo-dashboard-poster.jpg">
+          <source src="demo-dashboard.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section id="features">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">WHAT HEKLA DOES FOR YOU</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--cream);font-weight:400;margin-bottom:.5rem">Your encrypted second brain.</h2>
+    <p style="max-width:600px">Configured to you — your clients, your projects, your communication style. Running on your own hardware.</p>
+    <div class="feat-list">
+      <div class="feat"><div class="feat-label">Memory</div><div class="feat-desc">Remembers everyone, everything, always. Private CRM with long-term context that compounds across every conversation.</div></div>
+      <div class="feat"><div class="feat-label">Import</div><div class="feat-desc">Feed HEKLA with years of ChatGPT, emails, and your files. Your history becomes searchable intelligence.</div></div>
+      <div class="feat"><div class="feat-label">Inbox</div><div class="feat-desc">LinkedIn, WhatsApp, Emails — one priority view. Never miss what matters. Everything else, handled.</div></div>
+      <div class="feat"><div class="feat-label">Prep</div><div class="feat-desc">Proactive meeting briefings, smart alerts, and task execution. Walk into every room prepared.</div></div>
+      <div class="feat"><div class="feat-label">Execute</div><div class="feat-desc">Works from your phone — task becomes agent action instantly. No coding. Natural language in, results out.</div></div>
+      <div class="feat"><div class="feat-label">Private</div><div class="feat-desc">Runs on your own local hardware. No cloud. No third parties. NDA-safe from day one. Your data never leaves.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EVERYWHERE ═══ -->
+<section>
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">THE FUTURE IS PRIVATE</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);color:var(--cream);font-weight:400;margin-bottom:3rem;max-width:700px">Your private assistant. Everywhere you are.</h2>
+    <div class="scenes">
+      <div class="scene"><div class="scene-where">At home</div><div class="scene-what">Briefed, prepared, inbox cleared before you sit down.</div></div>
+      <div class="scene"><div class="scene-where">At work</div><div class="scene-what">Every meeting prepped, every priority surfaced.</div></div>
+      <div class="scene"><div class="scene-where">At the gym</div><div class="scene-what">Your day is managed while you are away from the screen.</div></div>
+      <div class="scene"><div class="scene-where">In the store</div><div class="scene-what">Finds deals. Checks your list. Orders what's missing.</div></div>
+      <div class="scene"><div class="scene-where">Right now</div><div class="scene-what">Now let me call your mum — it's her birthday.</div></div>
+    </div>
+    <div class="highlight" style="margin-top:3rem">Hardware you own. Data that never leaves. Intelligence that is yours.</div>
+  </div>
+</section>
+
+<!-- ═══ PRODUCTS ═══ -->
+<section id="products">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">SPRING 2026</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.8rem);color:var(--cream);font-weight:400;margin-bottom:.5rem">20 units. That's it.</h2>
+    <p style="max-width:550px">15 HEKLA Private. 5 HEKLA High Performance. Every unit configured one-to-one by the HEKLA team. Launch pricing — some features might not be available again.</p>
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="tier-label">HEKLA PRIVATE</div>
+        <h3>Your encrypted second brain.</h3>
+        <p class="desc">Everything you need to operate at a higher level — memory, inbox, agents, execution.</p>
+        <ul>
+          <li>Private CRM with long-term memory</li>
+          <li>Memory API: import years of history</li>
+          <li>Unified inbox: LinkedIn, WhatsApp, Email</li>
+          <li>Proactive meeting prep + alerts</li>
+          <li>Task to Agent execution from your phone</li>
+          <li>Runs on your own local hardware</li>
+        </ul>
+        <div class="price-amount">20,000 DKK</div>
+        <div class="price-note">ex. VAT &middot; Hardware available as add-on</div>
+        <div class="price-badge">15 UNITS AVAILABLE</div>
+      </div>
+
+      <div class="price-card featured">
+        <div class="tier-label">HEKLA HIGH PERFORMANCE</div>
+        <h3>For the people who operate at full speed.</h3>
+        <p class="desc">Everything in Private, plus custom training, full command layer, and direct access to the team.</p>
+        <ul>
+          <li>Everything in HEKLA Private</li>
+          <li>Custom agent training on your style</li>
+          <li>Full command: inbox, calendar, contacts</li>
+          <li>Dedicated onboarding sprint</li>
+          <li>Monthly review with HEKLA team</li>
+          <li>HEKLA Ambient (BETA)</li>
+          <li>Direct line to the team in 2026</li>
+          <li>Volcano Club membership *</li>
+        </ul>
+        <div class="price-amount">60,000 DKK</div>
+        <div class="price-note">ex. VAT &middot; Hardware upgrade as add-on</div>
+        <div class="price-badge">5 UNITS AVAILABLE</div>
+        <p style="font-size:.75rem;color:var(--dim);margin-top:1.25rem;font-style:italic">* Volcano Club members are first in line when HEKLA opens to investors.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section>
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">FAQ</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);color:var(--cream);font-weight:400;margin-bottom:1rem">Questions we get asked.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><h3>What is HEKLA?</h3><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>AI infrastructure on your own hardware. Persistent memory, autonomous agents, coordinated workflows — all encrypted and private. Not a chatbot. The infrastructure layer beneath it.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h3>How is this different from ChatGPT?</h3><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>ChatGPT resets every session and lives in the cloud. HEKLA is private, persistent, and agentic. It remembers everything, runs on your hardware, and executes tasks while you sleep.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h3>Do I need technical skills?</h3><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>No. You interact through natural language — from your phone, Slack, or Telegram. We handle the setup. You're running within 7 days.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h3>What about GDPR?</h3><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>All data stays on your infrastructure. No cloud. Every agent action logged. EU sovereignty is the default architecture, not an add-on.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h3>When does it ship?</h3><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Spring 2026. We don't ship until it's right. You'll be kept informed every step of the way. Next units after this batch: we honestly don't know.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESERVE CTA ═══ -->
+<section class="final-cta" id="reserve" style="padding-bottom:10rem">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">LIMITED AVAILABILITY</p>
+    <h2>The world gets HEKLA later.<br>You can own it now.</h2>
+    <p>15 Private + 5 High Performance units. Every unit configured one-to-one by the HEKLA team. Launch pricing and features — some might not be available again.</p>
+    <div class="final-box">
+      <h3>Reply to reserve your unit.</h3>
+      <div class="sub">20 UNITS &middot; NEXT BATCH: WE HONESTLY DON'T KNOW</div>
+      <a href="mailto:hello@hekla.is?subject=HEKLA — Reserve my unit" class="btn">Reserve now &rarr;</a>
+    </div>
+    <p class="final-note">We don't ship until it's right. You'll be kept informed every step of the way. HEKLA Teams pilot — autumn 2026.</p>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="c">
+    <div class="footer-brand">Hekla</div>
+    <div class="footer-links">
+      <a href="mailto:hello@hekla.is">hello@hekla.is</a>
+      <a href="#">hekla.is</a>
+      <a href="#">Copenhagen &middot; 2026</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+// Scroll-triggered fade-in animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.split, .split > div, .feat, .scene, .price-card, .faq-item, .final-box, .feat-list, .highlight').forEach(el => {
+  el.classList.add('anim');
+  observer.observe(el);
+});
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    // Toggle clicked
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+// Smooth anchor scroll offset for fixed nav
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', e => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = nav.offsetHeight + 20;
+      window.scrollTo({
+        top: target.offsetTop - offset,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>

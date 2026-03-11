@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet HEKLA — Private AI Assistant. 20 Units. Spring 2026.</title>
+<meta name="description" content="HEKLA is your private, encrypted AI assistant. She scans your platforms, briefs you every morning, and remembers everything. 20 units available Spring 2026.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#131110">
+<link rel="canonical" href="https://www.hekla.cc/meet-hekla">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Meet HEKLA — Your Private AI Assistant">
+<meta property="og:description" content="She scans your platforms. Briefs you every morning. Remembers everything. 20 units. Spring 2026.">
+<meta property="og:url" content="https://www.hekla.cc/meet-hekla">
+<meta property="og:image" content="https://www.hekla.cc/hero-poster.jpg">
+<meta property="og:site_name" content="HEKLA">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meet HEKLA — Your Private AI Assistant">
+<meta name="twitter:description" content="She scans your platforms. Briefs you every morning. Remembers everything. 20 units. Spring 2026.">
+<meta name="twitter:image" content="https://www.hekla.cc/hero-poster.jpg">
+
+<!-- Performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="video" href="hero-launch.mp4" type="video/mp4">
+<link rel="preload" as="image" href="hero-poster.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "HEKLA",
+  "description": "Private, encrypted AI assistant that scans your platforms, briefs you every morning, and remembers everything.",
+  "brand": { "@type": "Brand", "name": "HEKLA" },
+  "url": "https://www.hekla.cc/meet-hekla",
+  "image": "https://www.hekla.cc/hero-poster.jpg",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "HEKLA Private",
+      "price": "20000",
+      "priceCurrency": "DKK",
+      "availability": "https://schema.org/LimitedAvailability"
+    },
+    {
+      "@type": "Offer",
+      "name": "HEKLA Private — High Performance",
+      "price": "60000",
+      "priceCurrency": "DKK",
+      "availability": "https://schema.org/LimitedAvailability"
+    }
+  ]
+}
+</script>
+<style>
+:root {
+  --bg: #131110;
+  --card: #1E1D1B;
+  --card-hi: #2A2826;
+  --cream: #F0E6D3;
+  --body: #B8AFA2;
+  --dim: #807A72;
+  --orange: #D4643A;
+  --orange-lt: #E8805A;
+  --white: #FFF;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Film grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: .018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--orange); text-decoration: none; }
+.c { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+.label { font-family: var(--mono); font-size: .65rem; color: var(--orange); letter-spacing: .3em; text-transform: uppercase; }
+
+/* ═══════════════════════════════
+   AVAILABILITY TICKER — persistent
+   ═══════════════════════════════ */
+.avail-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(19,17,16,.95);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--orange);
+  padding: .75rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avail-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avail-dot {
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.avail-text {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--cream);
+  letter-spacing: .08em;
+}
+
+.avail-text strong { color: var(--orange); }
+
+.avail-cta {
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: .72rem;
+  padding: .5rem 1.4rem;
+  letter-spacing: .04em;
+  transition: background .3s;
+  flex-shrink: 0;
+}
+
+.avail-cta:hover { background: var(--orange-lt); color: var(--white); }
+
+/* ═══ NAV ═══ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(19,17,16,0);
+  backdrop-filter: blur(0px);
+  transition: background .4s, backdrop-filter .4s;
+}
+
+nav.scrolled {
+  background: rgba(19,17,16,.92);
+  backdrop-filter: blur(24px);
+}
+
+.nav-logo { font-family: var(--serif); font-size: 1.5rem; color: var(--cream); }
+.nav-r { display: flex; gap: 2rem; align-items: center; }
+.nav-r a { font-family: var(--mono); font-size: .68rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; transition: color .3s; }
+.nav-r a:hover { color: var(--cream); }
+
+.nav-live { display: flex; align-items: center; gap: .5rem; }
+.nav-live::before { content: ''; width: 7px; height: 7px; background: var(--orange); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
+/* Mobile nav CTA */
+.nav-mobile {
+  display: none;
+  align-items: center;
+}
+.nav-mobile a {
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: .62rem;
+  padding: .35rem .75rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: background .3s;
+  white-space: nowrap;
+}
+.nav-mobile a:hover { background: var(--orange-lt); color: var(--white); }
+
+/* ═══ HERO — cinematic fullscreen ═══ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .45;
+  filter: blur(2px);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(19,17,16,.1) 0%, rgba(19,17,16,.2) 30%, rgba(19,17,16,.85) 70%, var(--bg) 100%);
+  z-index: 1;
+}
+
+.hero .c { position: relative; z-index: 2; }
+
+.hero-pre {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--orange);
+  letter-spacing: .35em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp .8s .3s forwards;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+
+.hero h1 em { color: var(--orange); font-style: italic; }
+
+/* ── Headline rotation: masked line reveal ── */
+.hero-headline {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.hero-headline.is-visible {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Each line is a clip mask — text slides through */
+.hero-headline .line1,
+.hero-headline .line2 {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-headline .line2 {
+  color: var(--orange);
+  font-style: italic;
+}
+
+/* The inner span does the actual movement */
+.hero-headline .line1 > span,
+.hero-headline .line2 > span {
+  display: block;
+  transform: translateY(110%);
+  transition: transform .85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Stagger: line2 enters 140ms after line1 */
+.hero-headline .line2 > span {
+  transition-delay: 0s;
+}
+
+/* ── ENTER ── */
+.hero-headline.enter .line1 > span {
+  transform: translateY(0);
+}
+.hero-headline.enter .line2 > span {
+  transform: translateY(0);
+  transition-delay: .14s;
+}
+
+/* ── HOLD: same as enter ── */
+.hero-headline.hold .line1 > span,
+.hero-headline.hold .line2 > span {
+  transform: translateY(0);
+  transition: none; /* no re-animation while holding */
+}
+
+/* ── EXIT: slide up and out, line2 exits first ── */
+.hero-headline.exit .line1 > span,
+.hero-headline.exit .line2 > span {
+  transform: translateY(-110%);
+  transition: transform .55s cubic-bezier(0.6, 0, 0.4, 1);
+}
+
+.hero-headline.exit .line2 > span {
+  transition-delay: 0s;
+}
+.hero-headline.exit .line1 > span {
+  transition-delay: .08s;
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  max-width: 500px;
+  opacity: 0;
+  animation: fadeUp .8s .7s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  opacity: 0;
+  animation: fadeUp .8s .9s forwards;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  background: var(--orange);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: .85rem;
+  padding: 1rem 2.25rem;
+  letter-spacing: .04em;
+  transition: all .3s;
+}
+
+.btn:hover { background: var(--orange-lt); color: var(--white); transform: translateY(-2px); }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--card-hi);
+  color: var(--body);
+}
+
+.btn-ghost:hover { border-color: var(--orange); color: var(--cream); background: transparent; transform: none; }
+
+/* ═══════════════════════════════
+   THE PROBLEM — conversational
+   ═══════════════════════════════ */
+.problem { padding: 8rem 0; border-top: 1px solid var(--card-hi); }
+
+.problem h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.3;
+  max-width: 800px;
+  margin-bottom: 2.5rem;
+}
+
+.problem p {
+  font-size: 1.1rem;
+  max-width: 650px;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.problem p strong { color: var(--cream); }
+
+.inbox-chaos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 2rem 0;
+  max-width: 650px;
+}
+
+.inbox-tag {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--dim);
+  background: var(--card);
+  padding: .4rem 1rem;
+  letter-spacing: .06em;
+  border: 1px solid var(--card-hi);
+}
+
+.inbox-tag.overwhelm {
+  color: var(--orange);
+  border-color: var(--orange);
+  background: rgba(212,100,58,.08);
+}
+
+.highlight {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  color: var(--cream);
+  font-style: italic;
+  margin: 2.5rem 0;
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--orange);
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════
+   THE ANSWER — meet HEKLA
+   ═══════════════════════════════ */
+.answer { padding: 8rem 0; border-top: 1px solid var(--card-hi); }
+
+.answer h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
+
+.answer p {
+  font-size: 1.1rem;
+  max-width: 650px;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.answer p strong { color: var(--cream); }
+
+.answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.25rem;
+  margin: 3rem 0;
+  max-width: 750px;
+}
+
+.answer-card {
+  background: var(--card);
+  padding: 1.75rem 1.5rem;
+  border-bottom: 2px solid var(--orange);
+}
+
+.answer-card h4 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  color: var(--cream);
+  font-weight: 400;
+  font-style: italic;
+  margin-bottom: .5rem;
+}
+
+.answer-card p {
+  font-size: .88rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.everything {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--cream);
+  font-weight: 400;
+  letter-spacing: .15em;
+  margin: 3rem 0 1rem;
+}
+
+.everything span { color: var(--orange); }
+
+/* ═══════════════════════════════
+   PRIVATE — anti-corporate
+   ═══════════════════════════════ */
+.private { padding: 6rem 0; border-top: 1px solid var(--card-hi); }
+
+.private-flex {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.private h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
+}
+
+.private p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  max-width: 480px;
+}
+
+.private p strong { color: var(--cream); }
+
+.private-points { list-style: none; }
+
+.private-points li {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--card-hi);
+  font-size: .95rem;
+}
+
+.private-points li:last-child { border: none; }
+
+.icon-svg { width: 20px; height: 20px; color: var(--orange); flex-shrink: 0; }
+
+/* ═══════════════════════════════
+   PRODUCT TIERS
+   ═══════════════════════════════ */
+.tier { padding: 6rem 0; border-top: 1px solid var(--card-hi); }
+
+.tier-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.tier-content .label { margin-bottom: 1.5rem; }
+
+.tier-content h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--cream);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.tier-content p { margin-bottom: 1.25rem; line-height: 1.75; }
+
+.tier-features { list-style: none; margin: 2rem 0; }
+
+.tier-features li {
+  padding: .6rem 0 .6rem 1.5rem;
+  position: relative;
+  font-size: .95rem;
+  border-bottom: 1px solid rgba(42,40,38,.5);
+}
+
+.tier-features li::before { content: '\25B8'; position: absolute; left: 0; color: var(--orange); }
+.tier-features li:last-child { border: none; }
+
+.tier-price { font-family: var(--mono); font-size: 1.5rem; color: var(--orange); margin-top: 2rem; }
+.tier-price-note { font-family: var(--mono); font-size: .72rem; color: var(--dim); margin-top: .35rem; }
+
+.tier-badge {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: .6rem 1.5rem;
+  border: 1px solid var(--orange);
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--orange);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  animation: pulse-border 3s ease-in-out infinite;
+}
+
+@keyframes pulse-border {
+  0%, 100% { border-color: var(--orange); box-shadow: 0 0 0 rgba(212,100,58,0); }
+  50% { border-color: var(--orange-lt); box-shadow: 0 0 12px rgba(212,100,58,.15); }
+}
+
+/* Tier photos */
+.tier-photo {
+  background: var(--card);
+  aspect-ratio: 3/4;
+  position: relative;
+  overflow: hidden;
+}
+
+.tier-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, var(--bg) 100%);
+  z-index: 1;
+}
+
+.tier-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ═══════════════════════════════
+   SCARCITY CALLOUT
+   ═══════════════════════════════ */
+.scarcity {
+  padding: 5rem 0;
+  border-top: 1px solid var(--card-hi);
+  text-align: center;
+}
+
+.scarcity-number {
+  font-family: var(--mono);
+  font-size: clamp(4rem, 10vw, 8rem);
+  color: var(--orange);
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: .5rem;
+}
+
+.scarcity-label {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.scarcity-sub {
+  font-family: var(--mono);
+  font-size: .75rem;
+  color: var(--dim);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.scarcity-breakdown {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 2.5rem;
+}
+
+.scarcity-item {
+  text-align: center;
+}
+
+.scarcity-item .num {
+  font-family: var(--mono);
+  font-size: 2rem;
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.scarcity-item .desc {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--dim);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-top: .25rem;
+}
+
+/* ═══════════════════════════════
+   EVERYWHERE
+   ═══════════════════════════════ */
+.everywhere { padding: 7rem 0; border-top: 1px solid var(--card-hi); }
+
+.everywhere h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 3rem;
+  max-width: 700px;
+}
+
+.scene-list { display: grid; gap: 0; max-width: 700px; }
+
+.scene {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--card-hi);
+  align-items: baseline;
+}
+
+.scene:last-child { border: none; }
+.scene-where { font-family: var(--serif); font-size: 1.1rem; color: var(--cream); font-style: italic; }
+.scene-what { font-size: .95rem; }
+
+/* ═══════════════════════════════
+   RESERVE CTA
+   ═══════════════════════════════ */
+.final {
+  padding: 8rem 0 10rem;
+  border-top: 1px solid var(--card-hi);
+  position: relative;
+}
+
+.final::before {
+  content: '';
+  position: absolute;
+  top: -2rem; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 500px;
+  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.final .c { position: relative; }
+
+.final h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.final p { font-size: 1.1rem; max-width: 550px; margin-bottom: 2.5rem; }
+
+.final-box {
+  background: var(--card);
+  border: 1px solid var(--orange);
+  padding: 3rem;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-box::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(212,100,58,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.final-box h3 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: .5rem;
+}
+
+.final-box .sub {
+  font-family: var(--mono);
+  font-size: .75rem;
+  color: var(--orange);
+  letter-spacing: .12em;
+  margin-bottom: 1.5rem;
+}
+
+.final-note {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--dim);
+  margin-top: 2rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════
+   ABOUT
+   ═══════════════════════════════ */
+.about { padding: 7rem 0; border-top: 1px solid var(--card-hi); }
+
+.about h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 2rem;
+  max-width: 700px;
+}
+
+.about-body {
+  max-width: 650px;
+}
+
+.about-body p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.about-body p strong { color: var(--cream); }
+
+/* ═══════════════════════════════
+   TEAM
+   ═══════════════════════════════ */
+.team { padding: 6rem 0; border-top: 1px solid var(--card-hi); }
+
+.team h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 3rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.team-card {
+  background: var(--card);
+  padding: 2.5rem 2rem;
+  border-top: 2px solid var(--orange);
+  position: relative;
+}
+
+.team-initials {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--orange);
+  letter-spacing: .15em;
+  margin-bottom: 1.5rem;
+  opacity: .6;
+}
+
+.team-card h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: .25rem;
+}
+
+.team-role {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--orange);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.team-card p {
+  font-size: .9rem;
+  line-height: 1.7;
+  color: var(--body);
+  margin-bottom: 1.25rem;
+}
+
+.team-link {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--dim);
+  letter-spacing: .06em;
+  transition: color .3s;
+}
+
+.team-link:hover { color: var(--orange); }
+
+/* ═══ FOOTER ═══ */
+footer { padding: 2rem 0; border-top: 1px solid var(--card-hi); }
+footer .c { display: flex; justify-content: space-between; align-items: center; }
+.footer-brand { font-family: var(--serif); font-size: 1rem; color: var(--dim); }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { font-family: var(--mono); font-size: .65rem; color: var(--dim); letter-spacing: .08em; transition: color .3s; }
+.footer-links a:hover { color: var(--cream); }
+
+/* ═══ RESPONSIVE ═══ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .tier-split { gap: 2.5rem; }
+  .private-flex { gap: 2rem; }
+  .answer-grid { grid-template-columns: 1fr 1fr; }
+  .scene { grid-template-columns: 120px 1fr; }
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .tier-split { grid-template-columns: 1fr; }
+  .tier-photo { aspect-ratio: 16/9; }
+  .private-flex { grid-template-columns: 1fr; }
+  .answer-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .scene { grid-template-columns: 1fr; gap: .3rem; }
+  .scarcity-breakdown { flex-direction: column; gap: 1.5rem; }
+  .nav-r { display: none; }
+  .nav-mobile { display: flex; }
+  .hero h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+  .problem, .answer, .everywhere, .final { padding: 5rem 0; }
+  .final { padding-bottom: 8rem; }
+  .tier { padding: 4rem 0; }
+  .final-box { padding: 2rem; }
+  .avail-bar { padding: .65rem 1.5rem; }
+  .avail-text { font-size: .65rem; }
+  .avail-cta { padding: .4rem 1rem; font-size: .65rem; }
+  .inbox-chaos { gap: .35rem; }
+  .inbox-tag { font-size: .65rem; padding: .3rem .75rem; }
+  footer .c { flex-direction: column; gap: 1rem; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  .c { padding: 0 1.5rem; }
+  .btn { padding: .85rem 1.75rem; font-size: .78rem; }
+  .everything { font-size: clamp(2rem, 8vw, 3rem); }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .avail-bar { flex-direction: column; gap: .5rem; text-align: center; }
+  .avail-left { justify-content: center; }
+  nav { padding: 1rem 1.5rem; }
+}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.anim { opacity: 0; }
+.anim.visible { animation: fadeUp .7s ease-out forwards; }
+.anim.visible:nth-child(2) { animation-delay: .1s; }
+.anim.visible:nth-child(3) { animation-delay: .2s; }
+</style>
+</head>
+<body>
+
+<!-- ═══ PERSISTENT AVAILABILITY BAR ═══ -->
+<div class="avail-bar">
+  <div class="avail-left">
+    <div class="avail-dot"></div>
+    <div class="avail-text"><strong>20 units</strong> &mdash; 15 Private &middot; 5 High Performance &mdash; Spring 2026</div>
+  </div>
+  <a href="#reserve" class="avail-cta">Reserve yours &rarr;</a>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="index.html" class="nav-logo">Hekla</a>
+  <div class="nav-r">
+    <span class="nav-live label">20 UNITS — SPRING 2026</span>
+    <a href="index.html">Platform</a>
+    <a href="personal.html">Private</a>
+    <a href="#reserve" style="background:var(--orange);color:var(--white);padding:.4rem 1rem">Reserve yours</a>
+  </div>
+  <div class="nav-mobile">
+    <a href="#reserve">Reserve yours</a>
+  </div>
+</nav>
+
+<main>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-video">
+    <video autoplay muted loop playsinline poster="hero-poster.jpg">
+      <source src="hero-launch.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="c">
+    <div class="hero-pre" style="opacity:0;animation:fadeUp .8s .3s forwards">20 UNITS &middot; SPRING 2026</div>
+    <h1 aria-label="Meet HEKLA — Private AI, Encrypted, Everywhere">
+      <div class="hero-headline" data-index="0">
+        <span class="line1"><span>Meet</span></span>
+        <span class="line2"><span>HEKLA</span></span>
+      </div>
+      <div class="hero-headline" data-index="1">
+        <span class="line1"><span>40 tabs open in your head.</span></span>
+        <span class="line2"><span>HEKLA closes 39 of them.</span></span>
+      </div>
+      <div class="hero-headline" data-index="2">
+        <span class="line1"><span>Private AI.</span></span>
+        <span class="line2"><span>Encrypted. Everywhere.</span></span>
+      </div>
+    </h1>
+    <p class="hero-sub" style="opacity:0;animation:fadeUp .8s .7s forwards">She's not a tool. She's the all-knowing wizard you always wanted &mdash; but never had.</p>
+    <div class="hero-actions">
+      <a href="#reserve" class="btn">Reserve your unit &rarr;</a>
+      <a href="#problem" class="btn btn-ghost">Sound familiar?</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE PROBLEM ═══ -->
+<section class="problem" id="problem">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">SOUND FAMILIAR?</p>
+    <h2>The bottleneck in most organisations isn't capital. Isn't talent. It's the people responsible for decisions.</h2>
+    <div class="inbox-chaos">
+      <span class="inbox-tag">WhatsApp</span>
+      <span class="inbox-tag">Email</span>
+      <span class="inbox-tag">Slack</span>
+      <span class="inbox-tag">Teams</span>
+      <span class="inbox-tag">Telegram</span>
+      <span class="inbox-tag">LinkedIn</span>
+      <span class="inbox-tag">iMessage</span>
+      <span class="inbox-tag overwhelm">10+ inboxes</span>
+      <span class="inbox-tag overwhelm">Hundreds of messages</span>
+    </div>
+    <p>Six, seven, ten or even twenty inboxes. Hundreds of messages. And somewhere in there is what actually matters today.</p>
+    <div class="highlight">How could HEKLA change your mornings?</div>
+  </div>
+</section>
+
+<!-- ═══ THE ANSWER ═══ -->
+<section class="answer">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">MEET HEKLA</p>
+    <h2>She scans your platforms. Briefs you every morning. Crunches your meeting notes. Delegates to you. The team. The kids.</h2>
+    <div class="answer-grid">
+      <div class="answer-card">
+        <h4>You feed her</h4>
+        <p>Years of ChatGPT, emails, files, conversations. Your history becomes her intelligence.</p>
+      </div>
+      <div class="answer-card">
+        <h4>You train her</h4>
+        <p>Your communication style. Your priorities. Your people. Your way of working.</p>
+      </div>
+      <div class="answer-card">
+        <h4>She remembers</h4>
+        <p>Everyone. Everything. Always. Context that compounds across every interaction.</p>
+      </div>
+    </div>
+    <div class="everything">EVE<span>.</span>RY<span>.</span>THING<span>.</span></div>
+    <p style="color:var(--dim);font-size:1rem">The longer you use her, the more valuable she becomes. The switching cost is permanent &mdash; because your knowledge lives here.</p>
+  </div>
+</section>
+
+<!-- ═══ PRIVATE ═══ -->
+<section class="private">
+  <div class="c">
+    <div class="private-flex">
+      <div>
+        <p class="label" style="margin-bottom:1.5rem">YOUR DATA STAYS YOURS</p>
+        <h2>Your data? Stays yours. Locally stored.</h2>
+        <p>Your contacts, your conversations, your private CRM &mdash; your own infrastructure.</p>
+        <p><strong>Not some big we-want-to-own-the-entire-world corporate bullshit. No more.</strong></p>
+      </div>
+      <ul class="private-points">
+        <li><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Encrypted on your own hardware</li>
+        <li><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L3 7v6c0 5.25 3.75 10.13 9 11.25C17.25 23.13 21 18.25 21 13V7l-9-5z"/></svg> No cloud dependency</li>
+        <li><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10A15 15 0 0 1 12 2z"/></svg> EU sovereignty by design</li>
+        <li><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 14l2 2 4-4"/></svg> Every agent action logged &amp; auditable</li>
+        <li><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C9.24 2 7 4.24 7 7v3H5a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1h-2V7c0-2.76-2.24-5-5-5zm0 2c1.65 0 3 1.35 3 3v3H9V7c0-1.65 1.35-3 3-3z"/></svg> NDA-safe from day one</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SCARCITY CALLOUT ═══ -->
+<section class="scarcity">
+  <div class="c">
+    <div class="scarcity-number">20</div>
+    <div class="scarcity-label">units. That's it.</div>
+    <div class="scarcity-sub">SPRING 2026 &middot; EVERY UNIT CONFIGURED ONE-TO-ONE</div>
+    <div class="scarcity-breakdown">
+      <div class="scarcity-item">
+        <div class="num">15</div>
+        <div class="desc">HEKLA Private</div>
+      </div>
+      <div class="scarcity-item">
+        <div class="num">5</div>
+        <div class="desc">High Performance</div>
+      </div>
+      <div class="scarcity-item">
+        <div class="num">0</div>
+        <div class="desc">After this batch</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HEKLA PRIVATE ═══ -->
+<section class="tier" id="personal">
+  <div class="c">
+    <div class="tier-split">
+      <div class="tier-content">
+        <p class="label">HEKLA PRIVATE</p>
+        <h2>Your encrypted second brain.</h2>
+        <ul class="tier-features">
+          <li>Private CRM with long-term memory &mdash; remembers everyone, everything, always</li>
+          <li>Memory API: feed HEKLA with years of ChatGPT, emails, and your files</li>
+          <li>Unified inbox: LinkedIn, WhatsApp, Emails &mdash; one priority view</li>
+          <li>Proactive meeting prep, smart alerts and task execution</li>
+          <li>Works from your phone &mdash; task becomes agent action instantly</li>
+          <li>Runs privately on your own local hardware</li>
+        </ul>
+        <div class="tier-price">20,000 DKK</div>
+        <div class="tier-price-note">ex. VAT &middot; ex. hardware</div>
+        <p style="font-size:.88rem;margin-top:.75rem">Hardware available as an add-on &mdash; your system, your data, your control.</p>
+        <div class="tier-badge">15 UNITS AVAILABLE &mdash; SPRING 2026</div>
+      </div>
+      <div class="tier-photo">
+        <picture>
+          <source srcset="tier-private.webp" type="image/webp">
+          <img src="tier-private.jpg" alt="Professional working on laptop in dark environment" loading="lazy" width="600" height="800">
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HEKLA HIGH PERFORMANCE ═══ -->
+<section class="tier">
+  <div class="c">
+    <div class="tier-split" style="direction:rtl">
+      <div class="tier-content" style="direction:ltr">
+        <p class="label">HEKLA PRIVATE &mdash; HIGH PERFORMANCE</p>
+        <h2>For the people who operate at full speed.</h2>
+        <ul class="tier-features">
+          <li>Everything in HEKLA Private</li>
+          <li>Custom agent training on your decisions and communication style</li>
+          <li>Full command layer: inbox, calendar, contacts &mdash; always in sync</li>
+          <li>Dedicated online onboarding sprint and hardware optimisation session</li>
+          <li>Monthly performance review with the HEKLA team in 2026</li>
+          <li>HEKLA Ambient &mdash; (BETA)</li>
+          <li>Direct line to the team in 2026</li>
+          <li>Volcano Club membership *</li>
+        </ul>
+        <div class="tier-price">60,000 DKK</div>
+        <div class="tier-price-note">ex. VAT &middot; ex. hardware</div>
+        <p style="font-size:.88rem;margin-top:.75rem">Hardware upgrade available as an add-on &mdash; your system, your data, your control.</p>
+        <div class="tier-badge">5 UNITS AVAILABLE &mdash; SPRING 2026</div>
+        <p style="font-size:.78rem;color:var(--dim);margin-top:1.5rem;font-style:italic">* Volcano Club members are first in line when HEKLA opens to investors.</p>
+      </div>
+      <div class="tier-photo" style="direction:ltr">
+        <picture>
+          <source srcset="tier-hp.webp" type="image/webp">
+          <img src="tier-hp.jpg" alt="Executive in formal attire with warm ambient lighting" loading="lazy" width="600" height="800">
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EVERYWHERE ═══ -->
+<section class="everywhere">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">THE FUTURE IS PRIVATE</p>
+    <h2>Your private assistant. Everywhere you are.</h2>
+    <div class="scene-list">
+      <div class="scene"><div class="scene-where">At home</div><div class="scene-what">Briefed, prepared, inbox cleared before you sit down.</div></div>
+      <div class="scene"><div class="scene-where">At work</div><div class="scene-what">Every meeting prepped, every priority surfaced.</div></div>
+      <div class="scene"><div class="scene-where">At the gym</div><div class="scene-what">Your day is managed while you are away from the screen.</div></div>
+      <div class="scene"><div class="scene-where">In the supermarket</div><div class="scene-what">Finds discounted goods. Checks your list. Orders what's missing.</div></div>
+      <div class="scene"><div class="scene-where">Right now</div><div class="scene-what">Now let me call your mum &mdash; it's her birthday.</div></div>
+    </div>
+    <div class="highlight" style="margin-top:3rem">Want to find out? The window is tiny.</div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about" id="about">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">WHY WE'RE BUILDING THIS</p>
+    <h2>The people making the biggest decisions are drowning in the smallest tasks.</h2>
+    <div class="about-body">
+      <p>Every founder, executive, and decision-maker we know runs on the same broken system: ten inboxes, three calendars, a hundred browser tabs, and a brain that never fully switches off.</p>
+      <p><strong>We asked ourselves a simple question:</strong> what if you had a private intelligence that knew your world, ran on your hardware, and worked for you alone? Not another SaaS platform. Not another subscription that owns your data. Something fundamentally different.</p>
+      <p>HEKLA is that answer. Built in Copenhagen. Encrypted by design. Configured one-to-one. She learns your priorities, your people, and your patterns &mdash; and she never forgets.</p>
+      <p style="color:var(--dim)">We're three co-founders with backgrounds in product infrastructure, deep-tech invention, and business development. We've built companies, won innovation awards, and spent years inside the systems we're now replacing.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
+<section class="team">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">THE TEAM</p>
+    <h2>Three founders. One obsession.</h2>
+    <div class="team-grid">
+
+      <div class="team-card">
+        <div class="team-initials">SA</div>
+        <h3>Sven Arnarsson</h3>
+        <div class="team-role">Co-founder</div>
+        <p>Growth strategist turned builder. Background in data analytics, brand consulting, and marketing systems. Built companies and campaigns across Scandinavia before deciding to build an intelligence that thinks for itself.</p>
+        <a href="https://www.linkedin.com/in/svenarnarsson/" target="_blank" rel="noopener" class="team-link">LinkedIn &rarr;</a>
+      </div>
+
+      <div class="team-card">
+        <div class="team-initials">HJ</div>
+        <h3>Hjalti Jonsson</h3>
+        <div class="team-role">Co-founder</div>
+        <p>Business development and communications from the Danish startup ecosystem. Connects the dots between people, products, and markets. Icelandic-born, Copenhagen-based. Wired into the Nordic founder network.</p>
+        <a href="https://www.linkedin.com/in/hjalti-jonsson/" target="_blank" rel="noopener" class="team-link">LinkedIn &rarr;</a>
+      </div>
+
+      <div class="team-card">
+        <div class="team-initials">CL</div>
+        <h3>Christopher James L&uuml;scher, Ph.D</h3>
+        <div class="team-role">Co-founder</div>
+        <p>Serial inventor with a PhD from DTU. From nanotechnology research to commercial deep-tech products. Winner of KPMG Tech Innovator Denmark. Multiple EU Horizon grants and patents. He builds what others theorise about.</p>
+        <a href="https://www.linkedin.com/in/christopher-james-l%C3%BCscher/" target="_blank" rel="noopener" class="team-link">LinkedIn &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESERVE ═══ -->
+<section class="final" id="reserve">
+  <div class="c">
+    <p class="label" style="margin-bottom:2rem">LIMITED AVAILABILITY</p>
+    <h2>The world gets HEKLA later.<br>You can own it now.</h2>
+    <p>15 Private + 5 High Performance units. Every unit configured one-to-one by the HEKLA team. Launch pricing and features &mdash; some might not be available again.</p>
+    <div class="final-box">
+      <h3>Reply to reserve your unit.</h3>
+      <div class="sub">20 UNITS &middot; NEXT BATCH: WE HONESTLY DON'T KNOW</div>
+      <a href="mailto:hello@hekla.is?subject=HEKLA — Reserve my unit" class="btn">Reserve now &rarr;</a>
+    </div>
+    <p class="final-note">We don't ship until it's right. You'll be kept informed every step of the way. HEKLA Teams pilot &mdash; autumn 2026.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer role="contentinfo">
+  <div class="c">
+    <div class="footer-brand">Hekla</div>
+    <div class="footer-links">
+      <a href="index.html">Platform</a>
+      <a href="personal.html">Private</a>
+      <a href="mailto:hello@hekla.is">hello@hekla.is</a>
+      <a href="#">Copenhagen &middot; 2026</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.tier-content, .tier-photo, .scene, .final-box, .highlight, .answer-card, .inbox-tag, .private-points li, .scarcity-number, .scarcity-breakdown, .team-card, .about-body').forEach(el => {
+  el.classList.add('anim');
+  observer.observe(el);
+});
+
+// Smooth anchor scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', e => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({ top: target.offsetTop - nav.offsetHeight - 20, behavior: 'smooth' });
+    }
+  });
+});
+
+// ═══ HEADLINE ROTATOR — masked line reveal ═══
+(function() {
+  var slides = document.querySelectorAll('.hero-headline');
+  if (!slides.length) return;
+
+  var idx = 0;
+  var HOLD   = 3600; // visible hold time
+  var ENTER  = 900;  // enter transition duration
+  var EXIT   = 600;  // exit transition duration
+  var PAUSE  = 200;  // gap between exit end and next enter
+
+  // State helper — clean swap of classes
+  function setState(el, state) {
+    el.classList.remove('enter', 'hold', 'exit');
+    if (state) el.classList.add(state);
+    el.classList.toggle('is-visible', state !== null);
+  }
+
+  // Reset inner spans to starting position (below mask)
+  function resetSpans(el) {
+    el.querySelectorAll('.line1 > span, .line2 > span').forEach(function(s) {
+      s.style.transition = 'none';
+      s.style.transform = 'translateY(110%)';
+    });
+    // Force reflow so the reset takes effect before next transition
+    el.offsetHeight;
+    el.querySelectorAll('.line1 > span, .line2 > span').forEach(function(s) {
+      s.style.transition = '';
+      s.style.transform = '';
+    });
+  }
+
+  // ── Initial entrance ──
+  var first = slides[0];
+  first.classList.add('is-visible');
+  // Small delay to allow page paint, then trigger entrance
+  requestAnimationFrame(function() {
+    setTimeout(function() {
+      setState(first, 'enter');
+      setTimeout(function() { setState(first, 'hold'); }, ENTER);
+    }, 400);
+  });
+
+  function next() {
+    var prev = slides[idx];
+    idx = (idx + 1) % slides.length;
+    var nxt = slides[idx];
+
+    // Phase 1: Exit
+    setState(prev, 'exit');
+
+    // Phase 2: After exit completes, reset prev & enter next
+    setTimeout(function() {
+      setState(prev, null);    // hide prev
+      resetSpans(prev);        // move spans back below mask
+
+      nxt.classList.add('is-visible');
+      // One frame delay to ensure visibility + reset are painted
+      requestAnimationFrame(function() {
+        setState(nxt, 'enter');
+
+        // Phase 3: Hold
+        setTimeout(function() { setState(nxt, 'hold'); }, ENTER);
+      });
+    }, EXIT + PAUSE);
+  }
+
+  // Start loop after initial entrance + hold
+  var firstDelay = 400 + ENTER + HOLD;
+  var interval = EXIT + PAUSE + ENTER + HOLD;
+
+  // ── Dynamic h1 sizing: measure tallest headline ──
+  function sizeH1() {
+    var h1 = document.querySelector('.hero h1');
+    if (!h1) return;
+    var maxH = 0;
+    slides.forEach(function(hl) {
+      var h = hl.scrollHeight;
+      if (h > maxH) maxH = h;
+    });
+    if (maxH > 0) h1.style.minHeight = maxH + 'px';
+  }
+  sizeH1();
+  window.addEventListener('resize', sizeH1);
+
+  setTimeout(function() {
+    next();
+    setInterval(next, interval);
+  }, firstDelay);
+})();
+</script>
+</body>
+</html>

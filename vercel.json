@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/meet-hekla", "destination": "/launch.html" }
+  ]
+}
