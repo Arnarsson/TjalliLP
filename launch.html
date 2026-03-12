@@ -1608,9 +1608,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
   }
 
+  // Focus input only when reserve section is scrolled into view
+  function focusWhenVisible(el) {
+    var box = document.getElementById('reserve-box');
+    if (!box) return;
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) { el.focus(); observer.disconnect(); }
+    }, { threshold: 0.5 });
+    observer.observe(box);
+  }
+
   // Step 1: Name
   typeText(qName, "What's your name?", cursorName, function() {
-    inputName.focus();
+    focusWhenVisible(inputName);
   });
 
   inputName.addEventListener('keydown', function(e) {
