@@ -1087,6 +1087,37 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   margin-top: .4rem;
 }
 
+/* How it works */
+.reserve-how {
+  margin-bottom: 1.5rem;
+}
+.reserve-how-title {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  text-transform: uppercase; letter-spacing: .12em;
+  text-align: center; margin-bottom: 1rem;
+}
+.reserve-how-steps {
+  display: flex; align-items: center; justify-content: center; gap: .75rem;
+}
+.reserve-how-step {
+  display: flex; flex-direction: column; align-items: center; gap: .4rem;
+  flex: 0 1 auto;
+}
+.reserve-how-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid var(--orange); color: var(--orange);
+  font-family: var(--mono); font-size: .65rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+.reserve-how-text {
+  font-family: var(--mono); font-size: .6rem; color: var(--cream);
+  text-align: center; max-width: 90px; line-height: 1.4;
+}
+.reserve-how-arrow {
+  font-family: var(--mono); font-size: .7rem; color: rgba(255,255,255,.15);
+  margin-top: -1rem;
+}
+
 /* Nav reserve button with jiggle */
 .nav-reserve {
   background: var(--orange); color: var(--white) !important; padding: .4rem 1rem;
@@ -1405,21 +1436,37 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
             <div class="reserve-pos-label">Your position</div>
             <div class="reserve-pos-number" id="pos-number">#—</div>
             <div class="reserve-pos-sub" data-reserve-sub></div>
-            <div class="reserve-share-label">Share to move up</div>
-            <div class="reserve-link-box">
-              <span class="reserve-link-url" id="share-url"></span>
-              <button class="reserve-copy-btn" id="copy-btn">Copy</button>
-            </div>
-            <div class="reserve-share-hint">Each signup from your link moves you up 1 spot</div>
             <div class="reserve-tier" id="tier-section">
-              <div class="reserve-tier-heading">Share your link to unlock rewards</div>
-              <div id="tier-cards"></div>
+              <div class="reserve-how">
+                <div class="reserve-how-title">How it works</div>
+                <div class="reserve-how-steps">
+                  <div class="reserve-how-step">
+                    <div class="reserve-how-num">1</div>
+                    <div class="reserve-how-text">Copy your link below</div>
+                  </div>
+                  <div class="reserve-how-arrow">&rarr;</div>
+                  <div class="reserve-how-step">
+                    <div class="reserve-how-num">2</div>
+                    <div class="reserve-how-text">Send it to friends</div>
+                  </div>
+                  <div class="reserve-how-arrow">&rarr;</div>
+                  <div class="reserve-how-step">
+                    <div class="reserve-how-num">3</div>
+                    <div class="reserve-how-text">Move up &amp; unlock perks</div>
+                  </div>
+                </div>
+              </div>
+              <div class="reserve-link-box">
+                <span class="reserve-link-url" id="share-url"></span>
+                <button class="reserve-copy-btn" id="copy-btn">Copy link</button>
+              </div>
               <div class="reserve-tier-next" id="tier-next">
                 <div class="reserve-tier-bar-wrap">
                   <div class="reserve-tier-bar"><div class="reserve-tier-fill" id="tier-fill" style="width:0%"></div></div>
                 </div>
                 <div class="reserve-tier-next-label" id="tier-next-label"></div>
               </div>
+              <div id="tier-cards"></div>
             </div>
           </div>
         </div>
