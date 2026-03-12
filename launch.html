@@ -947,7 +947,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <div class="avail-bar">
   <div class="avail-left">
     <div class="avail-dot"></div>
-    <div class="avail-text"><strong>20 units</strong> &mdash; 15 Private &middot; 5 High Performance &mdash; Spring 2026</div>
+    <div class="avail-text" data-units></div>
   </div>
   <a href="#reserve" class="avail-cta">Reserve yours &rarr;</a>
 </div>
@@ -956,7 +956,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <nav>
   <a href="index.html" class="nav-logo">Hekla</a>
   <div class="nav-r">
-    <span class="nav-live label">20 UNITS — SPRING 2026</span>
+    <span class="nav-live label" data-units-nav></span>
     <a href="index.html">Platform</a>
     <a href="personal.html">Private</a>
     <a href="#reserve" style="background:var(--orange);color:var(--white);padding:.4rem 1rem">Reserve yours</a>
@@ -976,7 +976,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   </div>
   <div class="hero-overlay"></div>
   <div class="c">
-    <div class="hero-pre" style="opacity:0;animation:fadeUp .8s .3s forwards">20 UNITS &middot; SPRING 2026</div>
+    <div class="hero-pre" style="opacity:0;animation:fadeUp .8s .3s forwards" data-units-hero></div>
     <h1 aria-label="Meet HEKLA — Private AI, Encrypted, Everywhere">
       <div class="hero-headline" data-index="0">
         <span class="line1"><span>Meet</span></span>
@@ -1068,16 +1068,16 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <!-- ═══ SCARCITY CALLOUT ═══ -->
 <section class="scarcity">
   <div class="c">
-    <div class="scarcity-number">20</div>
+    <div class="scarcity-number" data-units-total></div>
     <div class="scarcity-label">units. That's it.</div>
     <div class="scarcity-sub">SPRING 2026 &middot; EVERY UNIT CONFIGURED ONE-TO-ONE</div>
     <div class="scarcity-breakdown">
       <div class="scarcity-item">
-        <div class="num">15</div>
+        <div class="num" data-units-private></div>
         <div class="desc">HEKLA Private</div>
       </div>
       <div class="scarcity-item">
-        <div class="num">5</div>
+        <div class="num" data-units-hp></div>
         <div class="desc">High Performance</div>
       </div>
       <div class="scarcity-item">
@@ -1106,7 +1106,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
         <div class="tier-price">20,000 DKK</div>
         <div class="tier-price-note">ex. VAT &middot; ex. hardware</div>
         <p style="font-size:.88rem;margin-top:.75rem">Hardware available as an add-on &mdash; your system, your data, your control.</p>
-        <div class="tier-badge">15 UNITS AVAILABLE &mdash; SPRING 2026</div>
+        <div class="tier-badge" data-badge-private></div>
       </div>
       <div class="tier-photo">
         <picture>
@@ -1138,7 +1138,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
         <div class="tier-price">60,000 DKK</div>
         <div class="tier-price-note">ex. VAT &middot; ex. hardware</div>
         <p style="font-size:.88rem;margin-top:.75rem">Hardware upgrade available as an add-on &mdash; your system, your data, your control.</p>
-        <div class="tier-badge">5 UNITS AVAILABLE &mdash; SPRING 2026</div>
+        <div class="tier-badge" data-badge-hp></div>
         <p style="font-size:.78rem;color:var(--dim);margin-top:1.5rem;font-style:italic">* Volcano Club members are first in line when HEKLA opens to investors.</p>
       </div>
       <div class="tier-photo" style="direction:ltr">
@@ -1221,10 +1221,10 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   <div class="c">
     <p class="label" style="margin-bottom:2rem">LIMITED AVAILABILITY</p>
     <h2>The world gets HEKLA later.<br>You can own it now.</h2>
-    <p>15 Private + 5 High Performance units. Every unit configured one-to-one by the HEKLA team. Launch pricing and features &mdash; some might not be available again.</p>
+    <p data-reserve-desc></p>
     <div class="final-box">
       <h3>Reply to reserve your unit.</h3>
-      <div class="sub">20 UNITS &middot; NEXT BATCH: WE HONESTLY DON'T KNOW</div>
+      <div class="sub" data-reserve-sub></div>
       <a href="mailto:hello@hekla.is?subject=HEKLA — Reserve my unit" class="btn">Reserve now &rarr;</a>
     </div>
     <p class="final-note">We don't ship until it's right. You'll be kept informed every step of the way. HEKLA Teams pilot &mdash; autumn 2026.</p>
@@ -1247,6 +1247,25 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 </footer>
 
 <script>
+// ═══ UNIT INVENTORY — edit these numbers when units are sold ═══
+var UNITS = { private: 12, hp: 4 };
+// ═══════════════════════════════════════════════════════════════
+
+(function(u) {
+  var t = u.private + u.hp;
+  var s = function(sel, html) { var el = document.querySelector(sel); if (el) el.innerHTML = html; };
+  s('[data-units]', '<strong>' + t + ' units left</strong> &mdash; ' + u.private + ' Private &middot; ' + u.hp + ' High Performance &mdash; Spring 2026');
+  s('[data-units-nav]', t + ' UNITS LEFT \u2014 SPRING 2026');
+  s('[data-units-hero]', t + ' UNITS LEFT \u00B7 SPRING 2026');
+  s('[data-units-total]', t);
+  s('[data-units-private]', u.private);
+  s('[data-units-hp]', u.hp);
+  s('[data-badge-private]', u.private + ' UNITS LEFT \u2014 SPRING 2026');
+  s('[data-badge-hp]', u.hp + ' UNITS LEFT \u2014 SPRING 2026');
+  s('[data-reserve-desc]', u.private + ' Private + ' + u.hp + ' High Performance units left. Every unit configured one-to-one by the HEKLA team. Launch pricing and features \u2014 some might not be available again.');
+  s('[data-reserve-sub]', t + ' UNITS LEFT \u00B7 NEXT BATCH: WE HONESTLY DON\u2019T KNOW');
+})(UNITS);
+
 // Nav scroll
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
