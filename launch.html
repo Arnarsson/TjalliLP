@@ -1590,10 +1590,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }, 400);
   });
 
+  var running = false;
   function next() {
+    if (running) return;     // prevent overlapping transitions
+    running = true;
     var prev = slides[idx];
     idx = (idx + 1) % slides.length;
     var nxt = slides[idx];
+
+    // Safety: hide all slides except the one we're exiting
+    slides.forEach(function(s) {
+      if (s !== prev) { setState(s, null); resetSpans(s); }
+    });
 
     // Phase 1: Exit
     setState(prev, 'exit');
@@ -1609,7 +1617,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         setState(nxt, 'enter');
 
         // Phase 3: Hold
-        setTimeout(function() { setState(nxt, 'hold'); }, ENTER);
+        setTimeout(function() {
+          setState(nxt, 'hold');
+          running = false;
+        }, ENTER);
       });
     }, EXIT + PAUSE);
   }
@@ -1632,9 +1643,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   sizeH1();
   window.addEventListener('resize', sizeH1);
 
+  function scheduleNext() {
+    setTimeout(function() {
+      next();
+      scheduleNext();
+    }, interval);
+  }
   setTimeout(function() {
     next();
-    setInterval(next, interval);
+    scheduleNext();
   }, firstDelay);
 })();
 
