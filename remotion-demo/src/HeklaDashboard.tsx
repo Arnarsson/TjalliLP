@@ -1281,6 +1281,7 @@ export const HeklaDashboard: React.FC = () => {
         fontSize: 14,
         lineHeight: 1.5,
         display: "flex",
+        flexDirection: "row",
         transform: `scale(${zoom})`,
         transformOrigin: "center center",
       }}
