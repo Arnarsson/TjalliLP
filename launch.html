@@ -1015,27 +1015,64 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   margin-top: 1rem;
 }
 
-/* Tier badge */
+/* Tier system */
 .reserve-tier {
-  margin-top: 1.5rem; padding-top: 1.5rem;
+  margin-top: 2rem; padding-top: 1.5rem;
   border-top: 1px solid rgba(255,255,255,.06);
+  text-align: left;
 }
-.reserve-tier-badge {
-  display: inline-block; font-family: var(--mono); font-size: .65rem;
-  text-transform: uppercase; letter-spacing: .1em; padding: .35rem .9rem;
-  border-radius: 20px; margin-bottom: .75rem;
+.reserve-tier-heading {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  text-transform: uppercase; letter-spacing: .12em;
+  margin-bottom: 1.25rem; text-align: center;
 }
-.reserve-tier-badge[data-tier="1"] {
-  color: var(--body); border: 1px solid rgba(255,255,255,.15);
+.reserve-tier-card {
+  background: var(--bg); border-radius: 8px; padding: 1.25rem 1.5rem;
+  margin-bottom: .75rem;
+  border-left: 2px solid rgba(255,255,255,.08);
+  transition: border-color .4s, opacity .4s;
 }
-.reserve-tier-badge[data-tier="2"] {
-  color: var(--orange); border: 1px solid var(--orange);
+.reserve-tier-card.active {
+  border-left-color: var(--orange);
 }
-.reserve-tier-badge[data-tier="3"] {
-  color: #131110; background: var(--orange); border: 1px solid var(--orange);
+.reserve-tier-card.locked {
+  opacity: .4;
 }
-.reserve-tier-progress {
-  max-width: 280px; margin: 0 auto .5rem;
+.reserve-tier-card-head {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: .6rem;
+}
+.reserve-tier-name {
+  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
+  font-style: italic;
+}
+.reserve-tier-card.locked .reserve-tier-name { color: var(--dim); }
+.reserve-tier-req {
+  font-family: var(--mono); font-size: .58rem; color: var(--dim);
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.reserve-tier-card.active .reserve-tier-req { color: var(--orange); }
+.reserve-tier-perks {
+  list-style: none; padding: 0; margin: 0;
+}
+.reserve-tier-perks li {
+  font-family: var(--mono); font-size: .65rem; color: var(--body);
+  padding: .2rem 0 .2rem 1.1rem; position: relative;
+}
+.reserve-tier-perks li::before {
+  content: ''; position: absolute; left: 0; top: .55rem;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--orange);
+}
+.reserve-tier-card.locked .reserve-tier-perks li { color: var(--dim); }
+.reserve-tier-card.locked .reserve-tier-perks li::before { background: var(--dim); }
+
+/* Progress toward next tier */
+.reserve-tier-next {
+  text-align: center; margin-top: 1.25rem;
+}
+.reserve-tier-bar-wrap {
+  max-width: 100%; margin: 0 auto .5rem;
 }
 .reserve-tier-bar {
   height: 3px; background: rgba(255,255,255,.08); border-radius: 2px;
@@ -1045,23 +1082,10 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   height: 100%; background: var(--orange); border-radius: 2px;
   transition: width .8s cubic-bezier(.16,1,.3,1);
 }
-.reserve-tier-label {
+.reserve-tier-next-label {
   font-family: var(--mono); font-size: .6rem; color: var(--dim);
   margin-top: .4rem;
 }
-.reserve-tier-perks {
-  list-style: none; padding: 0; margin: 1rem auto 0;
-  max-width: 320px; text-align: left;
-}
-.reserve-tier-perks li {
-  font-family: var(--mono); font-size: .65rem; color: var(--dim);
-  padding: .25rem 0; padding-left: 1.2rem; position: relative;
-}
-.reserve-tier-perks li::before {
-  content: '✓'; position: absolute; left: 0; color: var(--orange);
-}
-.reserve-tier-perks li.locked { opacity: .35; }
-.reserve-tier-perks li.locked::before { content: '○'; color: var(--dim); }
 
 /* Nav reserve button with jiggle */
 .nav-reserve {
@@ -1388,12 +1412,14 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
             </div>
             <div class="reserve-share-hint">Each signup from your link moves you up 1 spot</div>
             <div class="reserve-tier" id="tier-section">
-              <div class="reserve-tier-badge" id="tier-badge" data-tier="1">Reserved</div>
-              <div class="reserve-tier-progress" id="tier-progress">
-                <div class="reserve-tier-bar"><div class="reserve-tier-fill" id="tier-fill" style="width:0%"></div></div>
-                <div class="reserve-tier-label" id="tier-label"></div>
+              <div class="reserve-tier-heading">Share your link to unlock rewards</div>
+              <div id="tier-cards"></div>
+              <div class="reserve-tier-next" id="tier-next">
+                <div class="reserve-tier-bar-wrap">
+                  <div class="reserve-tier-bar"><div class="reserve-tier-fill" id="tier-fill" style="width:0%"></div></div>
+                </div>
+                <div class="reserve-tier-next-label" id="tier-next-label"></div>
               </div>
-              <ul class="reserve-tier-perks" id="tier-perks"></ul>
             </div>
           </div>
         </div>
@@ -1631,53 +1657,53 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     step();
   }
 
-  // Tier perks definition
-  var TIERS = {
-    1: { name: 'Reserved', perks: ['Your spot in the queue', 'Referral link to share'] },
-    2: { name: 'Inner Circle', perks: ['Priority configuration slot', 'Direct line to the HEKLA team', 'Name engraved on welcome card'] },
-    3: { name: 'Founding Member', perks: ['Private Founding Members group', 'Permanent Founding Member badge', 'Personal onboarding call'] }
-  };
+  // Tier definitions
+  var TIERS = [
+    { name: 'Reserved', req: 'Your spot', threshold: 0, perks: ['Position in the queue', 'Personal referral link'] },
+    { name: 'Inner Circle', req: '5 referrals', threshold: 5, perks: ['Priority configuration slot', 'Direct line to the HEKLA team', 'Name engraved on welcome card'] },
+    { name: 'Founding Member', req: '10 referrals', threshold: 10, perks: ['Private Founding Members group', 'Permanent Founding Member badge', 'Personal onboarding call with the team'] }
+  ];
 
   // Render tier UI
   function renderTier(tierData) {
-    var badge = document.getElementById('tier-badge');
+    var cardsEl = document.getElementById('tier-cards');
     var fill = document.getElementById('tier-fill');
-    var label = document.getElementById('tier-label');
-    var perksEl = document.getElementById('tier-perks');
-    var progress = document.getElementById('tier-progress');
-    if (!badge) return;
+    var nextLabel = document.getElementById('tier-next-label');
+    var nextWrap = document.getElementById('tier-next');
+    if (!cardsEl) return;
 
-    var tier = tierData.tier || 1;
+    var currentTier = (tierData.tier || 1) - 1; // 0-indexed
     var referrals = tierData.referralCount || 0;
 
-    badge.textContent = tierData.tierName || TIERS[tier].name;
-    badge.setAttribute('data-tier', tier);
-
-    // Progress bar
-    if (tier >= 3) {
-      progress.style.display = 'none';
-    } else {
-      var target = tier === 1 ? 5 : 10;
-      var pct = Math.min(100, Math.round((referrals / target) * 100));
-      setTimeout(function() { fill.style.width = pct + '%'; }, 300);
-      label.textContent = referrals + '/' + target + ' referrals → ' + (tierData.nextTier || 'next tier');
-    }
-
-    // Perks list
+    // Build tier cards
     var html = '';
-    // Current tier perks (unlocked)
-    for (var t = 1; t <= tier; t++) {
-      TIERS[t].perks.forEach(function(p) {
-        html += '<li>' + p + '</li>';
-      });
+    for (var i = 0; i < TIERS.length; i++) {
+      var t = TIERS[i];
+      var isActive = i <= currentTier;
+      var isLocked = i > currentTier;
+      var cls = 'reserve-tier-card' + (isActive ? ' active' : '') + (isLocked ? ' locked' : '');
+      html += '<div class="' + cls + '">';
+      html += '<div class="reserve-tier-card-head">';
+      html += '<span class="reserve-tier-name">' + t.name + '</span>';
+      html += '<span class="reserve-tier-req">' + (isActive && i <= currentTier ? (i === 0 ? 'Unlocked' : 'Unlocked') : t.req) + '</span>';
+      html += '</div>';
+      html += '<ul class="reserve-tier-perks">';
+      for (var j = 0; j < t.perks.length; j++) {
+        html += '<li>' + t.perks[j] + '</li>';
+      }
+      html += '</ul></div>';
     }
-    // Next tier perks (locked)
-    if (tier < 3) {
-      TIERS[tier + 1].perks.forEach(function(p) {
-        html += '<li class="locked">' + p + '</li>';
-      });
+    cardsEl.innerHTML = html;
+
+    // Progress bar toward next tier
+    if (currentTier >= 2) {
+      nextWrap.style.display = 'none';
+    } else {
+      var nextThreshold = TIERS[currentTier + 1].threshold;
+      var pct = Math.min(100, Math.round((referrals / nextThreshold) * 100));
+      setTimeout(function() { fill.style.width = pct + '%'; }, 300);
+      nextLabel.textContent = referrals + ' of ' + nextThreshold + ' referrals to unlock ' + TIERS[currentTier + 1].name;
     }
-    perksEl.innerHTML = html;
   }
 
   // Show confirmation state
