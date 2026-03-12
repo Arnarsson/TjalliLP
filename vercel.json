@@ -3,6 +3,7 @@
     { "source": "/", "destination": "/meet-hekla", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/meet-hekla", "destination": "/launch.html" }
+    { "source": "/meet-hekla", "destination": "/launch.html" },
+    { "source": "/r/:code", "destination": "/launch.html?ref=:code" }
   ]
 }

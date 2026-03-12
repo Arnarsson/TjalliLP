@@ -941,6 +941,79 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 .anim.visible { animation: fadeUp .7s ease-out forwards; }
 .anim.visible:nth-child(2) { animation-delay: .1s; }
 .anim.visible:nth-child(3) { animation-delay: .2s; }
+
+/* ═══ RESERVATION FORM ═══ */
+.reserve-form { position: relative; min-height: 140px; }
+.reserve-step {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .5s cubic-bezier(.16,1,.3,1), transform .5s cubic-bezier(.16,1,.3,1);
+  pointer-events: none; position: absolute; top: 0; left: 0; width: 100%;
+}
+.reserve-step.active { opacity: 1; transform: translateY(0); pointer-events: auto; position: relative; }
+.reserve-step.exit { opacity: 0; transform: translateY(-20px); }
+.reserve-question {
+  font-family: var(--serif); font-size: 1.8rem; color: var(--cream);
+  margin-bottom: 1.5rem; line-height: 1.3;
+}
+.reserve-cursor::after {
+  content: '|'; animation: blink 1s step-end infinite; color: var(--orange); margin-left: 2px;
+}
+@keyframes blink { 50% { opacity: 0; } }
+.reserve-input {
+  background: transparent; border: none; border-bottom: 2px solid var(--dim);
+  font-family: var(--serif); font-size: 1.6rem; color: var(--cream);
+  padding: .5rem 0; width: 100%; outline: none;
+  transition: border-color .3s;
+}
+.reserve-input:focus { border-color: var(--orange); }
+.reserve-input::placeholder { color: var(--dim); }
+.reserve-hint {
+  font-family: var(--mono); font-size: .65rem; color: var(--dim);
+  margin-top: .75rem; text-transform: uppercase; letter-spacing: .08em;
+}
+.reserve-error {
+  font-family: var(--mono); font-size: .75rem; color: #e05a4a;
+  margin-top: .5rem; min-height: 1.2em;
+}
+
+/* Confirmation state */
+.reserve-confirmed { text-align: center; }
+.reserve-pos-label {
+  font-family: var(--mono); font-size: .7rem; color: var(--dim);
+  text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem;
+}
+.reserve-pos-number {
+  font-family: var(--serif); font-size: 4.5rem; color: var(--orange);
+  line-height: 1; margin-bottom: .25rem;
+}
+.reserve-pos-sub {
+  font-family: var(--mono); font-size: .75rem; color: var(--body);
+  margin-bottom: 2rem;
+}
+.reserve-share-label {
+  font-family: var(--mono); font-size: .65rem; color: var(--dim);
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: .75rem;
+}
+.reserve-link-box {
+  display: flex; align-items: center; gap: .75rem;
+  background: var(--bg); border-radius: 8px; padding: .75rem 1rem;
+  max-width: 380px; margin: 0 auto;
+}
+.reserve-link-url {
+  font-family: var(--mono); font-size: .85rem; color: var(--cream);
+  flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.reserve-copy-btn {
+  background: var(--orange); color: #fff; border: none; border-radius: 6px;
+  font-family: var(--mono); font-size: .7rem; text-transform: uppercase;
+  letter-spacing: .06em; padding: .5rem 1rem; cursor: pointer;
+  transition: background .2s;
+}
+.reserve-copy-btn:hover { background: var(--orange-lt); }
+.reserve-share-hint {
+  font-family: var(--mono); font-size: .65rem; color: var(--dim);
+  margin-top: 1rem;
+}
 </style>
 </head>
 <body>
@@ -1224,10 +1297,40 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
     <p class="label" style="margin-bottom:2rem">LIMITED AVAILABILITY</p>
     <h2>The world gets HEKLA later.<br>You can own it now.</h2>
     <p data-reserve-desc></p>
-    <div class="final-box">
-      <h3>Reply to reserve your unit.</h3>
-      <div class="sub" data-reserve-sub></div>
-      <a href="mailto:hello@hekla.is?subject=HEKLA — Reserve my unit" class="btn">Reserve now &rarr;</a>
+    <div class="final-box" id="reserve-box">
+      <!-- Step 1: Name -->
+      <div class="reserve-form">
+        <div class="reserve-step active" id="step-name">
+          <div class="reserve-question"><span id="q-name"></span><span class="reserve-cursor" id="cursor-name"></span></div>
+          <input class="reserve-input" id="input-name" type="text" placeholder="Type your name…" autocomplete="name" />
+          <div class="reserve-hint">Press Enter ↵</div>
+          <div class="reserve-error" id="err-name"></div>
+        </div>
+        <!-- Step 2: Email -->
+        <div class="reserve-step" id="step-email">
+          <div class="reserve-question"><span id="q-email"></span><span class="reserve-cursor" id="cursor-email"></span></div>
+          <input class="reserve-input" id="input-email" type="email" placeholder="your@email.com" autocomplete="email" inputmode="email" />
+          <div class="reserve-hint">Press Enter ↵</div>
+          <div class="reserve-error" id="err-email"></div>
+        </div>
+        <!-- Step 3: Confirmation -->
+        <div class="reserve-step" id="step-confirm">
+          <div class="reserve-confirmed">
+            <div class="reserve-pos-label">Your position</div>
+            <div class="reserve-pos-number" id="pos-number">#—</div>
+            <div class="reserve-pos-sub" data-reserve-sub></div>
+            <div class="reserve-share-label">Share to move up</div>
+            <div class="reserve-link-box">
+              <span class="reserve-link-url" id="share-url"></span>
+              <button class="reserve-copy-btn" id="copy-btn">Copy</button>
+            </div>
+            <div class="reserve-share-hint">Each signup from your link moves you up 1 spot</div>
+          </div>
+        </div>
+      </div>
+      <noscript>
+        <a href="mailto:hello@hekla.is?subject=HEKLA — Reserve my unit" class="btn">Reserve now &rarr;</a>
+      </noscript>
     </div>
     <p class="final-note">We don't ship until it's right. You'll be kept informed every step of the way. HEKLA Teams pilot &mdash; autumn 2026.</p>
   </div>
@@ -1386,6 +1489,153 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     next();
     setInterval(next, interval);
   }, firstDelay);
+})();
+
+// ═══ RESERVATION FORM ═══
+(function() {
+  var stepName = document.getElementById('step-name');
+  var stepEmail = document.getElementById('step-email');
+  var stepConfirm = document.getElementById('step-confirm');
+  if (!stepName) return;
+
+  var inputName = document.getElementById('input-name');
+  var inputEmail = document.getElementById('input-email');
+  var qName = document.getElementById('q-name');
+  var qEmail = document.getElementById('q-email');
+  var cursorName = document.getElementById('cursor-name');
+  var cursorEmail = document.getElementById('cursor-email');
+  var errName = document.getElementById('err-name');
+  var errEmail = document.getElementById('err-email');
+  var posNumber = document.getElementById('pos-number');
+  var shareUrl = document.getElementById('share-url');
+  var copyBtn = document.getElementById('copy-btn');
+
+  var refCode = new URLSearchParams(window.location.search).get('ref') || '';
+  var savedCode = localStorage.getItem('hekla_code');
+
+  // Returning visitor: skip form, show position
+  if (savedCode) {
+    fetch('/api/position/' + savedCode)
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.position) showConfirmation(d.position, d.code || savedCode, d.totalReservations);
+      })
+      .catch(function() { /* show form normally */ });
+    return;
+  }
+
+  // Typing animation
+  function typeText(el, text, cursor, cb) {
+    var i = 0;
+    var timer = setInterval(function() {
+      el.textContent = text.slice(0, ++i);
+      if (i >= text.length) {
+        clearInterval(timer);
+        if (cursor) cursor.classList.remove('reserve-cursor');
+        if (cb) setTimeout(cb, 200);
+      }
+    }, 40);
+  }
+
+  // Transition between steps
+  function goTo(from, to, focusEl) {
+    from.classList.remove('active');
+    from.classList.add('exit');
+    setTimeout(function() {
+      to.classList.add('active');
+      if (focusEl) focusEl.focus();
+    }, 200);
+  }
+
+  // Animate position counter
+  function animateNumber(target) {
+    var start = Math.max(1, target + 20);
+    var current = start;
+    var el = posNumber;
+    function step() {
+      current -= Math.max(1, Math.ceil((current - target) * 0.15));
+      if (current <= target) { current = target; el.textContent = '#' + current; return; }
+      el.textContent = '#' + current;
+      requestAnimationFrame(step);
+    }
+    step();
+  }
+
+  // Show confirmation state
+  function showConfirmation(position, code, total) {
+    stepName.classList.remove('active');
+    stepName.classList.add('exit');
+    stepEmail.classList.remove('active');
+    stepEmail.classList.add('exit');
+    setTimeout(function() {
+      stepConfirm.classList.add('active');
+      animateNumber(position);
+      var link = 'hekla.cc/r/' + code;
+      shareUrl.textContent = link;
+      localStorage.setItem('hekla_code', code);
+    }, 200);
+  }
+
+  // Submit reservation
+  function submit(name, email) {
+    errEmail.textContent = '';
+    fetch('/api/reserve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email, referralCode: refCode || undefined })
+    })
+    .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+    .then(function(res) {
+      if (!res.ok) { errEmail.textContent = res.data.error || 'Something went wrong.'; return; }
+      showConfirmation(res.data.position, res.data.code, res.data.totalReservations);
+    })
+    .catch(function() {
+      errEmail.textContent = 'Network error. Please try again.';
+    });
+  }
+
+  // Step 1: Name
+  typeText(qName, "What's your name?", cursorName, function() {
+    inputName.focus();
+  });
+
+  inputName.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      var val = inputName.value.trim();
+      if (!val) { errName.textContent = 'Please enter your name.'; return; }
+      errName.textContent = '';
+      goTo(stepName, stepEmail, null);
+      typeText(qEmail, 'Where should we reach you, ' + val.split(' ')[0] + '?', cursorEmail, function() {
+        inputEmail.focus();
+      });
+    }
+  });
+
+  // Step 2: Email
+  inputEmail.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      var email = inputEmail.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEmail.textContent = 'Please enter a valid email.'; return;
+      }
+      errEmail.textContent = '';
+      inputEmail.disabled = true;
+      submit(inputName.value.trim(), email);
+    }
+  });
+
+  // Copy button
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function() {
+      var url = 'https://' + shareUrl.textContent;
+      navigator.clipboard.writeText(url).then(function() {
+        copyBtn.textContent = 'Copied!';
+        setTimeout(function() { copyBtn.textContent = 'Copy'; }, 2000);
+      });
+    });
+  }
 })();
 </script>
 </body>
