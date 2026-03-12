@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/", "destination": "/meet-hekla", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/meet-hekla", "destination": "/launch.html" }
   ]
