@@ -950,7 +950,8 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   pointer-events: none; position: absolute; top: 0; left: 0; width: 100%;
 }
 .reserve-step.active { opacity: 1; transform: translateY(0); pointer-events: auto; position: relative; }
-.reserve-step.exit { opacity: 0; transform: translateY(-20px); }
+.reserve-step.exit { opacity: 0; transform: translateY(-20px); position: absolute; }
+.final-box.confirmed { overflow: visible; }
 .reserve-question {
   font-family: var(--serif); font-size: 1.8rem; color: var(--cream);
   margin-bottom: 1.5rem; line-height: 1.3;
@@ -1765,6 +1766,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     stepEmail.classList.add('exit');
     setTimeout(function() {
       stepConfirm.classList.add('active');
+      document.getElementById('reserve-box').classList.add('confirmed');
       animateNumber(position);
       var link = 'hekla.cc/r/' + code;
       shareUrl.textContent = link;
