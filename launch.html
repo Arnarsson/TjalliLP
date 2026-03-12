@@ -1015,6 +1015,54 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   margin-top: 1rem;
 }
 
+/* Tier badge */
+.reserve-tier {
+  margin-top: 1.5rem; padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.reserve-tier-badge {
+  display: inline-block; font-family: var(--mono); font-size: .65rem;
+  text-transform: uppercase; letter-spacing: .1em; padding: .35rem .9rem;
+  border-radius: 20px; margin-bottom: .75rem;
+}
+.reserve-tier-badge[data-tier="1"] {
+  color: var(--body); border: 1px solid rgba(255,255,255,.15);
+}
+.reserve-tier-badge[data-tier="2"] {
+  color: var(--orange); border: 1px solid var(--orange);
+}
+.reserve-tier-badge[data-tier="3"] {
+  color: #131110; background: var(--orange); border: 1px solid var(--orange);
+}
+.reserve-tier-progress {
+  max-width: 280px; margin: 0 auto .5rem;
+}
+.reserve-tier-bar {
+  height: 3px; background: rgba(255,255,255,.08); border-radius: 2px;
+  overflow: hidden;
+}
+.reserve-tier-fill {
+  height: 100%; background: var(--orange); border-radius: 2px;
+  transition: width .8s cubic-bezier(.16,1,.3,1);
+}
+.reserve-tier-label {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  margin-top: .4rem;
+}
+.reserve-tier-perks {
+  list-style: none; padding: 0; margin: 1rem auto 0;
+  max-width: 320px; text-align: left;
+}
+.reserve-tier-perks li {
+  font-family: var(--mono); font-size: .65rem; color: var(--dim);
+  padding: .25rem 0; padding-left: 1.2rem; position: relative;
+}
+.reserve-tier-perks li::before {
+  content: '✓'; position: absolute; left: 0; color: var(--orange);
+}
+.reserve-tier-perks li.locked { opacity: .35; }
+.reserve-tier-perks li.locked::before { content: '○'; color: var(--dim); }
+
 /* Nav reserve button with jiggle */
 .nav-reserve {
   background: var(--orange); color: var(--white) !important; padding: .4rem 1rem;
@@ -1339,6 +1387,14 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
               <button class="reserve-copy-btn" id="copy-btn">Copy</button>
             </div>
             <div class="reserve-share-hint">Each signup from your link moves you up 1 spot</div>
+            <div class="reserve-tier" id="tier-section">
+              <div class="reserve-tier-badge" id="tier-badge" data-tier="1">Reserved</div>
+              <div class="reserve-tier-progress" id="tier-progress">
+                <div class="reserve-tier-bar"><div class="reserve-tier-fill" id="tier-fill" style="width:0%"></div></div>
+                <div class="reserve-tier-label" id="tier-label"></div>
+              </div>
+              <ul class="reserve-tier-perks" id="tier-perks"></ul>
+            </div>
           </div>
         </div>
       </div>
@@ -1532,7 +1588,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     fetch('/api/position/' + savedCode)
       .then(function(r) { return r.json(); })
       .then(function(d) {
-        if (d.position) showConfirmation(d.position, d.code || savedCode, d.totalReservations);
+        if (d.position) showConfirmation(d.position, d.code || savedCode, d.totalReservations, d);
       })
       .catch(function() { /* show form normally */ });
     return;
@@ -1575,8 +1631,57 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     step();
   }
 
+  // Tier perks definition
+  var TIERS = {
+    1: { name: 'Reserved', perks: ['Your spot in the queue', 'Referral link to share'] },
+    2: { name: 'Inner Circle', perks: ['Priority configuration slot', 'Direct line to the HEKLA team', 'Name engraved on welcome card'] },
+    3: { name: 'Founding Member', perks: ['Private Founding Members group', 'Permanent Founding Member badge', 'Personal onboarding call'] }
+  };
+
+  // Render tier UI
+  function renderTier(tierData) {
+    var badge = document.getElementById('tier-badge');
+    var fill = document.getElementById('tier-fill');
+    var label = document.getElementById('tier-label');
+    var perksEl = document.getElementById('tier-perks');
+    var progress = document.getElementById('tier-progress');
+    if (!badge) return;
+
+    var tier = tierData.tier || 1;
+    var referrals = tierData.referralCount || 0;
+
+    badge.textContent = tierData.tierName || TIERS[tier].name;
+    badge.setAttribute('data-tier', tier);
+
+    // Progress bar
+    if (tier >= 3) {
+      progress.style.display = 'none';
+    } else {
+      var target = tier === 1 ? 5 : 10;
+      var pct = Math.min(100, Math.round((referrals / target) * 100));
+      setTimeout(function() { fill.style.width = pct + '%'; }, 300);
+      label.textContent = referrals + '/' + target + ' referrals → ' + (tierData.nextTier || 'next tier');
+    }
+
+    // Perks list
+    var html = '';
+    // Current tier perks (unlocked)
+    for (var t = 1; t <= tier; t++) {
+      TIERS[t].perks.forEach(function(p) {
+        html += '<li>' + p + '</li>';
+      });
+    }
+    // Next tier perks (locked)
+    if (tier < 3) {
+      TIERS[tier + 1].perks.forEach(function(p) {
+        html += '<li class="locked">' + p + '</li>';
+      });
+    }
+    perksEl.innerHTML = html;
+  }
+
   // Show confirmation state
-  function showConfirmation(position, code, total) {
+  function showConfirmation(position, code, total, tierData) {
     stepName.classList.remove('active');
     stepName.classList.add('exit');
     stepEmail.classList.remove('active');
@@ -1587,6 +1692,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       var link = 'hekla.cc/r/' + code;
       shareUrl.textContent = link;
       localStorage.setItem('hekla_code', code);
+      if (tierData) renderTier(tierData);
     }, 200);
   }
 
@@ -1601,7 +1707,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
     .then(function(res) {
       if (!res.ok) { errEmail.textContent = res.data.error || 'Something went wrong.'; return; }
-      showConfirmation(res.data.position, res.data.code, res.data.totalReservations);
+      showConfirmation(res.data.position, res.data.code, res.data.totalReservations, {
+        tier: 1, tierName: 'Reserved', referralCount: 0, nextTier: 'Inner Circle', referralsToNext: 5
+      });
     })
     .catch(function() {
       errEmail.textContent = 'Network error. Please try again.';

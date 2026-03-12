@@ -27,6 +27,25 @@ export default async function handler(req, res) {
   const total = (await redis.get("counter")) || 0;
   const effectivePosition = Math.max(1, reservation.position - referralCount);
 
+  // Tier calculation
+  let tier, tierName, nextTier, referralsToNext;
+  if (referralCount >= 10) {
+    tier = 3;
+    tierName = "Founding Member";
+    nextTier = null;
+    referralsToNext = 0;
+  } else if (referralCount >= 5) {
+    tier = 2;
+    tierName = "Inner Circle";
+    nextTier = "Founding Member";
+    referralsToNext = 10 - referralCount;
+  } else {
+    tier = 1;
+    tierName = "Reserved";
+    nextTier = "Inner Circle";
+    referralsToNext = 5 - referralCount;
+  }
+
   return res.status(200).json({
     position: effectivePosition,
     originalPosition: reservation.position,
@@ -34,5 +53,9 @@ export default async function handler(req, res) {
     totalReservations: total,
     name: reservation.name,
     code: reservation.code,
+    tier,
+    tierName,
+    nextTier,
+    referralsToNext,
   });
 }
