@@ -1014,6 +1014,20 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   font-family: var(--mono); font-size: .65rem; color: var(--dim);
   margin-top: 1rem;
 }
+
+/* Nav reserve button with jiggle */
+.nav-reserve {
+  background: var(--orange); color: var(--white) !important; padding: .4rem 1rem;
+  border-radius: 4px; animation: jiggle 3s ease-in-out 4s infinite;
+}
+@keyframes jiggle {
+  0%, 86% { transform: rotate(0); }
+  88% { transform: rotate(-2deg) scale(1.04); }
+  90% { transform: rotate(2deg); }
+  92% { transform: rotate(-1.5deg); }
+  94% { transform: rotate(1deg); }
+  96% { transform: rotate(0) scale(1); }
+}
 </style>
 </head>
 <body>
@@ -1034,7 +1048,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
     <span class="nav-live label" data-units-nav></span>
     <a href="index.html">Platform</a>
     <a href="personal.html">Private</a>
-    <a href="#reserve" style="background:var(--orange);color:var(--white);padding:.4rem 1rem">Reserve yours</a>
+    <a href="#reserve" class="nav-reserve">Reserve yours</a>
   </div>
   <div class="nav-mobile">
     <a href="#reserve">Reserve yours</a>
