@@ -363,16 +363,16 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <div class="avail-bar">
   <div class="avail-left">
     <div class="avail-dot"></div>
-    <div class="avail-text"><strong>15 units</strong> &mdash; HEKLA Private &mdash; From 20,000 DKK</div>
+    <div class="avail-text" data-units></div>
   </div>
   <a href="/meet-hekla" class="avail-cta">Meet HEKLA &rarr;</a>
 </div>
 
 <!-- ═══ NAV ═══ -->
 <nav>
-  <a href="index.html" class="nav-logo">Hekla</a>
+  <a href="/platform" class="nav-logo">Hekla</a>
   <div class="nav-r">
-    <a href="index.html">&larr; Platform</a>
+    <a href="/platform">&larr; Platform</a>
     <a href="/meet-hekla" style="color:var(--cream)">Meet HEKLA &rarr;</a>
   </div>
 </nav>
@@ -428,7 +428,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <section id="pricing">
   <div class="c">
     <p class="label" style="margin-bottom:2rem">SPRING 2026</p>
-    <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--cream);font-weight:400;margin-bottom:.5rem">20 units. That's it.</h2>
+    <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--cream);font-weight:400;margin-bottom:.5rem" data-units-heading></h2>
     <p style="max-width:550px">This is not a subscription to a chatbot. This is infrastructure for how you perform. Launch pricing — some features might not be available again.</p>
     <div class="pricing-grid">
       <div class="price-card">
@@ -445,7 +445,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
         </ul>
         <div class="price-amount">20,000 DKK</div>
         <div class="price-note">ex. VAT &middot; Hardware as add-on</div>
-        <div class="price-badge">15 UNITS — SPRING 2026</div>
+        <div class="price-badge" data-badge-private></div>
       </div>
       <div class="price-card featured">
         <div class="tier-label">HEKLA HIGH PERFORMANCE</div>
@@ -463,7 +463,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
         </ul>
         <div class="price-amount">60,000 DKK</div>
         <div class="price-note">ex. VAT &middot; Hardware upgrade as add-on</div>
-        <div class="price-badge">5 UNITS — SPRING 2026</div>
+        <div class="price-badge" data-badge-hp></div>
         <p style="font-size:.75rem;color:var(--dim);margin-top:1.25rem;font-style:italic">* Volcano Club members are first in line when HEKLA opens to investors.</p>
       </div>
     </div>
@@ -475,10 +475,10 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   <div class="c">
     <p class="label" style="margin-bottom:2rem">LIMITED AVAILABILITY</p>
     <h2 style="font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);color:var(--cream);font-weight:400;margin-bottom:1rem">The window is tiny. Meet HEKLA.</h2>
-    <p style="max-width:500px;margin-bottom:2rem">15 Private units. Every unit configured one-to-one by the HEKLA team. Next batch: we honestly don't know.</p>
+    <p style="max-width:500px;margin-bottom:2rem" data-reserve-desc></p>
     <div class="final-box">
       <h3>Reply to reserve your unit.</h3>
-      <div class="sub">15 UNITS &middot; NEXT BATCH: WE HONESTLY DON'T KNOW</div>
+      <div class="sub" data-reserve-sub></div>
       <a href="mailto:hello@hekla.is?subject=HEKLA Private — Reserve" class="btn">Reserve now &rarr;</a>
     </div>
     <p style="font-family:var(--mono);font-size:.7rem;color:var(--dim);margin-top:2rem;line-height:1.6;max-width:450px">We don't ship until it's right. You'll be kept informed every step of the way.</p>
@@ -490,7 +490,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   <div class="c">
     <div class="footer-brand">Hekla</div>
     <div class="footer-links">
-      <a href="index.html">Platform</a>
+      <a href="/platform">Platform</a>
       <a href="/meet-hekla">Meet HEKLA</a>
       <a href="mailto:hello@hekla.is">hello@hekla.is</a>
       <a href="#">Copenhagen &middot; 2026</a>
@@ -499,6 +499,21 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 </footer>
 
 <script>
+// ═══ UNIT INVENTORY — edit these numbers when units are sold ═══
+var UNITS = { private: 12, hp: 4 };
+// ═══════════════════════════════════════════════════════════════
+
+(function(u) {
+  var t = u.private + u.hp;
+  var s = function(sel, html) { var el = document.querySelector(sel); if (el) el.innerHTML = html; };
+  s('[data-units]', '<strong>' + t + ' units left</strong> &mdash; ' + u.private + ' Private &middot; ' + u.hp + ' High Performance &mdash; Spring 2026');
+  s('[data-units-heading]', t + ' units. That\u2019s it.');
+  s('[data-badge-private]', u.private + ' UNITS LEFT \u2014 SPRING 2026');
+  s('[data-badge-hp]', u.hp + ' UNITS LEFT \u2014 SPRING 2026');
+  s('[data-reserve-desc]', u.private + ' Private + ' + u.hp + ' High Performance units left. Every unit configured one-to-one by the HEKLA team. Next batch: we honestly don\u2019t know.');
+  s('[data-reserve-sub]', t + ' UNITS LEFT \u00B7 NEXT BATCH: WE HONESTLY DON\u2019T KNOW');
+})(UNITS);
+
 // Nav scroll
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {

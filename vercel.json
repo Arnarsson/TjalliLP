@@ -4,6 +4,8 @@
   ],
   "rewrites": [
     { "source": "/meet-hekla", "destination": "/launch.html" },
+    { "source": "/platform", "destination": "/index.html" },
+    { "source": "/personal", "destination": "/personal.html" },
     { "source": "/r/:code", "destination": "/launch.html?ref=:code" }
   ]
 }

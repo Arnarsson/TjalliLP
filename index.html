@@ -790,18 +790,18 @@ footer .c {
 <div class="avail-bar">
   <div class="avail-left">
     <div class="avail-dot"></div>
-    <div class="avail-text"><strong>20 units</strong> &mdash; Spring 2026 &mdash; Next batch: we honestly don't know</div>
+    <div class="avail-text" data-units></div>
   </div>
   <a href="#reserve" class="avail-cta">Reserve yours &rarr;</a>
 </div>
 
 <!-- ═══ NAV ═══ -->
 <nav>
-  <a href="index.html" class="nav-logo">Hekla</a>
+  <a href="/platform" class="nav-logo">Hekla</a>
   <div class="nav-r">
-    <span class="nav-live label">20 UNITS — SPRING 2026</span>
+    <span class="nav-live label" data-units-nav></span>
     <a href="#platform">Platform</a>
-    <a href="personal.html">Private</a>
+    <a href="/personal">Private</a>
     <a href="/meet-hekla" style="color:var(--cream)">Meet HEKLA &rarr;</a>
     <a href="#reserve" class="nav-cta">Reserve yours</a>
   </div>
@@ -963,8 +963,8 @@ footer .c {
 <section id="products">
   <div class="c">
     <p class="label" style="margin-bottom:2rem">SPRING 2026</p>
-    <h2 style="font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.8rem);color:var(--cream);font-weight:400;margin-bottom:.5rem">20 units. That's it.</h2>
-    <p style="max-width:550px">15 HEKLA Private. 5 HEKLA High Performance. Every unit configured one-to-one by the HEKLA team. Launch pricing — some features might not be available again.</p>
+    <h2 style="font-family:var(--serif);font-size:clamp(2rem,3.5vw,2.8rem);color:var(--cream);font-weight:400;margin-bottom:.5rem" data-units-heading></h2>
+    <p style="max-width:550px" data-units-desc></p>
     <div class="pricing-grid">
 
       <div class="price-card">
@@ -981,7 +981,7 @@ footer .c {
         </ul>
         <div class="price-amount">20,000 DKK</div>
         <div class="price-note">ex. VAT &middot; Hardware available as add-on</div>
-        <div class="price-badge">15 UNITS AVAILABLE</div>
+        <div class="price-badge" data-badge-private></div>
       </div>
 
       <div class="price-card featured">
@@ -1000,7 +1000,7 @@ footer .c {
         </ul>
         <div class="price-amount">60,000 DKK</div>
         <div class="price-note">ex. VAT &middot; Hardware upgrade as add-on</div>
-        <div class="price-badge">5 UNITS AVAILABLE</div>
+        <div class="price-badge" data-badge-hp></div>
         <p style="font-size:.75rem;color:var(--dim);margin-top:1.25rem;font-style:italic">* Volcano Club members are first in line when HEKLA opens to investors.</p>
       </div>
 
@@ -1043,10 +1043,10 @@ footer .c {
   <div class="c">
     <p class="label" style="margin-bottom:2rem">LIMITED AVAILABILITY</p>
     <h2>The world gets HEKLA later.<br>You can own it now.</h2>
-    <p>15 Private + 5 High Performance units. Every unit configured one-to-one by the HEKLA team. Launch pricing and features — some might not be available again.</p>
+    <p data-reserve-desc></p>
     <div class="final-box">
       <h3>Reply to reserve your unit.</h3>
-      <div class="sub">20 UNITS &middot; NEXT BATCH: WE HONESTLY DON'T KNOW</div>
+      <div class="sub" data-reserve-sub></div>
       <a href="mailto:hello@hekla.is?subject=HEKLA — Reserve my unit" class="btn">Reserve now &rarr;</a>
     </div>
     <p class="final-note">We don't ship until it's right. You'll be kept informed every step of the way. HEKLA Teams pilot — autumn 2026.</p>
@@ -1066,6 +1066,23 @@ footer .c {
 </footer>
 
 <script>
+// ═══ UNIT INVENTORY — edit these numbers when units are sold ═══
+var UNITS = { private: 12, hp: 4 };
+// ═══════════════════════════════════════════════════════════════
+
+(function(u) {
+  var t = u.private + u.hp;
+  var s = function(sel, html) { var el = document.querySelector(sel); if (el) el.innerHTML = html; };
+  s('[data-units]', '<strong>' + t + ' units left</strong> &mdash; ' + u.private + ' Private &middot; ' + u.hp + ' High Performance &mdash; Spring 2026');
+  s('[data-units-nav]', t + ' UNITS LEFT \u2014 SPRING 2026');
+  s('[data-units-heading]', t + ' units. That\u2019s it.');
+  s('[data-units-desc]', u.private + ' HEKLA Private. ' + u.hp + ' HEKLA High Performance. Every unit configured one-to-one by the HEKLA team. Launch pricing \u2014 some features might not be available again.');
+  s('[data-badge-private]', u.private + ' UNITS LEFT \u2014 SPRING 2026');
+  s('[data-badge-hp]', u.hp + ' UNITS LEFT \u2014 SPRING 2026');
+  s('[data-reserve-desc]', u.private + ' Private + ' + u.hp + ' High Performance units left. Every unit configured one-to-one by the HEKLA team. Launch pricing and features \u2014 some might not be available again.');
+  s('[data-reserve-sub]', t + ' UNITS LEFT \u00B7 NEXT BATCH: WE HONESTLY DON\u2019T KNOW');
+})(UNITS);
+
 // Nav scroll effect
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
