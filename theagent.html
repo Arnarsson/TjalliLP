@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent — Et Nordisk Summit om Agentøkonomien · Produceret af HEKLA</title>
+<meta name="description" content="The Agent er et nordisk summit om agentøkonomien. For dem der deployer AI-agenter, for dem der mærker forandringen, og for dem der vil med. København, maj 2026.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#131110">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Agent — Et Nordisk Summit om Agentøkonomien">
+<meta property="og:description" content="Et nordisk summit om agentøkonomien. København. Begrænset antal pladser. Produceret af HEKLA.">
+<meta property="og:site_name" content="HEKLA">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   THE AGENT — HEKLA DESIGN SYSTEM
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --bg: #131110;
+  --card: #1E1D1B;
+  --card-hi: #2A2826;
+  --cream: #F0E6D3;
+  --body: #B8AFA2;
+  --dim: #807A72;
+  --orange: #D4643A;
+  --orange-lt: #E8805A;
+  --white: #FFF;
+  --red: #C23D2E;
+  --gold: #D4A843;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Film grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: .018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--orange); text-decoration: none; }
+.c { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+.label { font-family: var(--mono); font-size: .65rem; color: var(--orange); letter-spacing: .3em; text-transform: uppercase; }
+
+/* ═══ NAV ═══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(19,17,16,0); backdrop-filter: blur(0px);
+  transition: background .4s, backdrop-filter .4s;
+}
+nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
+.nav-logo { font-family: var(--serif); font-size: 1.5rem; color: var(--cream); letter-spacing: .04em; }
+.nav-logo strong { color: var(--orange); font-weight: 400; }
+.nav-r { display: flex; gap: 2rem; align-items: center; }
+.nav-r a { font-family: var(--mono); font-size: .68rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; transition: color .3s; }
+.nav-r a:hover { color: var(--cream); }
+.nav-cta { background: var(--orange); color: var(--white) !important; padding: .4rem 1rem; border-radius: 4px; transition: background .3s; }
+.nav-cta:hover { background: var(--orange-lt); color: var(--white) !important; }
+.nav-mobile { display: none; align-items: center; }
+.nav-mobile a { background: var(--orange); color: var(--white); font-family: var(--mono); font-size: .62rem; padding: .35rem .75rem; letter-spacing: .06em; text-transform: uppercase; transition: background .3s; white-space: nowrap; }
+.nav-mobile a:hover { background: var(--orange-lt); color: var(--white); }
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 0 4rem;
+  position: relative; overflow: hidden;
+}
+
+/* Volcanic ambient glow */
+.hero::before {
+  content: ''; position: absolute; bottom: -20%; left: 50%; transform: translateX(-50%);
+  width: 120%; height: 60%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(194,61,46,.06) 0%, rgba(212,100,58,.03) 30%, transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+
+.hero-embers {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+}
+.ember {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--orange); opacity: 0;
+  animation: float-ember linear infinite;
+}
+@keyframes float-ember {
+  0% { opacity: 0; transform: translateY(0) translateX(0) scale(1); }
+  10% { opacity: .6; }
+  90% { opacity: .2; }
+  100% { opacity: 0; transform: translateY(-100vh) translateX(40px) scale(0); }
+}
+
+.hero-scan {
+  position: absolute; left: 0; right: 0; height: 1px; z-index: 2;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,100,58,.15) 20%, rgba(212,100,58,.3) 50%, rgba(212,100,58,.15) 80%, transparent 100%);
+  animation: scanDown 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes scanDown { 0% { top: -2px; } 100% { top: 100%; } }
+
+.hero .c { position: relative; z-index: 3; }
+.hero-pre {
+  font-family: var(--mono); font-size: .7rem; color: var(--orange);
+  letter-spacing: .35em; margin-bottom: 2rem; text-transform: uppercase;
+  opacity: 0; animation: fadeUp .8s .3s forwards;
+}
+
+.hero h1 {
+  font-family: var(--serif); font-weight: 400; line-height: .95;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp .8s .5s forwards;
+}
+.hero-the {
+  display: block; font-size: clamp(5rem, 14vw, 11rem); color: var(--cream);
+  letter-spacing: -.02em;
+}
+.hero-agent {
+  display: block; font-size: clamp(5rem, 14vw, 11rem); color: var(--red);
+  letter-spacing: -.02em;
+}
+
+.hero-byline {
+  font-family: var(--sans); font-size: .95rem; color: var(--dim);
+  letter-spacing: .25em; text-transform: uppercase; margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp .8s .7s forwards;
+}
+.hero-byline strong { color: var(--orange); font-weight: 500; }
+.hero-byline-bar {
+  display: block; width: 60px; height: 2px; background: var(--orange);
+  margin-top: .75rem;
+}
+
+.hero-body {
+  font-family: var(--serif); font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--body); font-style: italic; max-width: 620px;
+  line-height: 1.7; margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp .8s .9s forwards;
+}
+
+.hero-punch {
+  font-family: var(--serif); font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  color: var(--cream); font-style: italic;
+  margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp .8s 1.1s forwards;
+}
+
+.hero-meta {
+  display: flex; flex-direction: column; gap: .35rem;
+  position: absolute; bottom: 6rem; right: 2.5rem; text-align: right;
+  font-family: var(--mono); font-size: .65rem; letter-spacing: .12em; text-transform: uppercase;
+  opacity: 0; animation: fadeUp .8s 1.3s forwards;
+}
+.hero-meta span { color: var(--dim); }
+.hero-meta .hl { color: var(--orange); }
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  opacity: 0; animation: fadeUp .8s 1.5s forwards;
+}
+.hero-scroll span {
+  font-family: var(--mono); font-size: .55rem; color: var(--dim);
+  letter-spacing: .2em; text-transform: uppercase;
+}
+.scroll-line { width: 1px; height: 32px; background: var(--card-hi); position: relative; overflow: hidden; }
+.scroll-line::after {
+  content: ''; position: absolute; top: -100%; left: 0; width: 1px; height: 100%;
+  background: var(--orange);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
+
+/* ═══ SECTIONS — shared ═══ */
+section { padding: 7rem 0; border-top: 1px solid var(--card-hi); position: relative; }
+section h2 {
+  font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--cream); font-weight: 400; line-height: 1.2; margin-bottom: 2rem;
+}
+section h2 strong { color: var(--orange); font-weight: 400; }
+section h2 .gold { color: var(--gold); font-weight: 400; }
+
+/* ═══ QUOTE ═══ */
+.quote-section { overflow: hidden; }
+.quote-section::before {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(circle, rgba(194,61,46,.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+.quote-text {
+  font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  color: var(--cream); font-weight: 400; font-style: italic;
+  line-height: 1.35; max-width: 800px; margin-bottom: 2rem;
+}
+.quote-text strong { color: var(--red); font-weight: 400; }
+.quote-attr {
+  font-family: var(--mono); font-size: .7rem; color: var(--dim);
+  letter-spacing: .15em; text-transform: uppercase;
+}
+.quote-attr strong { color: var(--orange); font-weight: 600; }
+
+/* ═══ WHY NOW ═══ */
+.whynow { overflow: hidden; }
+.whynow::before {
+  content: ''; position: absolute; top: 0; left: -10%; width: 120%; height: 100%;
+  background: radial-gradient(ellipse at 30% 30%, rgba(212,100,58,.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+.whynow-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;
+}
+.whynow h2 strong { color: var(--red); }
+.whynow-body {
+  font-family: var(--serif); font-size: 1.1rem; color: var(--body);
+  font-style: italic; line-height: 1.75; max-width: 520px;
+}
+.whynow-body strong { color: var(--cream); font-style: normal; }
+.whynow-cards { display: flex; flex-direction: column; gap: 1rem; }
+.whynow-card {
+  background: var(--card); padding: 1.75rem 1.5rem;
+  border-bottom: 2px solid var(--card-hi);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+}
+.whynow-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+.whynow-card .card-label {
+  font-family: var(--mono); font-size: .6rem; color: var(--orange);
+  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .5rem;
+}
+.whynow-card h4 {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--cream);
+  font-weight: 400; font-style: italic; margin-bottom: .5rem;
+}
+.whynow-card p { font-size: .88rem; line-height: 1.6; margin: 0; }
+.whynow-callout {
+  background: var(--card); border-left: 3px solid var(--orange); padding: 1.5rem 1.5rem;
+  margin-top: .5rem;
+}
+.whynow-callout p {
+  font-family: var(--serif); font-size: 1rem; color: var(--cream);
+  font-style: italic; line-height: 1.6; margin: 0;
+}
+.whynow-callout strong { color: var(--orange); }
+
+/* ═══ DENMARK ═══ */
+.denmark h2 .gold { color: var(--gold); }
+.denmark-pillars {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+.pillar {
+  background: var(--card); padding: 1.75rem 1.5rem;
+  border-top: 2px solid var(--card-hi);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+}
+.pillar:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+.pillar.gold-top { border-top-color: var(--gold); }
+.pillar-num {
+  font-family: var(--mono); font-size: .7rem; color: var(--dim);
+  letter-spacing: .1em; margin-bottom: .75rem;
+}
+.pillar h4 {
+  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
+  font-weight: 400; font-style: italic; margin-bottom: .5rem;
+}
+.pillar p { font-size: .85rem; line-height: 1.6; margin: 0; }
+
+.denmark-callout {
+  background: var(--card); border-left: 3px solid var(--gold); padding: 1.75rem 2rem;
+  position: relative; overflow: hidden;
+}
+.denmark-callout::after {
+  content: ''; position: absolute; top: 0; right: 0; width: 150px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212,168,67,.03));
+  pointer-events: none;
+}
+.denmark-callout p {
+  font-family: var(--serif); font-size: 1.05rem; color: var(--cream);
+  font-style: italic; line-height: 1.6; margin: 0; position: relative;
+}
+.denmark-callout strong { color: var(--gold); }
+
+/* ═══ TIMELINE ═══ */
+.timeline h2 .gold { color: var(--gold); }
+.timeline-cards {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+  margin-bottom: 4rem;
+}
+.tl-card {
+  background: var(--card); padding: 1.75rem 1.5rem;
+  border-top: 2px solid var(--card-hi);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+}
+.tl-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+.tl-label {
+  font-family: var(--mono); font-size: .6rem;
+  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem;
+}
+.tl-label.red { color: var(--red); }
+.tl-label.orange { color: var(--orange); }
+.tl-label.gold { color: var(--gold); }
+.tl-label.dim { color: var(--dim); }
+.tl-card h4 {
+  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
+  font-weight: 400; font-style: italic; margin-bottom: .5rem;
+}
+.tl-card p { font-size: .85rem; line-height: 1.6; margin: 0; }
+
+/* Stats strip */
+.stats-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid var(--card-hi);
+  border-bottom: 1px solid var(--card-hi);
+}
+.stat {
+  padding: 2rem 1.75rem;
+  border-right: 1px solid var(--card-hi);
+  transition: background .3s;
+}
+.stat:last-child { border-right: none; }
+.stat:hover { background: rgba(212,100,58,.02); }
+.stat-num {
+  font-family: var(--mono); font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--orange); font-weight: 600; line-height: 1; margin-bottom: .5rem;
+}
+.stat p { font-size: .82rem; line-height: 1.55; color: var(--dim); }
+
+/* ═══ TEAM ═══ */
+.team h2 .gold { color: var(--gold); }
+.team-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;
+}
+.team-pullquote {
+  font-family: var(--serif); font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--cream); font-style: italic; line-height: 1.6;
+  padding-left: 1.5rem; border-left: 3px solid var(--orange);
+  margin-bottom: 2.5rem;
+}
+.team-bullets { list-style: none; }
+.team-bullets li {
+  font-family: var(--mono); font-size: .68rem; color: var(--body);
+  letter-spacing: .06em; text-transform: uppercase;
+  padding: .5rem 0 .5rem 1.25rem; position: relative;
+  border-bottom: 1px solid var(--card-hi);
+}
+.team-bullets li:last-child { border: none; }
+.team-bullets li::before {
+  content: ''; position: absolute; left: 0; top: .85rem;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--orange);
+}
+
+.team-cards { display: flex; flex-direction: column; gap: 1rem; }
+.team-card {
+  background: var(--card); padding: 1.75rem 1.5rem;
+  border-top: 2px solid var(--orange);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+}
+.team-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.4); }
+.team-card h4 {
+  font-family: var(--serif); font-size: 1.2rem; color: var(--cream);
+  font-weight: 400; margin-bottom: .25rem;
+}
+.team-card .team-role {
+  font-family: var(--mono); font-size: .6rem; color: var(--orange);
+  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem;
+}
+.team-card p { font-size: .88rem; line-height: 1.6; margin: 0; }
+
+/* ═══ CTA ═══ */
+.cta-section { overflow: hidden; }
+.cta-section::before {
+  content: ''; position: absolute; top: -2rem; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 500px;
+  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;
+}
+.cta-section h2 strong { color: var(--orange); }
+.cta-sub {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--cream);
+  font-style: italic; margin-bottom: 1rem;
+}
+.cta-body {
+  font-family: var(--serif); font-size: 1.05rem; color: var(--body);
+  font-style: italic; line-height: 1.7; margin-bottom: 2.5rem;
+}
+.cta-email {
+  font-family: var(--mono); font-size: 1.1rem; color: var(--orange);
+  display: inline-block; margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(212,100,58,.3);
+  padding-bottom: .25rem;
+  transition: color .3s, border-color .3s;
+}
+.cta-email:hover { color: var(--orange-lt); border-color: var(--orange-lt); }
+.btn {
+  display: inline-flex; align-items: center; gap: .7rem;
+  background: var(--orange); color: var(--white);
+  font-family: var(--mono); font-size: .85rem;
+  padding: 1rem 2.25rem; letter-spacing: .04em;
+  transition: all .3s; border: none; cursor: pointer;
+}
+.btn:hover { background: var(--orange-lt); color: var(--white); transform: translateY(-2px); }
+
+.cta-cards { display: flex; flex-direction: column; gap: 1rem; }
+.cta-card {
+  background: var(--card); padding: 1.75rem 1.5rem;
+  border-bottom: 2px solid var(--card-hi);
+  transition: transform .4s cubic-bezier(.16,1,.3,1);
+}
+.cta-card:hover { transform: translateY(-3px); }
+.cta-card .card-label {
+  font-family: var(--mono); font-size: .6rem; color: var(--orange);
+  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .5rem;
+}
+.cta-card h4 {
+  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
+  font-weight: 400; margin-bottom: .25rem;
+}
+.cta-card p { font-size: .88rem; line-height: 1.6; margin: 0; }
+
+/* ═══ FOOTER ═══ */
+footer { padding: 2rem 0; border-top: 1px solid var(--card-hi); }
+footer .c { display: flex; justify-content: space-between; align-items: center; }
+.footer-brand { font-family: var(--serif); font-size: 1.4rem; color: var(--cream); }
+.footer-brand strong { color: var(--orange); font-weight: 400; }
+.footer-year { font-family: var(--mono); font-size: .75rem; color: var(--dim); letter-spacing: .08em; }
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.anim { opacity: 0; transform: translateY(30px); transition: opacity .7s ease-out, transform .7s ease-out; }
+.anim.visible { opacity: 1; transform: translateY(0); }
+.anim-d1 { transition-delay: .1s; }
+.anim-d2 { transition-delay: .2s; }
+.anim-d3 { transition-delay: .3s; }
+.anim-d4 { transition-delay: .4s; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+  .denmark-pillars { grid-template-columns: 1fr 1fr; }
+  .timeline-cards { grid-template-columns: 1fr 1fr; }
+  .stats-strip { grid-template-columns: 1fr 1fr; }
+  .stat:nth-child(2) { border-right: none; }
+  .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--card-hi); }
+  .stat:nth-child(4) { border-right: none; }
+  .whynow-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .team-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .cta-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 800px) {
+  .nav-r { display: none; }
+  .nav-mobile { display: flex; }
+  .hero { padding-bottom: 3rem; }
+  .hero-the, .hero-agent { font-size: clamp(3.5rem, 16vw, 5rem); }
+  .hero-meta { position: relative; bottom: auto; right: auto; text-align: left; margin-top: 2rem; }
+  .denmark-pillars { grid-template-columns: 1fr; }
+  .timeline-cards { grid-template-columns: 1fr; }
+  .stats-strip { grid-template-columns: 1fr; }
+  .stat { border-right: none; border-bottom: 1px solid var(--card-hi); }
+  .stat:last-child { border-bottom: none; }
+  section { padding: 5rem 0; }
+  .c { padding: 0 1.5rem; }
+  .hero-scroll { display: none; }
+  .btn { padding: .85rem 1.75rem; font-size: .78rem; }
+  footer .c { flex-direction: column; gap: 1rem; text-align: center; }
+}
+@media (max-width: 480px) {
+  nav { padding: 1rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-logo">THE <strong>AGENT</strong></div>
+  <div class="nav-r">
+    <a href="#why">Hvorfor nu</a>
+    <a href="#denmark">Danmark</a>
+    <a href="#timeline">Roadmap</a>
+    <a href="#team">Team</a>
+    <a href="#contact" class="nav-cta">Tilmeld venteliste</a>
+  </div>
+  <div class="nav-mobile">
+    <a href="#contact">Tilmeld venteliste</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="hero-embers" id="embers"></div>
+  <div class="hero-scan"></div>
+  <div class="c">
+    <div class="hero-pre">Et nordisk summit om agentøkonomien</div>
+    <h1>
+      <span class="hero-the">THE</span>
+      <span class="hero-agent">AGENT.</span>
+    </h1>
+    <div class="hero-byline">
+      A NORDIC AGENT SUMMIT <strong>BY HEKLA</strong>
+      <span class="hero-byline-bar"></span>
+    </div>
+    <p class="hero-body">Et nordisk summit om agentøkonomien. For dem der allerede deployer AI-agenter og ved hvad der sker, for dem der mærker forandringen på egen krop, og for dem der gerne vil med på bølgen men ikke ved hvor de skal begynde. Ingen er for sent ude.</p>
+    <p class="hero-punch">Agenterne kommer. For os alle.</p>
+  </div>
+  <div class="hero-meta">
+    <span class="hl">Tentativt: Maj 2026</span>
+    <span>København · Begrænset antal pladser</span>
+    <span>Produceret af HEKLA.CC</span>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE ═══ -->
+<section class="quote-section" id="quote">
+  <div class="c">
+    <div class="label anim">Jens Frederik · Om hvorfor det her er vigtigt</div>
+    <blockquote class="quote-text anim anim-d1">
+      "It's not about vibe coding. It's about <strong>who gets left behind.</strong>"
+    </blockquote>
+    <div class="quote-attr anim anim-d2">Jens Frederik, Marts 2026 · <strong>Det er derfor vi bygger dette rum.</strong></div>
+  </div>
+</section>
+
+<!-- ═══ WHY NOW ═══ -->
+<section class="whynow" id="why">
+  <div class="c">
+    <div class="label anim">Den samtale der endnu ikke finder sted</div>
+    <div class="whynow-grid">
+      <div>
+        <h2 class="anim anim-d1">De fleste organisationer er stadig pre-agentiske. <strong>Det vindue lukker nu.</strong></h2>
+        <p class="whynow-body anim anim-d2">Vi lever i et øjeblik, der minder om de tidlige dage af internettet. Men meget hurtigere. AI-agenter overtager opgaver, omskriver jobprofiler og ændrer fundamentalt, hvad det vil sige at arbejde. De organisationer der <strong>forstår det nu</strong> og handler på det, vil stå et helt andet sted om to år. Det er ikke en advarsel. Det er en invitation til at forme udviklingen.</p>
+      </div>
+      <div class="whynow-cards anim anim-d2">
+        <div class="whynow-card">
+          <div class="card-label">Hvad sker der nu</div>
+          <h4>Pre-agentisk</h4>
+          <p>De fleste organisationer er endnu ikke i gang. Det er præcis det øjeblik, hvor den rette samtale ændrer alt.</p>
+        </div>
+        <div class="whynow-card">
+          <div class="card-label">Hvem er i rummet</div>
+          <h4>Beslutningstagere</h4>
+          <p>Tech leads, jurister, digitale ingeniører, offentlige innovationschefer, iværksættere og SMV-ejere.</p>
+        </div>
+        <div class="whynow-callout">
+          <p><strong>Første udgave. Intimt af design.</strong> Et begrænset antal pladser skaber ægte samtaler. Sammen er vi førstemovere. Det hænger ved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DENMARK'S OPPORTUNITY ═══ -->
+<section class="denmark" id="denmark">
+  <div class="c">
+    <div class="label anim">Danmarks mulighed</div>
+    <h2 class="anim anim-d1">Danmark kan <span class="gold">definere agentøkonomien</span> frem for at følge den.</h2>
+    <div class="denmark-pillars">
+      <div class="pillar anim anim-d1">
+        <div class="pillar-num">01</div>
+        <h4>Akademisk kapacitet</h4>
+        <p>DTU Compute og et stigende antal forskere der arbejder direkte med agentsystemer. Verdensklasse og tilgængelig.</p>
+      </div>
+      <div class="pillar anim anim-d2">
+        <div class="pillar-num">02</div>
+        <h4>Offentlig åbenhed</h4>
+        <p>Kommuner, universiteter og statslige institutioner der rent faktisk vil eksperimentere. En fordel de fleste europæiske lande ikke har.</p>
+      </div>
+      <div class="pillar anim anim-d3">
+        <div class="pillar-num">03</div>
+        <h4>Juridisk modenhed</h4>
+        <p>En retsorden der forstår data, tillid og ansvar. Præcis det fundament, agent-deployment kræver for at skalere.</p>
+      </div>
+      <div class="pillar gold-top anim anim-d4">
+        <div class="pillar-num">04</div>
+        <h4>The Agent som katalysator</h4>
+        <p>Det rum der samler alle tre. Akademia, erhvervsliv og offentlig sektor i den samme samtale. Det er det, vi bygger.</p>
+      </div>
+    </div>
+    <div class="denmark-callout anim">
+      <p><strong>Quantum nærmer sig.</strong> Ifølge IBM og McKinsey forventes kommercielle gennembrud inden 2030. De aktører der allerede har bygget agent-infrastruktur vil stå som naturlige ledere i den næste bølge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="timeline" id="timeline">
+  <div class="c">
+    <div class="label anim">Det der kommer</div>
+    <h2 class="anim anim-d1">The Agent er ikke et enkelt event. Det er <span class="gold">begyndelsen på et fælles projekt.</span></h2>
+    <div class="timeline-cards">
+      <div class="tl-card anim anim-d1">
+        <div class="tl-label red">Tentativt Maj 2026</div>
+        <h4>The Agent, København</h4>
+        <p>Tech og legal tech fokus. DTU Skylab. Begrænset antal pladser. Ansøgningsbaseret.</p>
+      </div>
+      <div class="tl-card anim anim-d2">
+        <div class="tl-label orange">Muligvis August 2026</div>
+        <h4>The Agent x Tech BBQ?</h4>
+        <p>Et potentielt side-event til Nordens største tech-summit. Tema: 'Emerging from Agency.' 10.000+ deltagere. Bella Center.</p>
+      </div>
+      <div class="tl-card anim anim-d3">
+        <div class="tl-label gold">Muligvis Q4 2026</div>
+        <h4>Agentøkonomi-rapport?</h4>
+        <p>Danmark og Norden i agent-revolutionen. De mest påvirkede vertikaler. Et projekt vi ønsker at realisere med Erhvervsfremmebestyrelsen, DI, Dansk Erhverv og centrale interesseorganisationer.</p>
+      </div>
+      <div class="tl-card anim anim-d4">
+        <div class="tl-label dim">2027 og frem</div>
+        <h4>Norden · Agent og Quantum</h4>
+        <p>Et løbende nordisk rum. Agentøkonomien og det der følger.</p>
+      </div>
+    </div>
+    <div class="stats-strip">
+      <div class="stat anim">
+        <div class="stat-num" data-count="80" data-suffix="B">$0</div>
+        <p>McKinsey estimerer at AI kan frigøre 80 mia. dollar i værdi i Norden alene, svarende til 2-3 procentpoints i overskudsmargen på tværs af industrier.</p>
+      </div>
+      <div class="stat anim anim-d1">
+        <div class="stat-num" data-count="40" data-suffix="%">0%</div>
+        <p>af alle arbejdstimer i Norden kan automatiseres med teknologi vi allerede har i dag. Spørgsmålet er ikke om, men hvornår og hvem der styrer det.</p>
+      </div>
+      <div class="stat anim anim-d2">
+        <div class="stat-num" data-count="12" data-suffix="M">0</div>
+        <p>europæere skal skifte jobfunktion inden 2030, dobbelt så hurtigt som før pandemien. Danmark er blandt de mest eksponerede lande.</p>
+      </div>
+      <div class="stat anim anim-d3">
+        <div class="stat-num" data-count="2" data-suffix="x">0</div>
+        <p>frontrunner-virksomheder der fuldt ud adopterer AI inden 2030 kan fordoble deres cash flow. Dem der venter risikerer et fald på 20%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
+<section class="team" id="team">
+  <div class="c">
+    <div class="label anim">Hvem står bag</div>
+    <h2 class="anim anim-d1">Vi er HEKLA. Et AI-native strategi og konsulenthus, <span class="gold">hjemmehørende i København.</span></h2>
+    <div class="team-grid">
+      <div>
+        <div class="team-pullquote anim anim-d1">"Efter en længere snak med Jens Frederik, både Christoffer og senere Hjalti, og jo mere vi talte om hvad der sker, jo klarere blev det: der er et rum her, som mangler at blive bygget. Og vigtigst, I skal være en stor del af det."</div>
+        <ul class="team-bullets anim anim-d2">
+          <li>DTU Skylab som venue, i dialog om akademisk forankring</li>
+          <li>DTU Compute involveret i programudvikling</li>
+          <li>Venteliste åbner efter påske</li>
+          <li>Teamet bag University Startup World Cup, Venture Cup og Digital Tech Summit</li>
+          <li>Hjalti, medstifter af Duen</li>
+        </ul>
+      </div>
+      <div class="team-cards">
+        <div class="team-card anim anim-d1">
+          <h4>Hjalti H. Jonsson</h4>
+          <div class="team-role">Commercial og Operations</div>
+          <p>Go-to-market og enterprise relationer på tværs af Norden. Ham der får de rigtige mennesker ind i rummet.</p>
+        </div>
+        <div class="team-card anim anim-d2">
+          <h4>Christoffer James</h4>
+          <div class="team-role">Product og Enterprise · PhD, DTU</div>
+          <p>IP-baggrund og dyb erfaring med enterprise AI-deployment. Fokus på det, der faktisk virker i komplekse organisationer.</p>
+        </div>
+        <div class="team-card anim anim-d3">
+          <h4>Sven Arnarsson</h4>
+          <div class="team-role">Teknologi og AI-infrastruktur</div>
+          <p>Arkitektur, agenter og systemer i produktion. Ikke imponerende demos. Fungerende infrastrukturer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section" id="contact">
+  <div class="c">
+    <div class="cta-grid">
+      <div>
+        <h2 class="anim">Stå i centrum <strong>af samtalen.</strong></h2>
+        <p class="cta-sub anim anim-d1">Det er stadig muligt. Men ikke i lang tid.</p>
+        <p class="cta-body anim anim-d2">Publikummet formes nu. Hvis interessen er der, snakkes vi ved.</p>
+        <a href="mailto:hjalti@hekla.cc" class="cta-email anim anim-d3">hjalti@hekla.cc</a>
+        <br>
+        <a href="mailto:hjalti@hekla.cc" class="btn anim anim-d3">Tilmeld venteliste</a>
+      </div>
+      <div class="cta-cards anim anim-d2">
+        <div class="cta-card">
+          <div class="card-label">Kontakt</div>
+          <h4>Hjalti H. Jonsson</h4>
+          <p>Co-founder, HEKLA.cc &middot; 52 77 92 47</p>
+        </div>
+        <div class="cta-card">
+          <div class="card-label">Adresse</div>
+          <h4>Store Kongensgade 81D</h4>
+          <p>København &middot; Vi mødes gerne</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="c">
+    <div class="footer-brand">THE <strong>AGENT</strong> BY HEKLA.CC</div>
+    <div class="footer-year">2026</div>
+  </div>
+</footer>
+
+<script>
+/* ═══ NAV SCROLL ═══ */
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+/* ═══ SCROLL REVEAL ═══ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+
+/* ═══ EMBER PARTICLES ═══ */
+const embersContainer = document.getElementById('embers');
+for (let i = 0; i < 12; i++) {
+  const ember = document.createElement('div');
+  ember.classList.add('ember');
+  ember.style.left = Math.random() * 100 + '%';
+  ember.style.bottom = Math.random() * 20 + '%';
+  ember.style.animationDuration = (6 + Math.random() * 8) + 's';
+  ember.style.animationDelay = (Math.random() * 6) + 's';
+  ember.style.width = (2 + Math.random() * 2) + 'px';
+  ember.style.height = ember.style.width;
+  embersContainer.appendChild(ember);
+}
+
+/* ═══ COUNT-UP ANIMATION ═══ */
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const target = parseInt(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      const prefix = el.textContent.startsWith('$') ? '$' : '';
+      let current = 0;
+      const step = target / 40;
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          current = target;
+          clearInterval(interval);
+        }
+        el.textContent = prefix + Math.round(current) + suffix;
+      }, 30);
+      statObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-num[data-count]').forEach(el => statObserver.observe(el));
+</script>
+</body>
+</html>

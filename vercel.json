@@ -1,7 +1,8 @@
 {
   "rewrites": [
     { "source": "/meet-hekla", "destination": "/launch.html" },
-    { "source": "/consultancy", "destination": "/consultancy.html" }
+    { "source": "/consultancy", "destination": "/consultancy.html" },
+    { "source": "/theagent", "destination": "/theagent.html" }
   ],
   "redirects": [
     { "source": "/", "destination": "/meet-hekla", "permanent": false },
