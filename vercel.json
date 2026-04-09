@@ -1,16 +1,16 @@
 {
-  "rewrites": [
-    { "source": "/:path*", "has": [{ "type": "host", "value": "theagent.hekla.cc" }], "destination": "/theagent.html" },
-    { "source": "/meet-hekla", "destination": "/launch.html" },
-    { "source": "/consultancy", "destination": "/consultancy.html" },
-    { "source": "/theagent", "destination": "/theagent.html" }
-  ],
   "redirects": [
-    { "source": "/", "missing": [{ "type": "host", "value": "theagent.hekla.cc" }], "destination": "/meet-hekla", "permanent": false },
     { "source": "/personal", "destination": "/meet-hekla", "permanent": false },
     { "source": "/demo-dashboard", "destination": "/meet-hekla", "permanent": false },
     { "source": "/index.html", "destination": "/meet-hekla", "permanent": false },
     { "source": "/personal.html", "destination": "/meet-hekla", "permanent": false },
     { "source": "/demo-dashboard.html", "destination": "/meet-hekla", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "theagent.hekla.cc" }], "destination": "/theagent.html" },
+    { "source": "/", "destination": "/launch.html" },
+    { "source": "/meet-hekla", "destination": "/launch.html" },
+    { "source": "/consultancy", "destination": "/consultancy.html" },
+    { "source": "/theagent", "destination": "/theagent.html" }
   ]
 }
