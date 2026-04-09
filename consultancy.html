@@ -87,6 +87,9 @@ nav {
 .nav-r a { font-family: var(--mono); font-size: .68rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; transition: color .3s; }
 .nav-r a:hover { color: var(--cream); }
 .nav-r a.active { color: var(--orange); }
+.nav-live { display: flex; align-items: center; gap: .5rem; }
+.nav-live::before { content: ''; width: 7px; height: 7px; background: var(--orange); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
 .nav-mobile { display: none; }
 .nav-mobile a { font-family: var(--mono); font-size: .68rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; }
 .nav-mobile a.active { color: var(--orange); }
@@ -104,23 +107,76 @@ nav {
 .mobile-menu a { font-family: var(--mono); font-size: .72rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; }
 .mobile-menu a.active { color: var(--orange); }
 
-/* ═══ HERO ═══ */
+/* ═══ HERO — cinematic ═══ */
 .hero {
-  padding: 10rem 0 6rem;
+  min-height: 85svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6rem 0 4rem;
+  position: relative; overflow: hidden;
   border-bottom: 1px solid var(--card-hi);
 }
+/* Volcanic radial glow */
+.hero::before {
+  content: ''; position: absolute; top: 50%; left: 30%;
+  transform: translate(-50%,-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(circle, rgba(212,100,58,.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+/* Hero overlay gradient */
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(19,17,16,.1) 0%, rgba(19,17,16,.2) 30%, rgba(19,17,16,.85) 70%, var(--bg) 100%);
+  z-index: 1; pointer-events: none;
+}
+
+/* Ember particles */
+.hero-embers {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+}
+.ember {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--orange); opacity: 0;
+  animation: float-ember linear infinite;
+}
+@keyframes float-ember {
+  0% { opacity: 0; transform: translateY(0) translateX(0) scale(1); }
+  10% { opacity: .6; }
+  90% { opacity: .2; }
+  100% { opacity: 0; transform: translateY(-100vh) translateX(40px) scale(0); }
+}
+
+/* Scan line */
+.hero-scan {
+  position: absolute; left: 0; right: 0; height: 1px; z-index: 2;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,100,58,.15) 20%, rgba(212,100,58,.3) 50%, rgba(212,100,58,.15) 80%, transparent 100%);
+  animation: scanDown 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes scanDown { 0% { top: -2px; } 100% { top: 100%; } }
+
+.hero .c { position: relative; z-index: 3; }
+
+/* ── Headline ── */
 .hero h1 {
-  font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem);
   color: var(--cream); font-weight: 400; line-height: 1.1;
-  margin-bottom: 1.5rem; max-width: 700px;
+  margin-bottom: 2rem; max-width: 700px;
+  opacity: 0; animation: fadeUp .8s .3s forwards;
 }
 .hero h1 em { color: var(--orange); font-style: italic; }
+
 .hero-sub {
   font-size: 1.1rem; max-width: 540px; margin-bottom: 3rem; line-height: 1.75;
+  opacity: 0; animation: fadeUp .8s .7s forwards;
 }
 .hero-stats {
   display: grid; grid-template-columns: repeat(4, 1fr);
   max-width: 560px; gap: 0;
+  opacity: 0; animation: fadeUp .8s .9s forwards;
+}
+.hero-stat {
+  border-left: 2px solid var(--orange); padding-left: .75rem;
 }
 .hero-stat-num {
   font-family: var(--mono); font-size: 1.5rem; color: var(--cream); font-weight: 600; line-height: 1.2;
@@ -128,6 +184,24 @@ nav {
 .hero-stat-label {
   font-family: var(--mono); font-size: .6rem; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; margin-top: .15rem;
 }
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  opacity: 0; animation: fadeUp .8s 1.4s forwards;
+}
+.hero-scroll span {
+  font-family: var(--mono); font-size: .55rem; color: var(--dim);
+  letter-spacing: .2em; text-transform: uppercase;
+}
+.scroll-line { width: 1px; height: 32px; background: var(--card-hi); position: relative; overflow: hidden; }
+.scroll-line::after {
+  content: ''; position: absolute; top: -100%; left: 0; width: 1px; height: 100%;
+  background: var(--orange);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
 
 /* ═══ BUTTONS ═══ */
 .btn { display: inline-flex; align-items: center; gap: .7rem; background: var(--orange); color: var(--white); font-family: var(--mono); font-size: .85rem; padding: 1rem 2.25rem; letter-spacing: .04em; transition: all .3s; }
@@ -145,8 +219,21 @@ nav {
 .badge-teal { background: rgba(20,184,166,.12); color: #14b8a6; }
 .badge-dim { background: var(--card); color: var(--dim); }
 
+/* Badge glow on service cards */
+.service-badge { box-shadow: 0 0 20px rgba(212,100,58,.1); }
+
+/* Status dot pulse on badges */
+.badge-green::before, .badge-orange::before, .badge-teal::before {
+  content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+  margin-right: 5px; vertical-align: middle;
+  animation: pulse 2s ease-in-out infinite;
+}
+.badge-green::before { background: #28c840; }
+.badge-orange::before { background: var(--orange); }
+.badge-teal::before { background: #14b8a6; }
+
 /* ═══ SECTION HEADERS ═══ */
-.section { padding: 6rem 0; border-top: 1px solid var(--card-hi); }
+.section { padding: 6rem 0; border-top: 1px solid var(--card-hi); position: relative; overflow: hidden; }
 .section-head { margin-bottom: 3rem; }
 .section-head h2 {
   font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
@@ -156,17 +243,57 @@ nav {
   font-size: .95rem; color: var(--dim); margin-top: .5rem; max-width: 600px;
 }
 
+/* Section atmospheric glows */
+#cases::before {
+  content: ''; position: absolute; top: 30%; left: -10%;
+  width: 600px; height: 500px;
+  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+#services::before {
+  content: ''; position: absolute; top: 50%; right: -15%;
+  width: 700px; height: 500px;
+  background: radial-gradient(circle, rgba(212,100,58,.035) 0%, transparent 55%);
+  pointer-events: none;
+}
+#vertical::before {
+  content: ''; position: absolute; bottom: 20%; left: 20%;
+  width: 600px; height: 500px;
+  background: radial-gradient(circle, rgba(212,100,58,.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ═══ MANIFESTO BARS ═══ */
+.manifesto-bar {
+  background: var(--card); border-left: 3px solid var(--orange);
+  padding: 2rem 2.5rem; margin: 0 auto; max-width: 600px;
+  position: relative;
+}
+.manifesto-bar::after {
+  content: ''; position: absolute; top: 0; right: 0; width: 120px; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212,100,58,.03));
+  pointer-events: none;
+}
+.manifesto-bar p {
+  font-family: var(--serif); font-size: clamp(1.1rem, 2vw, 1.35rem);
+  color: var(--cream); font-style: italic; line-height: 1.5; margin: 0;
+}
+.manifesto-section {
+  padding: 4rem 0; border-top: 1px solid var(--card-hi);
+}
+
 /* ═══ CASE STUDIES ═══ */
 .cases-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
 }
 .case-card {
   background: var(--card); border: 1px solid var(--card-hi); padding: 2rem 1.75rem;
+  border-bottom: 2px solid var(--orange);
   cursor: pointer;
   transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s, border-color .3s;
 }
 .case-card:hover {
-  transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.3);
   border-color: rgba(212,100,58,.2);
 }
 .case-industry {
@@ -210,7 +337,17 @@ nav {
 .case-metrics {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
   margin-bottom: 2rem; padding: 1.75rem; background: var(--card); border: 1px solid var(--card-hi);
+  position: relative; overflow: hidden;
 }
+/* Scan line on metric cards */
+.case-metrics::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 1px; z-index: 1;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,100,58,.08) 30%, rgba(212,100,58,.15) 50%, rgba(212,100,58,.08) 70%, transparent 100%);
+  animation: metricScan 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes metricScan { 0% { top: -1px; } 100% { top: 100%; } }
+
 .case-metric-key {
   font-family: var(--mono); font-size: .6rem; color: var(--dim);
   letter-spacing: .08em; text-transform: uppercase; margin-bottom: .25rem;
@@ -232,6 +369,7 @@ nav {
 }
 .service-card {
   background: var(--card); border: 1px solid var(--card-hi); padding: 2rem 1.75rem;
+  border-bottom: 2px solid var(--orange);
   position: relative;
   transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s, border-color .3s;
 }
@@ -266,8 +404,36 @@ nav {
 }
 
 /* ═══ PROCESS ═══ */
+.process-wrapper { position: relative; }
+/* Connecting horizontal line */
+.process-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: rgba(212,100,58,.15);
+}
+.process-line::after {
+  content: ''; position: absolute; top: -1px; left: 0; height: 4px; width: 100%;
+  background: linear-gradient(90deg, var(--orange), transparent 50%, var(--orange));
+  opacity: .3;
+  animation: processGlow 4s ease-in-out infinite alternate;
+}
+@keyframes processGlow {
+  0% { opacity: .15; }
+  100% { opacity: .4; }
+}
+/* Orange dots on the line */
+.process-dot {
+  position: absolute; top: -4px; width: 10px; height: 10px;
+  background: var(--orange); border-radius: 50%;
+  box-shadow: 0 0 12px rgba(212,100,58,.3);
+}
+.process-dot:nth-child(2) { left: 0; }
+.process-dot:nth-child(3) { left: calc(25% - 5px); }
+.process-dot:nth-child(4) { left: calc(50% - 5px); }
+.process-dot:nth-child(5) { left: calc(75% - 5px); }
+
 .process-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+  position: relative;
 }
 .process-card {
   padding: 1.5rem 0; border-top: 2px solid var(--orange);
@@ -378,7 +544,8 @@ nav {
 .team-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
 .team-avatar {
   width: 40px; height: 40px; border-radius: 50%;
-  background: var(--card-hi); display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(212,100,58,.3), rgba(212,100,58,.15));
+  display: flex; align-items: center; justify-content: center;
   font-family: var(--mono); font-size: .7rem; color: var(--orange); font-weight: 600;
   margin-bottom: .75rem;
 }
@@ -418,6 +585,14 @@ nav {
 .cta h2 {
   font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
   color: var(--cream); font-weight: 400; margin-bottom: .5rem; position: relative;
+  display: inline-flex; align-items: center; gap: .75rem;
+}
+/* Pulsing orange dot next to "Let's build." */
+.cta-pulse {
+  display: inline-block; width: 10px; height: 10px;
+  background: var(--orange); border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
 }
 .cta-sub {
   font-family: var(--mono); font-size: .75rem; color: var(--dim);
@@ -461,10 +636,11 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   nav { padding: 1rem 1.5rem; }
   .nav-r { display: none; }
   .hamburger { display: flex; }
-  .hero { padding: 8rem 0 4rem; }
+  .hero { padding-bottom: 4rem; }
   .hero h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
   .hero-stats { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   .process-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .process-line, .process-dot { display: none; }
   .team-grid { grid-template-columns: 1fr; }
   .planned-grid { grid-template-columns: 1fr; }
   .agents-grid { grid-template-columns: 1fr 1fr; }
@@ -476,6 +652,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   .section { padding: 4rem 0; }
   .btn { padding: .85rem 1.75rem; font-size: .78rem; }
   .mobile-menu { padding: 1.5rem; }
+  .hero-scroll { display: none; }
 }
 @media (max-width: 480px) {
   nav { padding: 1rem 1.25rem; }
@@ -489,11 +666,10 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <nav>
   <div class="nav-left">
     <a href="/" class="nav-logo">Hekla</a>
-    <span class="nav-badge">Consultancy</span>
   </div>
   <div class="nav-r">
     <a href="/meet-hekla">Product</a>
-    <a href="/consultancy" class="active">Consultancy</a>
+    <a href="/consultancy" class="nav-live active">Consultancy</a>
     <a href="mailto:sven@hekla.cc">Contact</a>
   </div>
   <button class="hamburger" onclick="document.getElementById('mobilemenu').classList.toggle('open')" aria-label="Menu">
@@ -510,28 +686,35 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-embers" id="embers"></div>
+  <div class="hero-scan"></div>
   <div class="c">
-    <p class="label anim" style="margin-bottom:1.5rem">HEKLA &middot; AI CONSULTANCY &amp; ENTERPRISE SERVICES</p>
-    <h1 class="anim anim-d1">We build AI systems<br>that <em>run your business.</em></h1>
-    <p class="hero-sub anim anim-d2">Working products from week one. Agents that run for under &euro;50/month. Full ownership when we're done.</p>
-    <div class="hero-stats anim anim-d3">
-      <div>
-        <div class="hero-stat-num">12+</div>
+    <p class="label" style="margin-bottom:1.5rem; opacity:0; animation: fadeUp .8s .1s forwards;">HEKLA &middot; AI CONSULTANCY &amp; ENTERPRISE SERVICES</p>
+    <h1>We build AI systems<br><em>that run your business.</em></h1>
+    <p class="hero-sub">Working products from week one. Agents that run for under &euro;50/month. Full ownership when we're done.</p>
+    <div class="hero-stats" id="heroStats">
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count-to="12" data-suffix="+">12+</div>
         <div class="hero-stat-label">Products shipped</div>
       </div>
-      <div>
-        <div class="hero-stat-num">3 wks</div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count-to="3" data-suffix=" wks">3 wks</div>
         <div class="hero-stat-label">Avg to production</div>
       </div>
-      <div>
-        <div class="hero-stat-num">83%</div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-count-to="83" data-suffix="%">83%</div>
         <div class="hero-stat-label">Client time saved</div>
       </div>
-      <div>
+      <div class="hero-stat">
         <div class="hero-stat-num">&lt;&euro;50</div>
         <div class="hero-stat-label">Avg monthly cost</div>
       </div>
     </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
@@ -552,6 +735,15 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   </div>
 </section>
 
+<!-- ═══ MANIFESTO BAR 1 ═══ -->
+<section class="manifesto-section">
+  <div class="c">
+    <div class="manifesto-bar anim">
+      <p>Working products from week one. Not decks. Not proposals. Code.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ PROCESS ═══ -->
 <section class="section" id="process">
   <div class="c">
@@ -559,27 +751,44 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
       <p class="label anim">02 / PROCESS</p>
       <h2 class="anim anim-d1">Working products from day one.</h2>
     </div>
-    <div class="process-grid">
-      <div class="process-card anim">
-        <div class="process-num">01</div>
-        <div class="process-name">Scope</div>
-        <div class="process-desc">Map your workflows. Identify the highest-leverage automation. Define success metrics.</div>
+    <div class="process-wrapper">
+      <div class="process-line">
+        <div class="process-dot"></div>
+        <div class="process-dot"></div>
+        <div class="process-dot"></div>
+        <div class="process-dot"></div>
       </div>
-      <div class="process-card anim anim-d1">
-        <div class="process-num">02</div>
-        <div class="process-name">Prototype</div>
-        <div class="process-desc">Working version within 48 hours. Real data, real integrations. Not a slide deck.</div>
+      <div class="process-grid">
+        <div class="process-card anim">
+          <div class="process-num">01</div>
+          <div class="process-name">Scope</div>
+          <div class="process-desc">Map your workflows. Identify the highest-leverage automation. Define success metrics.</div>
+        </div>
+        <div class="process-card anim anim-d1">
+          <div class="process-num">02</div>
+          <div class="process-name">Prototype</div>
+          <div class="process-desc">Working version within 48 hours. Real data, real integrations. Not a slide deck.</div>
+        </div>
+        <div class="process-card anim anim-d2">
+          <div class="process-num">03</div>
+          <div class="process-name">Iterate</div>
+          <div class="process-desc">Daily deploys. Tight feedback loops. Ship improvements until it runs itself.</div>
+        </div>
+        <div class="process-card anim anim-d3">
+          <div class="process-num">04</div>
+          <div class="process-name">Handoff</div>
+          <div class="process-desc">Your infrastructure. Your code. Documentation, training, 30-day support. You own everything.</div>
+        </div>
       </div>
-      <div class="process-card anim anim-d2">
-        <div class="process-num">03</div>
-        <div class="process-name">Iterate</div>
-        <div class="process-desc">Daily deploys. Tight feedback loops. Ship improvements until it runs itself.</div>
-      </div>
-      <div class="process-card anim anim-d3">
-        <div class="process-num">04</div>
-        <div class="process-name">Handoff</div>
-        <div class="process-desc">Your infrastructure. Your code. Documentation, training, 30-day support. You own everything.</div>
-      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MANIFESTO BAR 2 ═══ -->
+<section class="manifesto-section">
+  <div class="c">
+    <div class="manifesto-bar anim">
+      <p>Zero lock-in. We build it. You own it. HEKLA walks away.</p>
     </div>
   </div>
 </section>
@@ -744,7 +953,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <!-- ═══ CTA ═══ -->
 <section class="cta">
   <div class="c">
-    <h2 class="anim">Let's build.</h2>
+    <h2 class="anim">Let's build. <span class="cta-pulse"></span></h2>
     <p class="cta-sub anim anim-d1">Production, not prototypes.</p>
     <div class="cta-links anim anim-d2">
       <div>
@@ -987,6 +1196,59 @@ function observeReveals() {
 
   document.querySelectorAll('.anim:not(.visible)').forEach(el => observer.observe(el));
 }
+
+// ═══ EMBER PARTICLES ═══
+(function() {
+  var container = document.getElementById('embers');
+  if (!container) return;
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+  for (var i = 0; i < 12; i++) {
+    var ember = document.createElement('div');
+    ember.className = 'ember';
+    ember.style.left = (Math.random() * 100) + '%';
+    ember.style.bottom = (-Math.random() * 20) + '%';
+    ember.style.animationDuration = (6 + Math.random() * 8) + 's';
+    ember.style.animationDelay = (Math.random() * 10) + 's';
+    ember.style.width = ember.style.height = (2 + Math.random() * 3) + 'px';
+    ember.style.opacity = 0;
+    container.appendChild(ember);
+  }
+})();
+
+// Headline rotator removed — static headline
+
+// ═══ ANIMATED STAT COUNTERS ═══
+(function() {
+  var counted = false;
+  var observer = new IntersectionObserver(function(entries) {
+    if (counted) return;
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      counted = true;
+      document.querySelectorAll('[data-count-to]').forEach(function(el) {
+        var target = parseInt(el.getAttribute('data-count-to'), 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        if (isNaN(target) || target === 0) return;
+        var current = 0;
+        var duration = 1200;
+        var start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          current = Math.round(eased * target);
+          el.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        el.textContent = '0' + suffix;
+        requestAnimationFrame(step);
+      });
+    });
+  }, { threshold: 0.3 });
+  var heroStats = document.getElementById('heroStats');
+  if (heroStats) observer.observe(heroStats);
+})();
 
 // ═══ INIT ═══
 renderCaseCards();
