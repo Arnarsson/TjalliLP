@@ -97,7 +97,7 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
   position: relative; overflow: hidden;
 }
 
-/* Volcanic ambient glow */
+/* Volcanic ambient glow — hero only */
 .hero::before {
   content: ''; position: absolute; bottom: -20%; left: 50%; transform: translateX(-50%);
   width: 120%; height: 60%;
@@ -201,8 +201,8 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 }
 @keyframes scrollPulse { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
 
-/* ═══ SECTIONS — shared ═══ */
-section { padding: 7rem 0; border-top: 1px solid var(--card-hi); position: relative; }
+/* ═══ SECTIONS ═══ */
+section { border-top: 1px solid var(--card-hi); position: relative; }
 section h2 {
   font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
   color: var(--cream); font-weight: 400; line-height: 1.2; margin-bottom: 2rem;
@@ -211,13 +211,7 @@ section h2 strong { color: var(--orange); font-weight: 400; }
 section h2 .gold { color: var(--gold); font-weight: 400; }
 
 /* ═══ QUOTE ═══ */
-.quote-section { overflow: hidden; }
-.quote-section::before {
-  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 600px; height: 400px;
-  background: radial-gradient(circle, rgba(194,61,46,.04) 0%, transparent 65%);
-  pointer-events: none;
-}
+.quote-section { padding: 8rem 0; }
 .quote-text {
   font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.8rem);
   color: var(--cream); font-weight: 400; font-style: italic;
@@ -231,12 +225,7 @@ section h2 .gold { color: var(--gold); font-weight: 400; }
 .quote-attr strong { color: var(--orange); font-weight: 600; }
 
 /* ═══ WHY NOW ═══ */
-.whynow { overflow: hidden; }
-.whynow::before {
-  content: ''; position: absolute; top: 0; left: -10%; width: 120%; height: 100%;
-  background: radial-gradient(ellipse at 30% 30%, rgba(212,100,58,.03) 0%, transparent 50%);
-  pointer-events: none;
-}
+.whynow { padding: 6rem 0; }
 .whynow-grid {
   display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;
 }
@@ -246,167 +235,117 @@ section h2 .gold { color: var(--gold); font-weight: 400; }
   font-style: italic; line-height: 1.75; max-width: 520px;
 }
 .whynow-body strong { color: var(--cream); font-style: normal; }
-.whynow-cards { display: flex; flex-direction: column; gap: 1rem; }
-.whynow-card {
-  background: var(--card); padding: 1.75rem 1.5rem;
-  border-bottom: 2px solid var(--card-hi);
-  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+.whynow-aside {
+  font-size: .95rem; line-height: 1.7;
 }
-.whynow-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
-.whynow-card .card-label {
+.whynow-aside p { margin-bottom: 1.25rem; }
+.whynow-aside p:last-child { margin-bottom: 0; }
+.whynow-aside strong { color: var(--cream); }
+.whynow-aside em { font-family: var(--serif); color: var(--cream); }
+
+/* ═══ DENMARK ═══ */
+.denmark { padding: 8rem 0; }
+.denmark h2 .gold { color: var(--gold); }
+.denmark-prose {
+  font-family: var(--serif); font-size: 1.1rem; color: var(--body);
+  font-style: italic; line-height: 1.8; max-width: 780px; margin-bottom: 2rem;
+}
+.denmark-prose strong { color: var(--cream); font-style: normal; }
+.denmark-prose .gold { color: var(--gold); font-style: normal; }
+.denmark-note {
+  font-size: .9rem; color: var(--dim); line-height: 1.7; max-width: 680px;
+}
+.denmark-note strong { color: var(--body); }
+
+/* ═══ TIMELINE ═══ */
+.timeline { padding: 4rem 0; }
+.timeline h2 .gold { color: var(--gold); }
+.timeline-list { margin-bottom: 3rem; }
+
+.tl-item { padding: 2rem 0; border-bottom: 1px solid var(--card-hi); }
+.tl-item:last-child { border-bottom: none; }
+
+.tl-item-primary .tl-when {
+  font-family: var(--mono); font-size: .7rem; color: var(--red);
+  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .5rem;
+}
+.tl-item-primary h4 {
+  font-family: var(--serif); font-size: 1.6rem; color: var(--cream);
+  font-weight: 400; font-style: italic; margin-bottom: .75rem;
+}
+.tl-item-primary p {
+  font-size: 1rem; line-height: 1.7; max-width: 580px;
+}
+
+.tl-item-secondary .tl-when {
+  font-family: var(--mono); font-size: .65rem; color: var(--orange);
+  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .35rem;
+}
+.tl-item-secondary h4 {
+  font-family: var(--serif); font-size: 1.2rem; color: var(--cream);
+  font-weight: 400; font-style: italic; margin-bottom: .5rem;
+}
+.tl-item-secondary p {
+  font-size: .9rem; line-height: 1.6; max-width: 520px;
+}
+
+.tl-item-compact {
+  display: flex; gap: 1.5rem; align-items: baseline; padding: 1.25rem 0;
+}
+.tl-item-compact .tl-when {
+  font-family: var(--mono); font-size: .6rem; color: var(--gold);
+  letter-spacing: .15em; text-transform: uppercase; flex-shrink: 0;
+}
+.tl-item-compact h4 {
+  font-family: var(--serif); font-size: 1rem; color: var(--body);
+  font-weight: 400; font-style: italic;
+}
+
+.tl-item-faded {
+  display: flex; gap: 1.5rem; align-items: baseline; padding: 1rem 0;
+  opacity: .5;
+}
+.tl-item-faded .tl-when {
+  font-family: var(--mono); font-size: .55rem; color: var(--dim);
+  letter-spacing: .15em; text-transform: uppercase; flex-shrink: 0;
+}
+.tl-item-faded h4 {
+  font-family: var(--serif); font-size: .9rem; color: var(--dim);
+  font-weight: 400; font-style: italic;
+}
+
+/* ═══ TEAM ═══ */
+.team { padding: 6rem 0; }
+.team h2 .gold { color: var(--gold); }
+.team-intro {
+  font-family: var(--serif); font-size: 1.05rem; color: var(--cream);
+  font-style: italic; line-height: 1.7; max-width: 640px;
+  margin-bottom: 3rem;
+}
+.team-list { max-width: 640px; }
+.team-member { padding: 1.5rem 0; border-bottom: 1px solid var(--card-hi); }
+.team-member:last-child { border-bottom: none; }
+.team-member h4 {
+  font-family: var(--serif); font-size: 1.2rem; color: var(--cream);
+  font-weight: 400; margin-bottom: .15rem;
+}
+.team-member .team-role {
   font-family: var(--mono); font-size: .6rem; color: var(--orange);
   letter-spacing: .2em; text-transform: uppercase; margin-bottom: .5rem;
 }
-.whynow-card h4 {
-  font-family: var(--serif); font-size: 1.15rem; color: var(--cream);
-  font-weight: 400; font-style: italic; margin-bottom: .5rem;
+.team-member p { font-size: .88rem; line-height: 1.6; }
+.team-context {
+  margin-top: 2.5rem;
 }
-.whynow-card p { font-size: .88rem; line-height: 1.6; margin: 0; }
-.whynow-callout {
-  background: var(--card); border-left: 3px solid var(--orange); padding: 1.5rem 1.5rem;
-  margin-top: .5rem;
-}
-.whynow-callout p {
-  font-family: var(--serif); font-size: 1rem; color: var(--cream);
-  font-style: italic; line-height: 1.6; margin: 0;
-}
-.whynow-callout strong { color: var(--orange); }
-
-/* ═══ DENMARK ═══ */
-.denmark h2 .gold { color: var(--gold); }
-.denmark-pillars {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
-  margin-bottom: 3rem;
-}
-.pillar {
-  background: var(--card); padding: 1.75rem 1.5rem;
-  border-top: 2px solid var(--card-hi);
-  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
-}
-.pillar:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
-.pillar.gold-top { border-top-color: var(--gold); }
-.pillar-num {
-  font-family: var(--mono); font-size: .7rem; color: var(--dim);
-  letter-spacing: .1em; margin-bottom: .75rem;
-}
-.pillar h4 {
-  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
-  font-weight: 400; font-style: italic; margin-bottom: .5rem;
-}
-.pillar p { font-size: .85rem; line-height: 1.6; margin: 0; }
-
-.denmark-callout {
-  background: var(--card); border-left: 3px solid var(--gold); padding: 1.75rem 2rem;
-  position: relative; overflow: hidden;
-}
-.denmark-callout::after {
-  content: ''; position: absolute; top: 0; right: 0; width: 150px; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(212,168,67,.03));
-  pointer-events: none;
-}
-.denmark-callout p {
-  font-family: var(--serif); font-size: 1.05rem; color: var(--cream);
-  font-style: italic; line-height: 1.6; margin: 0; position: relative;
-}
-.denmark-callout strong { color: var(--gold); }
-
-/* ═══ TIMELINE ═══ */
-.timeline h2 .gold { color: var(--gold); }
-.timeline-cards {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
-  margin-bottom: 4rem;
-}
-.tl-card {
-  background: var(--card); padding: 1.75rem 1.5rem;
-  border-top: 2px solid var(--card-hi);
-  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
-}
-.tl-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
-.tl-label {
-  font-family: var(--mono); font-size: .6rem;
-  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem;
-}
-.tl-label.red { color: var(--red); }
-.tl-label.orange { color: var(--orange); }
-.tl-label.gold { color: var(--gold); }
-.tl-label.dim { color: var(--dim); }
-.tl-card h4 {
-  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
-  font-weight: 400; font-style: italic; margin-bottom: .5rem;
-}
-.tl-card p { font-size: .85rem; line-height: 1.6; margin: 0; }
-
-/* Stats strip */
-.stats-strip {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
-  border-top: 1px solid var(--card-hi);
-  border-bottom: 1px solid var(--card-hi);
-}
-.stat {
-  padding: 2rem 1.75rem;
-  border-right: 1px solid var(--card-hi);
-  transition: background .3s;
-}
-.stat:last-child { border-right: none; }
-.stat:hover { background: rgba(212,100,58,.02); }
-.stat-num {
-  font-family: var(--mono); font-size: clamp(2rem, 4vw, 3rem);
-  color: var(--orange); font-weight: 600; line-height: 1; margin-bottom: .5rem;
-}
-.stat p { font-size: .82rem; line-height: 1.55; color: var(--dim); }
-
-/* ═══ TEAM ═══ */
-.team h2 .gold { color: var(--gold); }
-.team-grid {
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;
-}
-.team-pullquote {
-  font-family: var(--serif); font-size: clamp(1.05rem, 2vw, 1.25rem);
-  color: var(--cream); font-style: italic; line-height: 1.6;
-  padding-left: 1.5rem; border-left: 3px solid var(--orange);
-  margin-bottom: 2.5rem;
-}
-.team-bullets { list-style: none; }
-.team-bullets li {
+.team-context li {
   font-family: var(--mono); font-size: .68rem; color: var(--body);
   letter-spacing: .06em; text-transform: uppercase;
-  padding: .5rem 0 .5rem 1.25rem; position: relative;
-  border-bottom: 1px solid var(--card-hi);
+  padding: .4rem 0;
+  list-style: none;
 }
-.team-bullets li:last-child { border: none; }
-.team-bullets li::before {
-  content: ''; position: absolute; left: 0; top: .85rem;
-  width: 5px; height: 5px; border-radius: 50%; background: var(--orange);
-}
-
-.team-cards { display: flex; flex-direction: column; gap: 1rem; }
-.team-card {
-  background: var(--card); padding: 1.75rem 1.5rem;
-  border-top: 2px solid var(--orange);
-  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
-}
-.team-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.4); }
-.team-card h4 {
-  font-family: var(--serif); font-size: 1.2rem; color: var(--cream);
-  font-weight: 400; margin-bottom: .25rem;
-}
-.team-card .team-role {
-  font-family: var(--mono); font-size: .6rem; color: var(--orange);
-  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem;
-}
-.team-card p { font-size: .88rem; line-height: 1.6; margin: 0; }
 
 /* ═══ CTA ═══ */
-.cta-section { overflow: hidden; }
-.cta-section::before {
-  content: ''; position: absolute; top: -2rem; left: 50%; transform: translateX(-50%);
-  width: 600px; height: 500px;
-  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
-  pointer-events: none;
-}
-.cta-grid {
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;
-}
+.cta-section { padding: 8rem 0; }
 .cta-section h2 strong { color: var(--orange); }
 .cta-sub {
   font-family: var(--serif); font-size: 1.15rem; color: var(--cream);
@@ -414,7 +353,7 @@ section h2 .gold { color: var(--gold); font-weight: 400; }
 }
 .cta-body {
   font-family: var(--serif); font-size: 1.05rem; color: var(--body);
-  font-style: italic; line-height: 1.7; margin-bottom: 2.5rem;
+  font-style: italic; line-height: 1.7; margin-bottom: 2.5rem; max-width: 520px;
 }
 .cta-email {
   font-family: var(--mono); font-size: 1.1rem; color: var(--orange);
@@ -433,22 +372,19 @@ section h2 .gold { color: var(--gold); font-weight: 400; }
 }
 .btn:hover { background: var(--orange-lt); color: var(--white); transform: translateY(-2px); }
 
-.cta-cards { display: flex; flex-direction: column; gap: 1rem; }
-.cta-card {
-  background: var(--card); padding: 1.75rem 1.5rem;
-  border-bottom: 2px solid var(--card-hi);
-  transition: transform .4s cubic-bezier(.16,1,.3,1);
+.cta-contact {
+  margin-top: 3rem; display: flex; gap: 3rem;
 }
-.cta-card:hover { transform: translateY(-3px); }
-.cta-card .card-label {
-  font-family: var(--mono); font-size: .6rem; color: var(--orange);
-  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .5rem;
+.cta-contact-block h4 {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  letter-spacing: .2em; text-transform: uppercase; margin-bottom: .35rem;
 }
-.cta-card h4 {
-  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
-  font-weight: 400; margin-bottom: .25rem;
+.cta-contact-block p {
+  font-size: .88rem; line-height: 1.5;
 }
-.cta-card p { font-size: .88rem; line-height: 1.6; margin: 0; }
+.cta-contact-block p strong {
+  color: var(--cream); font-weight: 400;
+}
 
 /* ═══ FOOTER ═══ */
 footer { padding: 2rem 0; border-top: 1px solid var(--card-hi); }
@@ -461,22 +397,11 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 .anim { opacity: 0; transform: translateY(30px); transition: opacity .7s ease-out, transform .7s ease-out; }
 .anim.visible { opacity: 1; transform: translateY(0); }
-.anim-d1 { transition-delay: .1s; }
-.anim-d2 { transition-delay: .2s; }
-.anim-d3 { transition-delay: .3s; }
-.anim-d4 { transition-delay: .4s; }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 1024px) {
-  .denmark-pillars { grid-template-columns: 1fr 1fr; }
-  .timeline-cards { grid-template-columns: 1fr 1fr; }
-  .stats-strip { grid-template-columns: 1fr 1fr; }
-  .stat:nth-child(2) { border-right: none; }
-  .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--card-hi); }
-  .stat:nth-child(4) { border-right: none; }
   .whynow-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .team-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .cta-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .tl-item-compact, .tl-item-faded { flex-direction: column; gap: .35rem; }
 }
 @media (max-width: 800px) {
   .nav-r { display: none; }
@@ -484,12 +409,11 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   .hero { padding-bottom: 3rem; }
   .hero-the, .hero-agent { font-size: clamp(3.5rem, 16vw, 5rem); }
   .hero-meta { position: relative; bottom: auto; right: auto; text-align: left; margin-top: 2rem; }
-  .denmark-pillars { grid-template-columns: 1fr; }
-  .timeline-cards { grid-template-columns: 1fr; }
-  .stats-strip { grid-template-columns: 1fr; }
-  .stat { border-right: none; border-bottom: 1px solid var(--card-hi); }
-  .stat:last-child { border-bottom: none; }
-  section { padding: 5rem 0; }
+  .cta-contact { flex-direction: column; gap: 1.5rem; }
+  section { padding: 4rem 0; }
+  .quote-section { padding: 5rem 0; }
+  .denmark { padding: 5rem 0; }
+  .cta-section { padding: 5rem 0; }
   .c { padding: 0 1.5rem; }
   .hero-scroll { display: none; }
   .btn { padding: .85rem 1.75rem; font-size: .78rem; }
@@ -548,37 +472,25 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <!-- ═══ QUOTE ═══ -->
 <section class="quote-section" id="quote">
   <div class="c">
-    <div class="label anim">Jens Frederik · Om hvorfor det her er vigtigt</div>
-    <blockquote class="quote-text anim anim-d1">
+    <blockquote class="quote-text anim">
       "It's not about vibe coding. It's about <strong>who gets left behind.</strong>"
     </blockquote>
-    <div class="quote-attr anim anim-d2">Jens Frederik, Marts 2026 · <strong>Det er derfor vi bygger dette rum.</strong></div>
+    <div class="quote-attr anim">Jens Frederik, Marts 2026 · <strong>Det er derfor vi bygger dette rum.</strong></div>
   </div>
 </section>
 
 <!-- ═══ WHY NOW ═══ -->
 <section class="whynow" id="why">
   <div class="c">
-    <div class="label anim">Den samtale der endnu ikke finder sted</div>
+    <div class="label anim">01 / Den samtale der endnu ikke finder sted</div>
     <div class="whynow-grid">
       <div>
-        <h2 class="anim anim-d1">De fleste organisationer er stadig pre-agentiske. <strong>Det vindue lukker nu.</strong></h2>
-        <p class="whynow-body anim anim-d2">Vi lever i et øjeblik, der minder om de tidlige dage af internettet. Men meget hurtigere. AI-agenter overtager opgaver, omskriver jobprofiler og ændrer fundamentalt, hvad det vil sige at arbejde. De organisationer der <strong>forstår det nu</strong> og handler på det, vil stå et helt andet sted om to år. Det er ikke en advarsel. Det er en invitation til at forme udviklingen.</p>
+        <h2 class="anim">De fleste organisationer er stadig pre-agentiske. <strong>Det vindue lukker nu.</strong></h2>
+        <p class="whynow-body anim">Vi lever i et øjeblik, der minder om de tidlige dage af internettet. Men meget hurtigere. AI-agenter overtager opgaver, omskriver jobprofiler og ændrer fundamentalt, hvad det vil sige at arbejde. De organisationer der <strong>forstår det nu</strong> og handler på det, vil stå et helt andet sted om to år. Det er ikke en advarsel. Det er en invitation til at forme udviklingen.</p>
       </div>
-      <div class="whynow-cards anim anim-d2">
-        <div class="whynow-card">
-          <div class="card-label">Hvad sker der nu</div>
-          <h4>Pre-agentisk</h4>
-          <p>De fleste organisationer er endnu ikke i gang. Det er præcis det øjeblik, hvor den rette samtale ændrer alt.</p>
-        </div>
-        <div class="whynow-card">
-          <div class="card-label">Hvem er i rummet</div>
-          <h4>Beslutningstagere</h4>
-          <p>Tech leads, jurister, digitale ingeniører, offentlige innovationschefer, iværksættere og SMV-ejere.</p>
-        </div>
-        <div class="whynow-callout">
-          <p><strong>Første udgave. Intimt af design.</strong> Et begrænset antal pladser skaber ægte samtaler. Sammen er vi førstemovere. Det hænger ved.</p>
-        </div>
+      <div class="whynow-aside anim">
+        <p>De fleste organisationer er endnu ikke i gang. Det er præcis det øjeblik, hvor den rette samtale ændrer alt. I rummet sidder tech leads, jurister, digitale ingeniører, offentlige innovationschefer, iværksættere og SMV-ejere.</p>
+        <p><strong>Første udgave. Intimt af design.</strong> Et begrænset antal pladser skaber ægte samtaler. Sammen er vi førstemovere. Det hænger ved.</p>
       </div>
     </div>
   </div>
@@ -587,79 +499,35 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <!-- ═══ DENMARK'S OPPORTUNITY ═══ -->
 <section class="denmark" id="denmark">
   <div class="c">
-    <div class="label anim">Danmarks mulighed</div>
-    <h2 class="anim anim-d1">Danmark kan <span class="gold">definere agentøkonomien</span> frem for at følge den.</h2>
-    <div class="denmark-pillars">
-      <div class="pillar anim anim-d1">
-        <div class="pillar-num">01</div>
-        <h4>Akademisk kapacitet</h4>
-        <p>DTU Compute og et stigende antal forskere der arbejder direkte med agentsystemer. Verdensklasse og tilgængelig.</p>
-      </div>
-      <div class="pillar anim anim-d2">
-        <div class="pillar-num">02</div>
-        <h4>Offentlig åbenhed</h4>
-        <p>Kommuner, universiteter og statslige institutioner der rent faktisk vil eksperimentere. En fordel de fleste europæiske lande ikke har.</p>
-      </div>
-      <div class="pillar anim anim-d3">
-        <div class="pillar-num">03</div>
-        <h4>Juridisk modenhed</h4>
-        <p>En retsorden der forstår data, tillid og ansvar. Præcis det fundament, agent-deployment kræver for at skalere.</p>
-      </div>
-      <div class="pillar gold-top anim anim-d4">
-        <div class="pillar-num">04</div>
-        <h4>The Agent som katalysator</h4>
-        <p>Det rum der samler alle tre. Akademia, erhvervsliv og offentlig sektor i den samme samtale. Det er det, vi bygger.</p>
-      </div>
-    </div>
-    <div class="denmark-callout anim">
-      <p><strong>Quantum nærmer sig.</strong> Ifølge IBM og McKinsey forventes kommercielle gennembrud inden 2030. De aktører der allerede har bygget agent-infrastruktur vil stå som naturlige ledere i den næste bølge.</p>
-    </div>
+    <h2 class="anim">Danmark kan <span class="gold">definere agentøkonomien</span> frem for at følge den.</h2>
+    <p class="denmark-prose anim">Danmark har fire fordele der gør os unikt positioneret. <strong>Akademisk kapacitet</strong> fra DTU Compute og et stigende antal forskere der arbejder direkte med agentsystemer — verdensklasse og tilgængelig. <strong>Offentlig åbenhed</strong> fra kommuner, universiteter og statslige institutioner der rent faktisk vil eksperimentere, en fordel de fleste europæiske lande ikke har. <strong>Juridisk modenhed</strong> i en retsorden der forstår data, tillid og ansvar — præcis det fundament agent-deployment kræver for at skalere. Og <strong class="gold">The Agent som katalysator</strong> — det rum der samler alle tre: akademia, erhvervsliv og offentlig sektor i den samme samtale.</p>
+    <p class="denmark-note anim">McKinsey estimerer at AI kan frigøre op mod 80 mia. i værdi i Norden alene — og op mod <strong>40% af alle arbejdstimer</strong> kan automatiseres med teknologi vi allerede har. 12 millioner europæere skal skifte jobfunktion inden 2030. Ifølge IBM og McKinsey forventes kommercielle quantum-gennembrud inden 2030. De aktører der allerede har bygget agent-infrastruktur vil stå som naturlige ledere i den næste bølge.</p>
   </div>
 </section>
 
 <!-- ═══ TIMELINE ═══ -->
 <section class="timeline" id="timeline">
   <div class="c">
-    <div class="label anim">Det der kommer</div>
-    <h2 class="anim anim-d1">The Agent er ikke et enkelt event. Det er <span class="gold">begyndelsen på et fælles projekt.</span></h2>
-    <div class="timeline-cards">
-      <div class="tl-card anim anim-d1">
-        <div class="tl-label red">Tentativt Maj 2026</div>
+    <div class="label anim">02 / Det der kommer</div>
+    <h2 class="anim">The Agent er ikke et enkelt event. Det er <span class="gold">begyndelsen på et fælles projekt.</span></h2>
+    <div class="timeline-list">
+      <div class="tl-item tl-item-primary anim">
+        <div class="tl-when">Tentativt Maj 2026</div>
         <h4>The Agent, København</h4>
-        <p>Tech og legal tech fokus. DTU Skylab. Begrænset antal pladser. Ansøgningsbaseret.</p>
+        <p>Tech og legal tech fokus. DTU Skylab. Begrænset antal pladser. Ansøgningsbaseret. Frontrunner-virksomheder der fuldt adopterer AI inden 2030 kan fordoble deres resultater — dem der venter risikerer at falde markant bagud.</p>
       </div>
-      <div class="tl-card anim anim-d2">
-        <div class="tl-label orange">Muligvis August 2026</div>
+      <div class="tl-item tl-item-secondary anim">
+        <div class="tl-when">Muligvis August 2026</div>
         <h4>The Agent x Tech BBQ?</h4>
-        <p>Et potentielt side-event til Nordens største tech-summit. Tema: 'Emerging from Agency.' 10.000+ deltagere. Bella Center.</p>
+        <p>Et potentielt side-event til Nordens største tech-summit. Tema: 'Emerging from Agency.' Bella Center.</p>
       </div>
-      <div class="tl-card anim anim-d3">
-        <div class="tl-label gold">Muligvis Q4 2026</div>
-        <h4>Agentøkonomi-rapport?</h4>
-        <p>Danmark og Norden i agent-revolutionen. De mest påvirkede vertikaler. Et projekt vi ønsker at realisere med Erhvervsfremmebestyrelsen, DI, Dansk Erhverv og centrale interesseorganisationer.</p>
+      <div class="tl-item tl-item-compact anim">
+        <div class="tl-when">Muligvis Q4 2026</div>
+        <h4>Agentøkonomi-rapport — Danmark og Norden i agent-revolutionen, med Erhvervsfremmebestyrelsen, DI og Dansk Erhverv</h4>
       </div>
-      <div class="tl-card anim anim-d4">
-        <div class="tl-label dim">2027 og frem</div>
-        <h4>Norden · Agent og Quantum</h4>
-        <p>Et løbende nordisk rum. Agentøkonomien og det der følger.</p>
-      </div>
-    </div>
-    <div class="stats-strip">
-      <div class="stat anim">
-        <div class="stat-num" data-count="80" data-suffix="B">$0</div>
-        <p>McKinsey estimerer at AI kan frigøre 80 mia. dollar i værdi i Norden alene, svarende til 2-3 procentpoints i overskudsmargen på tværs af industrier.</p>
-      </div>
-      <div class="stat anim anim-d1">
-        <div class="stat-num" data-count="40" data-suffix="%">0%</div>
-        <p>af alle arbejdstimer i Norden kan automatiseres med teknologi vi allerede har i dag. Spørgsmålet er ikke om, men hvornår og hvem der styrer det.</p>
-      </div>
-      <div class="stat anim anim-d2">
-        <div class="stat-num" data-count="12" data-suffix="M">0</div>
-        <p>europæere skal skifte jobfunktion inden 2030, dobbelt så hurtigt som før pandemien. Danmark er blandt de mest eksponerede lande.</p>
-      </div>
-      <div class="stat anim anim-d3">
-        <div class="stat-num" data-count="2" data-suffix="x">0</div>
-        <p>frontrunner-virksomheder der fuldt ud adopterer AI inden 2030 kan fordoble deres cash flow. Dem der venter risikerer et fald på 20%.</p>
+      <div class="tl-item tl-item-faded anim">
+        <div class="tl-when">2027 og frem</div>
+        <h4>Norden · Agent og Quantum — et løbende nordisk rum</h4>
       </div>
     </div>
   </div>
@@ -668,63 +536,52 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <!-- ═══ TEAM ═══ -->
 <section class="team" id="team">
   <div class="c">
-    <div class="label anim">Hvem står bag</div>
-    <h2 class="anim anim-d1">Vi er HEKLA. Et AI-native strategi og konsulenthus, <span class="gold">hjemmehørende i København.</span></h2>
-    <div class="team-grid">
-      <div>
-        <div class="team-pullquote anim anim-d1">"Efter en længere snak med Jens Frederik, både Christoffer og senere Hjalti, og jo mere vi talte om hvad der sker, jo klarere blev det: der er et rum her, som mangler at blive bygget. Og vigtigst, I skal være en stor del af det."</div>
-        <ul class="team-bullets anim anim-d2">
-          <li>DTU Skylab som venue, i dialog om akademisk forankring</li>
-          <li>DTU Compute involveret i programudvikling</li>
-          <li>Venteliste åbner efter påske</li>
-          <li>Teamet bag University Startup World Cup, Venture Cup og Digital Tech Summit</li>
-          <li>Hjalti, medstifter af Duen</li>
-        </ul>
+    <h2 class="anim">Vi er HEKLA. Et AI-native strategi og konsulenthus, <span class="gold">hjemmehørende i København.</span></h2>
+    <div class="team-intro anim">"Efter en længere snak med Jens Frederik, både Christoffer og senere Hjalti, og jo mere vi talte om hvad der sker, jo klarere blev det: der er et rum her, som mangler at blive bygget. Og vigtigst, I skal være en stor del af det."</div>
+    <div class="team-list">
+      <div class="team-member anim">
+        <h4>Hjalti H. Jonsson</h4>
+        <div class="team-role">Commercial og Operations</div>
+        <p>Go-to-market og enterprise relationer på tværs af Norden. Ham der får de rigtige mennesker ind i rummet.</p>
       </div>
-      <div class="team-cards">
-        <div class="team-card anim anim-d1">
-          <h4>Hjalti H. Jonsson</h4>
-          <div class="team-role">Commercial og Operations</div>
-          <p>Go-to-market og enterprise relationer på tværs af Norden. Ham der får de rigtige mennesker ind i rummet.</p>
-        </div>
-        <div class="team-card anim anim-d2">
-          <h4>Christoffer James</h4>
-          <div class="team-role">Product og Enterprise · PhD, DTU</div>
-          <p>IP-baggrund og dyb erfaring med enterprise AI-deployment. Fokus på det, der faktisk virker i komplekse organisationer.</p>
-        </div>
-        <div class="team-card anim anim-d3">
-          <h4>Sven Arnarsson</h4>
-          <div class="team-role">Teknologi og AI-infrastruktur</div>
-          <p>Arkitektur, agenter og systemer i produktion. Ikke imponerende demos. Fungerende infrastrukturer.</p>
-        </div>
+      <div class="team-member anim">
+        <h4>Christoffer James</h4>
+        <div class="team-role">Product og Enterprise · PhD, DTU</div>
+        <p>IP-baggrund og dyb erfaring med enterprise AI-deployment. Fokus på det, der faktisk virker i komplekse organisationer.</p>
+      </div>
+      <div class="team-member anim">
+        <h4>Sven Arnarsson</h4>
+        <div class="team-role">Teknologi og AI-infrastruktur</div>
+        <p>Arkitektur, agenter og systemer i produktion. Ikke imponerende demos. Fungerende infrastrukturer.</p>
       </div>
     </div>
+    <ul class="team-context anim">
+      <li>DTU Skylab som venue, i dialog om akademisk forankring</li>
+      <li>DTU Compute involveret i programudvikling</li>
+      <li>Venteliste åbner efter påske</li>
+      <li>Teamet bag University Startup World Cup, Venture Cup og Digital Tech Summit</li>
+      <li>Hjalti, medstifter af Duen</li>
+    </ul>
   </div>
 </section>
 
 <!-- ═══ CTA ═══ -->
 <section class="cta-section" id="contact">
   <div class="c">
-    <div class="cta-grid">
-      <div>
-        <h2 class="anim">Stå i centrum <strong>af samtalen.</strong></h2>
-        <p class="cta-sub anim anim-d1">Det er stadig muligt. Men ikke i lang tid.</p>
-        <p class="cta-body anim anim-d2">Publikummet formes nu. Hvis interessen er der, snakkes vi ved.</p>
-        <a href="mailto:hjalti@hekla.cc" class="cta-email anim anim-d3">hjalti@hekla.cc</a>
-        <br>
-        <a href="mailto:hjalti@hekla.cc" class="btn anim anim-d3">Tilmeld venteliste</a>
+    <h2 class="anim">Stå i centrum <strong>af samtalen.</strong></h2>
+    <p class="cta-sub anim">Det er stadig muligt. Men ikke i lang tid.</p>
+    <p class="cta-body anim">Publikummet formes nu. Hvis interessen er der, snakkes vi ved.</p>
+    <a href="mailto:hjalti@hekla.cc" class="cta-email anim">hjalti@hekla.cc</a>
+    <br>
+    <a href="mailto:hjalti@hekla.cc" class="btn anim">Tilmeld venteliste</a>
+    <div class="cta-contact anim">
+      <div class="cta-contact-block">
+        <h4>Kontakt</h4>
+        <p><strong>Hjalti H. Jonsson</strong><br>Co-founder, HEKLA.cc &middot; 52 77 92 47</p>
       </div>
-      <div class="cta-cards anim anim-d2">
-        <div class="cta-card">
-          <div class="card-label">Kontakt</div>
-          <h4>Hjalti H. Jonsson</h4>
-          <p>Co-founder, HEKLA.cc &middot; 52 77 92 47</p>
-        </div>
-        <div class="cta-card">
-          <div class="card-label">Adresse</div>
-          <h4>Store Kongensgade 81D</h4>
-          <p>København &middot; Vi mødes gerne</p>
-        </div>
+      <div class="cta-contact-block">
+        <h4>Adresse</h4>
+        <p><strong>Store Kongensgade 81D</strong><br>København &middot; Vi mødes gerne</p>
       </div>
     </div>
   </div>
@@ -770,31 +627,6 @@ for (let i = 0; i < 12; i++) {
   ember.style.height = ember.style.width;
   embersContainer.appendChild(ember);
 }
-
-/* ═══ COUNT-UP ANIMATION ═══ */
-const statObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el = e.target;
-      const target = parseInt(el.dataset.count);
-      const suffix = el.dataset.suffix || '';
-      const prefix = el.textContent.startsWith('$') ? '$' : '';
-      let current = 0;
-      const step = target / 40;
-      const interval = setInterval(() => {
-        current += step;
-        if (current >= target) {
-          current = target;
-          clearInterval(interval);
-        }
-        el.textContent = prefix + Math.round(current) + suffix;
-      }, 30);
-      statObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.stat-num[data-count]').forEach(el => statObserver.observe(el));
 </script>
 </body>
 </html>

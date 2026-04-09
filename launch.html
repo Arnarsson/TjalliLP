@@ -41,8 +41,8 @@
   "url": "https://www.hekla.cc/meet-hekla",
   "image": "hero-poster.jpg",
   "offers": [
-    { "@type": "Offer", "name": "HEKLA Personal", "price": "20000", "priceCurrency": "DKK", "availability": "https://schema.org/LimitedAvailability" },
-    { "@type": "Offer", "name": "HEKLA Personal — High Performance", "price": "60000", "priceCurrency": "DKK", "availability": "https://schema.org/LimitedAvailability" }
+    { "@type": "Offer", "name": "HEKLA Personal", "availability": "https://schema.org/LimitedAvailability" },
+    { "@type": "Offer", "name": "HEKLA Personal — High Performance", "availability": "https://schema.org/LimitedAvailability" }
   ]
 }
 </script>
@@ -233,7 +233,7 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 @keyframes scrollPulse { 0% { top: -100%; } 50% { top: 100%; } 100% { top: 100%; } }
 
 /* ═══ SCARCITY — with volcanic glow ═══ */
-.scarcity { padding: 6rem 0; border-top: 1px solid var(--card-hi); text-align: center; position: relative; overflow: hidden; }
+.scarcity { padding: 4rem 0; border-top: 1px solid var(--card-hi); text-align: center; position: relative; overflow: hidden; }
 .scarcity::before {
   content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: 500px; height: 400px;
@@ -249,7 +249,7 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 .scarcity-item .desc { font-family: var(--mono); font-size: .65rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; margin-top: .25rem; }
 
 /* ═══ VALUE STRIP ═══ */
-.value-strip { padding: 6rem 0; border-top: 1px solid var(--card-hi); }
+.value-strip { padding: 7rem 0; border-top: 1px solid var(--card-hi); }
 .value-strip h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--cream); font-weight: 400; line-height: 1.2; margin-bottom: 2.5rem; max-width: 700px; }
 .value-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; max-width: 750px; }
 .value-card {
@@ -271,7 +271,7 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 
 /* ═══ INLINE CTA — mid-page squeeze ═══ */
 .inline-cta {
-  padding: 5rem 0; border-top: 1px solid var(--card-hi);
+  padding: 3rem 0; border-top: 1px solid var(--card-hi);
   text-align: center; position: relative; overflow: hidden;
 }
 .inline-cta::before {
@@ -289,7 +289,7 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 }
 
 /* ═══ PLATFORM SHOWCASE ═══ */
-.platform { padding: 7rem 0; border-top: 1px solid var(--card-hi); position: relative; overflow: hidden; }
+.platform { padding: 8rem 0; border-top: 1px solid var(--card-hi); position: relative; overflow: hidden; }
 .platform::before {
   content: ''; position: absolute; top: 0; left: -20%; width: 140%; height: 100%;
   background: radial-gradient(ellipse at 70% 30%, rgba(212,100,58,.03) 0%, transparent 50%),
@@ -300,22 +300,6 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 .platform-intro h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--cream); font-weight: 400; line-height: 1.2; margin-bottom: 1.25rem; }
 .platform-intro p { font-size: 1.05rem; line-height: 1.75; }
 .platform-intro p strong { color: var(--cream); }
-
-/* Manifesto callout — cinematic accent */
-.manifesto-bar {
-  background: var(--card); border-left: 3px solid var(--orange);
-  padding: 2rem 2.5rem; margin: 3rem auto; max-width: 600px;
-  position: relative;
-}
-.manifesto-bar::after {
-  content: ''; position: absolute; top: 0; right: 0; width: 120px; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(212,100,58,.03));
-  pointer-events: none;
-}
-.manifesto-bar p {
-  font-family: var(--serif); font-size: clamp(1.1rem, 2vw, 1.35rem);
-  color: var(--cream); font-style: italic; line-height: 1.5; margin: 0;
-}
 
 /* Editorial split — platform demos */
 .plat-split {
@@ -682,7 +666,7 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 }
 
 /* ═══ PRIVATE ═══ */
-.private { padding: 6rem 0; border-top: 1px solid var(--card-hi); }
+.private { padding: 5rem 0; border-top: 1px solid var(--card-hi); }
 .private-flex { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
 .private h2 { font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--cream); font-weight: 400; line-height: 1.25; margin-bottom: 1.5rem; }
 .private p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem; max-width: 480px; }
@@ -709,13 +693,11 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 .tier-features li { padding: .5rem 0 .5rem 1.5rem; position: relative; font-size: .9rem; border-bottom: 1px solid rgba(42,40,38,.5); }
 .tier-features li::before { content: '\25B8'; position: absolute; left: 0; color: var(--orange); }
 .tier-features li:last-child { border: none; }
-.tier-price { font-family: var(--mono); font-size: 1.5rem; color: var(--orange); }
-.tier-price-note { font-family: var(--mono); font-size: .72rem; color: var(--dim); margin-top: .35rem; }
 .tier-badge { display: inline-block; margin-top: 1.25rem; padding: .6rem 1.5rem; border: 1px solid var(--orange); font-family: var(--mono); font-size: .72rem; color: var(--orange); letter-spacing: .15em; text-transform: uppercase; animation: pulse-border 3s ease-in-out infinite; }
 @keyframes pulse-border { 0%,100%{border-color:var(--orange);box-shadow:0 0 0 rgba(212,100,58,0)} 50%{border-color:var(--orange-lt);box-shadow:0 0 12px rgba(212,100,58,.15)} }
 
 /* ═══ SOCIAL PROOF ═══ */
-.proof { padding: 3rem 0; border-top: 1px solid var(--card-hi); text-align: center; }
+.proof { padding: 4rem 0; border-top: 1px solid var(--card-hi); text-align: center; }
 .proof-logos {
   display: flex; justify-content: center; align-items: center;
   gap: 3rem; flex-wrap: wrap;
@@ -728,7 +710,7 @@ nav.scrolled { background: rgba(19,17,16,.92); backdrop-filter: blur(24px); }
 .proof-item strong { font-family: var(--serif); font-size: 1.1rem; color: var(--cream); font-weight: 400; font-style: italic; letter-spacing: 0; }
 
 /* ═══ RESERVE CTA ═══ */
-.final { padding: 8rem 0 10rem; border-top: 1px solid var(--card-hi); position: relative; }
+.final { padding: 6rem 0 8rem; border-top: 1px solid var(--card-hi); position: relative; }
 .final::before { content: ''; position: absolute; top: -2rem; left: 50%; transform: translateX(-50%); width: 600px; height: 500px; background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%); pointer-events: none; }
 .final .c { position: relative; }
 .final h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); color: var(--cream); font-weight: 400; margin-bottom: 1rem; }
@@ -978,17 +960,13 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
       <p>ChatGPT resets every session. Your CRM doesn't know what happened in Monday's meeting. <strong>Everything is fragmented.</strong></p>
     </div>
 
-    <div class="manifesto-bar anim anim-d1">
-      <p>This is not another chatbot subscription. This is your personal intelligence layer &mdash; always on, always learning, always yours.</p>
-    </div>
-
     <!-- MEMORY — split left -->
     <div class="plat-split anim">
       <div class="plat-text">
         <p class="label" style="margin-bottom:1rem">MEMORY</p>
         <h3>Every conversation. Every decision. Remembered.</h3>
         <p>Import years of ChatGPT, Claude, and file history. Build a knowledge layer that never resets. The longer you use it, the more valuable it becomes.</p>
-        <div class="hl">The switching cost is permanent &mdash; because your knowledge lives here.</div>
+        <div class="hl">The switching barrier is permanent &mdash; because your knowledge lives here.</div>
         <div class="plat-tag">Live in Spring 2026</div>
       </div>
       <div class="visual">
@@ -1248,8 +1226,6 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
           <li>Unified inbox: all platforms, one view</li>
           <li>Proactive agents on your hardware</li>
         </ul>
-        <div class="tier-price">20,000 DKK</div>
-        <div class="tier-price-note">ex. VAT &middot; ex. hardware</div>
         <div class="tier-badge" data-badge-private></div>
       </div>
       <div class="tier-card anim anim-d2">
@@ -1261,8 +1237,6 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
           <li>Onboarding sprint + monthly reviews</li>
           <li>Volcano Club membership *</li>
         </ul>
-        <div class="tier-price">60,000 DKK</div>
-        <div class="tier-price-note">ex. VAT &middot; ex. hardware</div>
         <div class="tier-badge" data-badge-hp></div>
         <p style="font-size:.78rem;color:var(--dim);margin-top:1.25rem;font-style:italic">* First in line when HEKLA opens to investors.</p>
       </div>
@@ -1366,7 +1340,7 @@ var UNITS = { private: 8, hp: 4 };
   s('[data-units-hp]', u.hp);
   s('[data-badge-private]', u.private + ' UNITS LEFT \u2014 SPRING 2026');
   s('[data-badge-hp]', u.hp + ' UNITS LEFT \u2014 SPRING 2026');
-  s('[data-reserve-desc]', u.private + ' Personal + ' + u.hp + ' High Performance units left. Every unit configured one-to-one by the HEKLA team. Launch pricing and features \u2014 some might not be available again.');
+  s('[data-reserve-desc]', u.private + ' Personal + ' + u.hp + ' High Performance units left. Every unit configured one-to-one by the HEKLA team. Launch features and configuration \u2014 some might not be available again.');
   s('[data-reserve-sub]', t + ' UNITS LEFT \u00B7 NEXT BATCH: WE HONESTLY DON\u2019T KNOW');
 })(UNITS);
 
@@ -1389,7 +1363,7 @@ window.addEventListener('scroll', function() {
 
   document.querySelectorAll('.anim').forEach(function(el) { observer.observe(el); });
   // Also observe platform splits for staggered child reveals
-  document.querySelectorAll('.plat-split, .visual-chrome, .manifesto-bar, .plat-feats').forEach(function(el) {
+  document.querySelectorAll('.plat-split, .visual-chrome, .plat-feats').forEach(function(el) {
     if (!el.classList.contains('anim')) { el.classList.add('anim'); observer.observe(el); }
   });
 
