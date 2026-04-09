@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEKLA — AI Consultancy & Enterprise Services</title>
+<meta name="description" content="HEKLA builds AI systems that run your business. Working products from week one. Agents that run for under €50/month. Full ownership when we're done.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#131110">
+<link rel="canonical" href="https://www.hekla.cc/consultancy">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HEKLA — AI Consultancy & Enterprise Services">
+<meta property="og:description" content="Working products from week one. Agents that run for under €50/month. Full ownership when we're done.">
+<meta property="og:url" content="https://www.hekla.cc/consultancy">
+<meta property="og:site_name" content="HEKLA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HEKLA — AI Consultancy & Enterprise Services">
+<meta name="twitter:description" content="Working products from week one. Agents that run for under €50/month. Full ownership when we're done.">
+
+<!-- Performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   HEKLA DESIGN SYSTEM — identical tokens to launch.html
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --bg: #131110;
+  --card: #1E1D1B;
+  --card-hi: #2A2826;
+  --cream: #F0E6D3;
+  --body: #B8AFA2;
+  --dim: #807A72;
+  --orange: #D4643A;
+  --orange-lt: #E8805A;
+  --white: #FFF;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --mono: 'JetBrains Mono', Consolas, monospace;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Film grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: .018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--orange); text-decoration: none; }
+.c { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
+.label { font-family: var(--mono); font-size: .65rem; color: var(--orange); letter-spacing: .3em; text-transform: uppercase; }
+
+/* ═══ NAV ═══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(19,17,16,.92); backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--card-hi);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.5rem; color: var(--cream); text-decoration: none; }
+.nav-badge { font-family: var(--mono); font-size: .6rem; color: var(--dim); letter-spacing: .08em; text-transform: uppercase; background: var(--card); border: 1px solid var(--card-hi); border-radius: 4px; padding: 2px 8px; margin-left: .75rem; }
+.nav-left { display: flex; align-items: center; }
+.nav-r { display: flex; gap: 2rem; align-items: center; }
+.nav-r a { font-family: var(--mono); font-size: .68rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; transition: color .3s; }
+.nav-r a:hover { color: var(--cream); }
+.nav-r a.active { color: var(--orange); }
+.nav-mobile { display: none; }
+.nav-mobile a { font-family: var(--mono); font-size: .68rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; }
+.nav-mobile a.active { color: var(--orange); }
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer; padding: 4px;
+  flex-direction: column; gap: 4px;
+}
+.hamburger span { display: block; width: 18px; height: 1.5px; background: var(--cream); }
+.mobile-menu {
+  display: none; position: fixed; top: 60px; left: 0; right: 0;
+  background: var(--bg); border-bottom: 1px solid var(--card-hi);
+  padding: 1.5rem 2.5rem; z-index: 99;
+}
+.mobile-menu.open { display: flex; flex-direction: column; gap: 1rem; }
+.mobile-menu a { font-family: var(--mono); font-size: .72rem; color: var(--dim); letter-spacing: .1em; text-transform: uppercase; }
+.mobile-menu a.active { color: var(--orange); }
+
+/* ═══ HERO ═══ */
+.hero {
+  padding: 10rem 0 6rem;
+  border-bottom: 1px solid var(--card-hi);
+}
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 3.8rem);
+  color: var(--cream); font-weight: 400; line-height: 1.1;
+  margin-bottom: 1.5rem; max-width: 700px;
+}
+.hero h1 em { color: var(--orange); font-style: italic; }
+.hero-sub {
+  font-size: 1.1rem; max-width: 540px; margin-bottom: 3rem; line-height: 1.75;
+}
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  max-width: 560px; gap: 0;
+}
+.hero-stat-num {
+  font-family: var(--mono); font-size: 1.5rem; color: var(--cream); font-weight: 600; line-height: 1.2;
+}
+.hero-stat-label {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; margin-top: .15rem;
+}
+
+/* ═══ BUTTONS ═══ */
+.btn { display: inline-flex; align-items: center; gap: .7rem; background: var(--orange); color: var(--white); font-family: var(--mono); font-size: .85rem; padding: 1rem 2.25rem; letter-spacing: .04em; transition: all .3s; }
+.btn:hover { background: var(--orange-lt); color: var(--white); transform: translateY(-2px); }
+.btn-ghost { background: transparent; border: 1px solid var(--card-hi); color: var(--body); }
+.btn-ghost:hover { border-color: var(--orange); color: var(--cream); background: transparent; transform: none; }
+
+/* ═══ BADGES ═══ */
+.badge {
+  display: inline-block; font-family: var(--mono); font-size: .58rem; letter-spacing: .08em;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 3px; font-weight: 600;
+}
+.badge-green { background: rgba(40,200,64,.1); color: #28c840; }
+.badge-orange { background: rgba(212,100,58,.12); color: var(--orange); }
+.badge-teal { background: rgba(20,184,166,.12); color: #14b8a6; }
+.badge-dim { background: var(--card); color: var(--dim); }
+
+/* ═══ SECTION HEADERS ═══ */
+.section { padding: 6rem 0; border-top: 1px solid var(--card-hi); }
+.section-head { margin-bottom: 3rem; }
+.section-head h2 {
+  font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--cream); font-weight: 400; line-height: 1.2; margin-top: .75rem;
+}
+.section-sub {
+  font-size: .95rem; color: var(--dim); margin-top: .5rem; max-width: 600px;
+}
+
+/* ═══ CASE STUDIES ═══ */
+.cases-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+}
+.case-card {
+  background: var(--card); border: 1px solid var(--card-hi); padding: 2rem 1.75rem;
+  cursor: pointer;
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s, border-color .3s;
+}
+.case-card:hover {
+  transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.4);
+  border-color: rgba(212,100,58,.2);
+}
+.case-industry {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  letter-spacing: .1em; text-transform: uppercase; margin: .75rem 0 .5rem;
+}
+.case-name {
+  font-family: var(--serif); font-size: 1.3rem; color: var(--cream);
+  font-weight: 400; margin-bottom: .35rem;
+}
+.case-headline {
+  font-size: .88rem; color: var(--body); margin-bottom: .5rem; line-height: 1.6;
+}
+.case-result {
+  font-family: var(--mono); font-size: .78rem; color: var(--orange); margin-bottom: 1rem;
+}
+.case-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.case-tag {
+  font-family: var(--mono); font-size: .55rem; color: var(--dim);
+  letter-spacing: .06em; text-transform: uppercase;
+  background: var(--card-hi); padding: 3px 10px; border-radius: 3px;
+}
+
+/* Case detail view */
+.case-detail { display: none; }
+.case-detail.active { display: block; }
+.case-detail-back {
+  font-family: var(--mono); font-size: .72rem; color: var(--dim);
+  cursor: pointer; margin-bottom: 2rem; display: inline-flex;
+  align-items: center; gap: .5rem; background: none; border: none;
+  transition: color .3s; letter-spacing: .06em;
+}
+.case-detail-back:hover { color: var(--cream); }
+.case-detail-name {
+  font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--cream); font-weight: 400; margin-bottom: .5rem;
+}
+.case-detail-result {
+  font-size: 1.05rem; color: var(--orange); margin-bottom: 2rem;
+}
+.case-metrics {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+  margin-bottom: 2rem; padding: 1.75rem; background: var(--card); border: 1px solid var(--card-hi);
+}
+.case-metric-key {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  letter-spacing: .08em; text-transform: uppercase; margin-bottom: .25rem;
+}
+.case-metric-val {
+  font-family: var(--mono); font-size: 1.35rem; color: var(--cream); font-weight: 600;
+}
+.case-metric-sub {
+  font-size: .75rem; color: var(--dim); margin-top: .15rem;
+}
+.case-detail-desc {
+  font-size: 1rem; color: var(--body); line-height: 1.8;
+  margin-bottom: 1.5rem; max-width: 700px;
+}
+
+/* ═══ SERVICES ═══ */
+.services-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+}
+.service-card {
+  background: var(--card); border: 1px solid var(--card-hi); padding: 2rem 1.75rem;
+  position: relative;
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s, border-color .3s;
+}
+.service-card:hover {
+  transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  border-color: rgba(212,100,58,.15);
+}
+.service-badge { position: absolute; top: 1.25rem; right: 1.25rem; }
+.service-duration {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
+}
+.service-name {
+  font-family: var(--serif); font-size: 1.3rem; color: var(--cream);
+  font-weight: 400; margin-bottom: .75rem; font-style: italic;
+}
+.service-desc {
+  font-size: .88rem; color: var(--body); margin-bottom: 1rem; line-height: 1.65;
+}
+.service-list { list-style: none; margin-bottom: 1rem; }
+.service-list li {
+  font-size: .82rem; color: var(--body); padding: .3rem 0 .3rem 1.25rem;
+  position: relative;
+}
+.service-list li::before {
+  content: ''; position: absolute; left: 0; top: .6rem;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--orange);
+}
+.service-who {
+  font-family: var(--mono); font-size: .68rem; color: var(--dim);
+  font-style: italic; line-height: 1.5;
+}
+
+/* ═══ PROCESS ═══ */
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
+}
+.process-card {
+  padding: 1.5rem 0; border-top: 2px solid var(--orange);
+}
+.process-num {
+  font-family: var(--mono); font-size: 2rem; color: var(--card-hi);
+  font-weight: 600; margin-bottom: .5rem;
+}
+.process-name {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--cream);
+  font-weight: 400; font-style: italic; margin-bottom: .35rem;
+}
+.process-desc {
+  font-size: .85rem; color: var(--dim); line-height: 1.6;
+}
+
+/* ═══ VERTICAL PRODUCTS ═══ */
+.vp-main {
+  background: var(--card); border: 1px solid var(--card-hi); padding: 2.5rem;
+  margin-bottom: 1.5rem;
+  transition: box-shadow .4s;
+}
+.vp-main:hover { box-shadow: 0 16px 48px rgba(0,0,0,.3); }
+.vp-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 1rem; flex-wrap: wrap; gap: .75rem;
+}
+.vp-badges { display: flex; gap: .5rem; align-items: center; }
+.vp-meta { display: flex; gap: 1.25rem; align-items: center; }
+.vp-meta-item {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  letter-spacing: .06em;
+}
+.vp-name {
+  font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: var(--cream); font-weight: 400; margin-bottom: .35rem;
+}
+.vp-tagline {
+  font-size: .95rem; color: var(--body); margin-bottom: 2rem;
+}
+
+.modes-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  margin-bottom: 2rem;
+}
+.mode-card {
+  background: var(--card-hi); border-radius: 6px; padding: 1.25rem;
+}
+.mode-label {
+  font-family: var(--mono); font-size: .58rem; color: var(--orange);
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
+}
+.mode-name {
+  font-family: var(--serif); font-size: 1rem; color: var(--cream);
+  font-weight: 400; font-style: italic; margin-bottom: .35rem;
+}
+.mode-desc {
+  font-size: .78rem; color: var(--dim); line-height: 1.55;
+}
+
+.agents-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem;
+  margin-bottom: 1.5rem;
+}
+.agent-card {
+  background: var(--card-hi); border-radius: 6px; padding: 1rem;
+}
+.agent-name {
+  font-family: var(--mono); font-size: .6rem; color: #14b8a6;
+  letter-spacing: .06em; margin-bottom: .25rem;
+}
+.agent-desc {
+  font-size: .75rem; color: var(--dim); line-height: 1.4;
+}
+
+.vp-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: .75rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--card-hi);
+}
+.vp-footer-tech { font-size: .75rem; color: var(--dim); }
+.vp-footer-advisor { font-size: .75rem; color: var(--dim); font-style: italic; }
+
+.planned-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+  opacity: .5;
+}
+.planned-card {
+  background: var(--card); border: 1px solid var(--card-hi); padding: 1.75rem;
+}
+.planned-name {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--cream);
+  font-weight: 400; margin-bottom: .35rem;
+}
+.planned-desc {
+  font-size: .8rem; color: var(--dim); line-height: 1.55; margin-bottom: .75rem;
+}
+
+/* ═══ TEAM ═══ */
+.team-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.team-card {
+  background: var(--card); border: 1px solid var(--card-hi); padding: 2rem 1.75rem;
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+}
+.team-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+.team-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--card-hi); display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: .7rem; color: var(--orange); font-weight: 600;
+  margin-bottom: .75rem;
+}
+.team-name {
+  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
+  font-weight: 400; margin-bottom: .25rem;
+}
+.team-role {
+  font-family: var(--mono); font-size: .58rem; color: var(--orange);
+  letter-spacing: .12em; text-transform: uppercase; margin-bottom: .75rem;
+}
+.team-desc {
+  font-size: .82rem; color: var(--dim); line-height: 1.55;
+}
+
+.advisor-card {
+  background: var(--card); border: 1px solid var(--card-hi); padding: 1.75rem;
+  display: flex; align-items: center; gap: 1.25rem;
+  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+}
+.advisor-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
+.advisor-info { flex: 1; }
+.advisor-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .25rem; }
+.advisor-desc { font-size: .82rem; color: var(--dim); line-height: 1.55; }
+
+/* ═══ CTA ═══ */
+.cta {
+  padding: 7rem 0; border-top: 1px solid var(--card-hi);
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta::before {
+  content: ''; position: absolute; top: -2rem; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 500px;
+  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta h2 {
+  font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--cream); font-weight: 400; margin-bottom: .5rem; position: relative;
+}
+.cta-sub {
+  font-family: var(--mono); font-size: .75rem; color: var(--dim);
+  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3rem; position: relative;
+}
+.cta-links {
+  display: flex; justify-content: center; gap: 3.5rem; position: relative;
+}
+.cta-link-label {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim);
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: .25rem;
+}
+.cta-link-val { font-size: 1rem; color: var(--orange); transition: color .3s; }
+.cta-link-val:hover { color: var(--orange-lt); }
+
+/* ═══ FOOTER ═══ */
+footer { padding: 2rem 0; border-top: 1px solid var(--card-hi); }
+footer .c { display: flex; justify-content: space-between; align-items: center; }
+.footer-brand { font-family: var(--serif); font-size: 1.4rem; color: var(--cream); }
+.footer-links { display: flex; gap: 2rem; margin-top: .5rem; }
+.footer-links a, .footer-links span { font-family: var(--mono); font-size: .75rem; color: rgba(255,255,255,.45); letter-spacing: .08em; transition: color .3s; }
+.footer-links a:hover { color: var(--cream); }
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.anim { opacity: 0; transform: translateY(30px); transition: opacity .7s ease-out, transform .7s ease-out; }
+.anim.visible { opacity: 1; transform: translateY(0); }
+.anim-d1 { transition-delay: .1s; }
+.anim-d2 { transition-delay: .2s; }
+.anim-d3 { transition-delay: .3s; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .cases-grid { grid-template-columns: 1fr; }
+  .modes-grid { grid-template-columns: 1fr; }
+  .case-metrics { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 800px) {
+  .c { padding: 0 1.5rem; }
+  nav { padding: 1rem 1.5rem; }
+  .nav-r { display: none; }
+  .hamburger { display: flex; }
+  .hero { padding: 8rem 0 4rem; }
+  .hero h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .process-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .team-grid { grid-template-columns: 1fr; }
+  .planned-grid { grid-template-columns: 1fr; }
+  .agents-grid { grid-template-columns: 1fr 1fr; }
+  .advisor-card { flex-direction: column; align-items: flex-start; }
+  .cta-links { flex-direction: column; gap: 1.5rem; }
+  .vp-top { flex-direction: column; }
+  footer .c { flex-direction: column; gap: 1rem; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  .section { padding: 4rem 0; }
+  .btn { padding: .85rem 1.75rem; font-size: .78rem; }
+  .mobile-menu { padding: 1.5rem; }
+}
+@media (max-width: 480px) {
+  nav { padding: 1rem 1.25rem; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-left">
+    <a href="/" class="nav-logo">Hekla</a>
+    <span class="nav-badge">Consultancy</span>
+  </div>
+  <div class="nav-r">
+    <a href="/meet-hekla">Product</a>
+    <a href="/consultancy" class="active">Consultancy</a>
+    <a href="mailto:sven@hekla.cc">Contact</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('mobilemenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobilemenu">
+  <a href="/meet-hekla">Product</a>
+  <a href="/consultancy" class="active">Consultancy</a>
+  <a href="mailto:sven@hekla.cc">Contact</a>
+</div>
+
+<main>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="c">
+    <p class="label anim" style="margin-bottom:1.5rem">HEKLA &middot; AI CONSULTANCY &amp; ENTERPRISE SERVICES</p>
+    <h1 class="anim anim-d1">We build AI systems<br>that <em>run your business.</em></h1>
+    <p class="hero-sub anim anim-d2">Working products from week one. Agents that run for under &euro;50/month. Full ownership when we're done.</p>
+    <div class="hero-stats anim anim-d3">
+      <div>
+        <div class="hero-stat-num">12+</div>
+        <div class="hero-stat-label">Products shipped</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">3 wks</div>
+        <div class="hero-stat-label">Avg to production</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">83%</div>
+        <div class="hero-stat-label">Client time saved</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">&lt;&euro;50</div>
+        <div class="hero-stat-label">Avg monthly cost</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CASE STUDIES ═══ -->
+<section class="section" id="cases">
+  <div class="c">
+    <div class="section-head">
+      <p class="label anim">01 / CASE STUDIES</p>
+      <h2 class="anim anim-d1">Shipped by HEKLA</h2>
+      <p class="section-sub anim anim-d2">All shipped. All running.</p>
+    </div>
+
+    <div class="cases-grid" id="casesGrid"></div>
+    <div class="case-detail" id="caseDetail">
+      <button class="case-detail-back" onclick="closeCaseDetail()">&larr; Back to cases</button>
+      <div id="caseDetailContent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section class="section" id="process">
+  <div class="c">
+    <div class="section-head">
+      <p class="label anim">02 / PROCESS</p>
+      <h2 class="anim anim-d1">Working products from day one.</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-card anim">
+        <div class="process-num">01</div>
+        <div class="process-name">Scope</div>
+        <div class="process-desc">Map your workflows. Identify the highest-leverage automation. Define success metrics.</div>
+      </div>
+      <div class="process-card anim anim-d1">
+        <div class="process-num">02</div>
+        <div class="process-name">Prototype</div>
+        <div class="process-desc">Working version within 48 hours. Real data, real integrations. Not a slide deck.</div>
+      </div>
+      <div class="process-card anim anim-d2">
+        <div class="process-num">03</div>
+        <div class="process-name">Iterate</div>
+        <div class="process-desc">Daily deploys. Tight feedback loops. Ship improvements until it runs itself.</div>
+      </div>
+      <div class="process-card anim anim-d3">
+        <div class="process-num">04</div>
+        <div class="process-name">Handoff</div>
+        <div class="process-desc">Your infrastructure. Your code. Documentation, training, 30-day support. You own everything.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="section" id="services">
+  <div class="c">
+    <div class="section-head">
+      <p class="label anim">03 / SERVICES</p>
+      <h2 class="anim anim-d1">How we engage</h2>
+      <p class="section-sub anim anim-d2">Seven models &mdash; from a free discovery call to a full AI platform replacement.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ VERTICAL PRODUCTS ═══ -->
+<section class="section" id="vertical">
+  <div class="c">
+    <div class="section-head">
+      <p class="label anim">04 / VERTICAL PRODUCTS</p>
+      <h2 class="anim anim-d1">Agent packs &mdash; full departments, not point solutions</h2>
+      <p class="section-sub anim anim-d2">Pre-built agent teams for specific functions. Deploy a full marketing department, finance ops, or sales pipeline in a day.</p>
+    </div>
+
+    <div class="vp-main anim anim-d3">
+      <div class="vp-top">
+        <div class="vp-badges">
+          <span class="badge badge-teal">Open source</span>
+          <span class="badge badge-orange">First vertical</span>
+        </div>
+        <div class="vp-meta">
+          <span class="vp-meta-item">Apache 2.0</span>
+          <span class="vp-meta-item">$49/mo managed</span>
+          <span class="vp-meta-item">Free self-hosted</span>
+        </div>
+      </div>
+      <div class="vp-name">AI Marketing Agency</div>
+      <div class="vp-tagline">You explain your business. The agency does the rest.</div>
+
+      <div class="modes-grid">
+        <div class="mode-card">
+          <div class="mode-label">Mode 1</div>
+          <div class="mode-name">Interview</div>
+          <div class="mode-desc">10-20 min onboarding. Voice, text, file drops. Builds the company brief automatically. No forms.</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-label">Mode 2</div>
+          <div class="mode-name">The Plan</div>
+          <div class="mode-desc">Agents research in parallel &mdash; personas, competitors, channels. Strategy agent synthesizes a 90-day plan. You approve.</div>
+        </div>
+        <div class="mode-card">
+          <div class="mode-label">Mode 3</div>
+          <div class="mode-name">Weekly Execution</div>
+          <div class="mode-desc">Every Monday: ready-to-publish content, scheduled posts, email drafts. Approve and get back to building.</div>
+        </div>
+      </div>
+
+      <div class="agents-grid">
+        <div class="agent-card">
+          <div class="agent-name">Intake Agent</div>
+          <div class="agent-desc">Builds company brief</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">Persona Agent</div>
+          <div class="agent-desc">Maps target audiences</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">Competitor Agent</div>
+          <div class="agent-desc">Landscape analysis</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">Market Agent</div>
+          <div class="agent-desc">Sizing + opportunity</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">Channel Agent</div>
+          <div class="agent-desc">Where to show up</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">Strategy Agent</div>
+          <div class="agent-desc">Positioning + plan</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">Content Agent</div>
+          <div class="agent-desc">Writes in your voice</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-name">Briefing Agent</div>
+          <div class="agent-desc">Weekly execution plan</div>
+        </div>
+      </div>
+
+      <div class="vp-footer">
+        <div class="vp-footer-tech">Local-first via Ollama &middot; LangGraph orchestration &middot; File-based memory that compounds &middot; Brand voice learning</div>
+        <div class="vp-footer-advisor">Advised by Mark Konrad</div>
+      </div>
+    </div>
+
+    <div class="planned-grid anim">
+      <div class="planned-card">
+        <div class="planned-name">Sales Pipeline Pack</div>
+        <div class="planned-desc">Lead qualification, outreach sequencing, follow-up automation, pipeline intelligence.</div>
+        <span class="badge badge-dim">Planned</span>
+      </div>
+      <div class="planned-card">
+        <div class="planned-name">Finance Ops Pack</div>
+        <div class="planned-desc">Invoice processing, expense categorization, cash flow forecasting, financial reporting.</div>
+        <span class="badge badge-dim">Planned</span>
+      </div>
+      <div class="planned-card">
+        <div class="planned-name">HR / Recruiting Pack</div>
+        <div class="planned-desc">Candidate screening, outreach drafting, interview prep, pipeline tracking.</div>
+        <span class="badge badge-dim">Planned</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
+<section class="section" id="team">
+  <div class="c">
+    <div class="section-head">
+      <p class="label anim">05 / TEAM</p>
+      <h2 class="anim anim-d1">Built by founders who ship.</h2>
+    </div>
+
+    <div class="team-grid anim anim-d2">
+      <div class="team-card">
+        <div class="team-avatar">SA</div>
+        <div class="team-name">Sven Arnarsson</div>
+        <div class="team-role">Teknologi og AI-infrastruktur</div>
+        <div class="team-desc">Arkitektur, agenter og systemer i produktion. Ikke imponerende demos. Fungerende infrastrukturer.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">HHJ</div>
+        <div class="team-name">Hjalti H. Jonsson</div>
+        <div class="team-role">Commercial og Operations</div>
+        <div class="team-desc">Go-to-market og enterprise relationer p&aring; tv&aelig;rs af Norden. Ham der f&aring;r de rigtige mennesker ind i rummet.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">CJ</div>
+        <div class="team-name">Christoffer James</div>
+        <div class="team-role">Product og Enterprise &middot; PhD, DTU</div>
+        <div class="team-desc">IP-baggrund og dyb erfaring med enterprise AI-deployment. Fokus p&aring; det, der faktisk virker.</div>
+      </div>
+    </div>
+
+    <div class="advisor-card anim anim-d3">
+      <div class="team-avatar">MK</div>
+      <div class="advisor-info">
+        <div class="advisor-row">
+          <span class="team-name">Mark Konrad</span>
+          <span class="badge badge-teal">Advisor</span>
+        </div>
+        <div class="advisor-desc">AI research + marketing agency vertical. Leads open-source marketing agent product development.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta">
+  <div class="c">
+    <h2 class="anim">Let's build.</h2>
+    <p class="cta-sub anim anim-d1">Production, not prototypes.</p>
+    <div class="cta-links anim anim-d2">
+      <div>
+        <div class="cta-link-label">Email</div>
+        <a class="cta-link-val" href="mailto:sven@hekla.cc">sven@hekla.cc &rarr;</a>
+      </div>
+      <div>
+        <div class="cta-link-label">LinkedIn</div>
+        <a class="cta-link-val" href="https://linkedin.com/company/hekla" target="_blank" rel="noopener">HEKLA &rarr;</a>
+      </div>
+      <div>
+        <div class="cta-link-label">Product</div>
+        <a class="cta-link-val" href="/meet-hekla">hekla.cc &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER — identical to launch.html ═══ -->
+<footer role="contentinfo">
+  <div class="c">
+    <div class="footer-brand">Hekla</div>
+    <div class="footer-links">
+      <span style="font-family:var(--mono);font-size:.75rem;color:rgba(255,255,255,.45);letter-spacing:.08em">AI consulting &amp; enterprise services</span>
+      <a href="mailto:sven@hekla.cc">sven@hekla.cc</a>
+      <span>Copenhagen &middot; 2026</span>
+    </div>
+    <div style="margin-top:2rem;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;border:1px solid rgba(255,255,255,.1);padding:.4rem .8rem;border-radius:2px"><span style="color:var(--orange);opacity:.6">&#9672;</span> created by Hekla</div>
+  </div>
+</footer>
+
+<!-- Vercel Analytics -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+<script>
+// ═══ DATA ═══
+const cases = [
+  {
+    id: 0,
+    status: 'LIVE', statusClass: 'badge-green',
+    industry: 'Maritime / Heavy Industry',
+    name: 'AI Engine Evaluation System',
+    headline: 'AI-powered engine evaluation against 800-page technical manuals',
+    result: '83% faster service reporting. 32% freed bound capital.',
+    description: 'A maritime heavy industry company purchases and evaluates used engines worth millions per unit. Each assessment required manual cross-referencing against 800+ page technical specifications. HEKLA built an AI system that ingests the full manual corpus, extracts critical parameters, and scores engine condition against manufacturer specs.',
+    metrics: [
+      { key: 'Reporting time', val: '-83%', sub: 'Days \u2192 hours' },
+      { key: 'Bound capital', val: '-32%', sub: 'Freed for operations' },
+      { key: 'Time to deploy', val: '3 wks', sub: 'Idea to production' },
+      { key: 'Running cost', val: '<\u20AC50/mo', sub: 'Post-handoff' }
+    ],
+    services: ['Agent Build', 'Workshop', 'Advisory']
+  },
+  {
+    id: 1,
+    status: 'LIVE', statusClass: 'badge-green',
+    industry: 'Sales / B2B',
+    name: 'Lead Intelligence Agent',
+    headline: 'Autonomous agent replacing 15-20 hours/week of manual lead research',
+    result: 'Qualified leads delivered overnight.',
+    description: 'A B2B sales team spent 15-20 hours per week manually researching and qualifying leads. HEKLA built an autonomous agent using n8n workflows with SerpAPI and Bright Data \u2014 it scrapes, filters, enriches, and delivers qualified leads overnight.',
+    metrics: [
+      { key: 'Hours saved', val: '15-20/wk', sub: 'Per sales rep' },
+      { key: 'Lead quality', val: '+40%', sub: 'Qualification accuracy' },
+      { key: 'Delivery', val: '2 wks', sub: 'To production' },
+      { key: 'Running cost', val: '<\u20AC30/mo', sub: 'n8n + API calls' }
+    ],
+    services: ['Agent Build']
+  },
+  {
+    id: 2,
+    status: 'MVP', statusClass: 'badge-orange',
+    industry: 'Construction / SaaS',
+    name: 'Unified Contractor Platform',
+    headline: 'Unified platform replacing fragmented SaaS stack',
+    result: 'One platform. Nordic contractors. Mobile-first.',
+    description: 'Nordic construction companies ran 5-7 separate SaaS tools with zero integration. HEKLA led technical due diligence, team restructuring, and built a unified platform with mobile-first time tracking, GPS, and accounting connectivity.',
+    metrics: [
+      { key: 'SaaS replaced', val: '5-7', sub: 'Into one platform' },
+      { key: 'Sprint', val: '4 wks', sub: 'MVP to pilot' },
+      { key: 'Users', val: 'Mobile', sub: 'Field workers' },
+      { key: 'Cost saved', val: '100K/mo', sub: 'DKK in SaaS fees' }
+    ],
+    services: ['Product Sprint', 'Technical Advisory']
+  },
+  {
+    id: 3,
+    status: 'OPEN SOURCE', statusClass: 'badge-teal',
+    industry: 'Marketing / SaaS',
+    name: 'AI Marketing Agency',
+    headline: 'Full marketing department as an agent pack \u2014 research, strategy, content, weekly execution',
+    result: 'Open source. Local-first. First vertical agent product.',
+    description: 'A complete AI marketing agency built on HEKLA\u2019s architecture. 8 specialized agents handle the full pipeline: intake interview, persona research, competitor analysis, market sizing, channel strategy, positioning, content creation, and weekly briefings. The user briefs once \u2014 the agency researches, plans, and executes. Open source (Apache 2.0), local-first via Ollama, file-based memory that compounds over time.',
+    metrics: [
+      { key: 'Agents', val: '8', sub: 'Full pipeline' },
+      { key: 'Modes', val: '3', sub: 'Interview \u2192 Plan \u2192 Execute' },
+      { key: 'License', val: 'Apache 2.0', sub: 'Open source' },
+      { key: 'Running cost', val: '<$5/mo', sub: 'Local inference' }
+    ],
+    services: ['Vertical Agent Pack', 'Open Source']
+  }
+];
+
+const services = [
+  {
+    duration: '30-60 min',
+    name: 'Discovery Session',
+    badge: { text: 'START HERE', cls: 'badge-green' },
+    desc: 'We audit your workflows, identify where AI saves real time and money, and scope a potential engagement.',
+    items: ['30-60 min video call with a HEKLA partner', 'Process audit across your current stack', 'Top 3 AI opportunity map', 'Written summary within 24 hours'],
+    who: 'Anyone exploring AI who wants to know where to start.'
+  },
+  {
+    duration: '1-2 days',
+    name: 'Workshop',
+    desc: 'Your team builds working automations during the session. You leave with prototypes and a roadmap.',
+    items: ['Process mapping + AI opportunity audit', 'Hands-on build session', '2-3 working prototypes you keep', 'Prioritized roadmap', 'ROI framework'],
+    who: 'Teams who need proof it works for their workflows.'
+  },
+  {
+    duration: '2-4 weeks',
+    name: 'Agent Build',
+    desc: 'Custom AI agent integrated into your tools. Running cost under \u20AC50/month after handoff. You own everything.',
+    items: ['Custom agent architecture', 'Integration with your stack', 'Deployment on your infrastructure', 'Documentation + team training', '30-day support'],
+    who: 'Companies with a specific workflow to automate.'
+  },
+  {
+    duration: '3-4 weeks',
+    name: 'Product Sprint',
+    desc: 'Problem to production in 3-4 weeks. Working code from day one. Daily deployments. Full handoff.',
+    items: ['Architecture + spec', 'Working prototype within 48h', 'Daily deploys + feedback', 'Production deployment', 'Full handoff + training'],
+    who: 'Teams who need to ship an AI product fast.'
+  },
+  {
+    duration: '8 weeks',
+    name: 'Enterprise Pilot',
+    badge: { text: 'NEW', cls: 'badge-orange' },
+    desc: 'Time-boxed proof of value with HEKLA on your infrastructure. Pilot fee credits toward annual license.',
+    items: ['HEKLA deployed on your hardware or cloud', '2-3 connectors configured', '2 pilot agents deployed', 'Team onboarding workshop', 'ROI report at week 6-7', 'Pilot fee credited toward year-1 license'],
+    who: 'Enterprise teams evaluating HEKLA for org-wide rollout.'
+  },
+  {
+    duration: 'Setup + ongoing',
+    name: 'AI Platform aaS',
+    badge: { text: 'REPLACE A HIRE', cls: 'badge-teal' },
+    desc: 'The full AI platform engineer role \u2014 delivered as a managed service. Faster, cheaper, zero recruitment risk.',
+    items: ['Full agent infrastructure on your hardware', 'MCP connectors to your data warehouse', '2-3 agents deployed in first sprint', 'Security: RBAC, secrets management, GDPR', 'LLM routing, cost optimization, prompt versioning', 'New agents deployed monthly', 'Agent monitoring + alerting', 'Quarterly platform review + roadmap'],
+    who: 'Scale-ups posting \u2018AI Platform Engineer\u2019 who want results in weeks, not months.'
+  },
+  {
+    duration: 'Ongoing',
+    name: 'Managed + Advisory',
+    desc: 'HEKLA runs your intelligence layer. Monthly reviews, agent optimization, priority support.',
+    items: ['Hosted and managed by HEKLA', 'Agent monitoring + optimization', 'Monthly reviews', 'Priority support (4h SLA)', 'Quarterly strategy session', 'New agent deployments included'],
+    who: 'Organizations that want results without managing infra.'
+  }
+];
+
+// ═══ RENDER CASE CARDS ═══
+function renderCaseCards() {
+  const grid = document.getElementById('casesGrid');
+  grid.innerHTML = cases.map((c, i) => `
+    <div class="case-card anim" style="transition-delay:${i * .08}s" onclick="openCase(${c.id})">
+      <span class="badge ${c.statusClass}">${c.status}</span>
+      <div class="case-industry">${c.industry}</div>
+      <div class="case-name">${c.name}</div>
+      <div class="case-headline">${c.headline}</div>
+      <div class="case-result">${c.result}</div>
+      <div class="case-tags">${c.services.map(s => `<span class="case-tag">${s}</span>`).join('')}</div>
+    </div>
+  `).join('');
+  observeReveals();
+}
+
+function openCase(id) {
+  const c = cases[id];
+  const grid = document.getElementById('casesGrid');
+  const detail = document.getElementById('caseDetail');
+  const content = document.getElementById('caseDetailContent');
+
+  content.innerHTML = `
+    <span class="badge ${c.statusClass}">${c.status}</span>
+    <div class="case-industry" style="margin-top:.75rem">${c.industry}</div>
+    <div class="case-detail-name">${c.name}</div>
+    <div class="case-detail-result">${c.result}</div>
+    <div class="case-metrics">
+      ${c.metrics.map(m => `
+        <div>
+          <div class="case-metric-key">${m.key}</div>
+          <div class="case-metric-val">${m.val}</div>
+          <div class="case-metric-sub">${m.sub}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="case-detail-desc">${c.description}</div>
+    <div class="case-tags">${c.services.map(s => `<span class="case-tag">${s}</span>`).join('')}</div>
+  `;
+
+  grid.style.display = 'none';
+  detail.classList.add('active');
+  detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeCaseDetail() {
+  document.getElementById('casesGrid').style.display = '';
+  document.getElementById('caseDetail').classList.remove('active');
+}
+
+// ═══ RENDER SERVICE CARDS ═══
+function renderServiceCards() {
+  const grid = document.getElementById('servicesGrid');
+  grid.innerHTML = services.map((s, i) => `
+    <div class="service-card anim" style="transition-delay:${i * .06}s">
+      ${s.badge ? `<span class="badge ${s.badge.cls} service-badge">${s.badge.text}</span>` : ''}
+      <div class="service-duration">${s.duration}</div>
+      <div class="service-name">${s.name}</div>
+      <div class="service-desc">${s.desc}</div>
+      <ul class="service-list">
+        ${s.items.map(item => `<li>${item}</li>`).join('')}
+      </ul>
+      <div class="service-who">${s.who}</div>
+    </div>
+  `).join('');
+  observeReveals();
+}
+
+// ═══ SCROLL REVEAL (IntersectionObserver — same as launch.html) ═══
+function observeReveals() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.anim:not(.visible)').forEach(el => observer.observe(el));
+}
+
+// ═══ INIT ═══
+renderCaseCards();
+renderServiceCards();
+observeReveals();
+</script>
+
+</body>
+</html>
