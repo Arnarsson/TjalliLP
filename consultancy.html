@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HEKLA — AI Consultancy & Enterprise Services</title>
-<meta name="description" content="HEKLA builds AI systems that run your business. Working products from week one. Agents that run for under €50/month. Full ownership when we're done.">
+<meta name="description" content="HEKLA builds AI systems that run your business. Working products from week one. Full ownership when we're done.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#131110">
 <link rel="canonical" href="https://www.hekla.cc/consultancy">
 <meta property="og:type" content="website">
 <meta property="og:title" content="HEKLA — AI Consultancy & Enterprise Services">
-<meta property="og:description" content="Working products from week one. Agents that run for under €50/month. Full ownership when we're done.">
+<meta property="og:description" content="Working products from week one. Full ownership when we're done.">
 <meta property="og:url" content="https://www.hekla.cc/consultancy">
 <meta property="og:site_name" content="HEKLA">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HEKLA — AI Consultancy & Enterprise Services">
-<meta name="twitter:description" content="Working products from week one. Agents that run for under €50/month. Full ownership when we're done.">
+<meta name="twitter:description" content="Working products from week one. Full ownership when we're done.">
 
 <!-- Performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,7 +115,6 @@ nav {
   position: relative; overflow: hidden;
   border-bottom: 1px solid var(--card-hi);
 }
-/* Volcanic radial glow */
 .hero::before {
   content: ''; position: absolute; top: 50%; left: 30%;
   transform: translate(-50%,-50%);
@@ -123,14 +122,11 @@ nav {
   background: radial-gradient(circle, rgba(212,100,58,.06) 0%, transparent 65%);
   pointer-events: none;
 }
-/* Hero overlay gradient */
 .hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(19,17,16,.1) 0%, rgba(19,17,16,.2) 30%, rgba(19,17,16,.85) 70%, var(--bg) 100%);
   z-index: 1; pointer-events: none;
 }
-
-/* Ember particles */
 .hero-embers {
   position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
 }
@@ -145,8 +141,6 @@ nav {
   90% { opacity: .2; }
   100% { opacity: 0; transform: translateY(-100vh) translateX(40px) scale(0); }
 }
-
-/* Scan line */
 .hero-scan {
   position: absolute; left: 0; right: 0; height: 1px; z-index: 2;
   background: linear-gradient(90deg, transparent 0%, rgba(212,100,58,.15) 20%, rgba(212,100,58,.3) 50%, rgba(212,100,58,.15) 80%, transparent 100%);
@@ -154,10 +148,7 @@ nav {
   pointer-events: none;
 }
 @keyframes scanDown { 0% { top: -2px; } 100% { top: 100%; } }
-
 .hero .c { position: relative; z-index: 3; }
-
-/* ── Headline ── */
 .hero h1 {
   font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem);
   color: var(--cream); font-weight: 400; line-height: 1.1;
@@ -165,7 +156,6 @@ nav {
   opacity: 0; animation: fadeUp .8s .3s forwards;
 }
 .hero h1 em { color: var(--orange); font-style: italic; }
-
 .hero-sub {
   font-size: 1.1rem; max-width: 540px; margin-bottom: 3rem; line-height: 1.75;
   opacity: 0; animation: fadeUp .8s .7s forwards;
@@ -175,17 +165,13 @@ nav {
   max-width: 560px; gap: 0;
   opacity: 0; animation: fadeUp .8s .9s forwards;
 }
-.hero-stat {
-  border-left: 2px solid var(--orange); padding-left: .75rem;
-}
+.hero-stat { border-left: 2px solid var(--orange); padding-left: .75rem; }
 .hero-stat-num {
   font-family: var(--mono); font-size: 1.5rem; color: var(--cream); font-weight: 600; line-height: 1.2;
 }
 .hero-stat-label {
   font-family: var(--mono); font-size: .6rem; color: var(--dim); text-transform: uppercase; letter-spacing: .08em; margin-top: .15rem;
 }
-
-/* Scroll indicator */
 .hero-scroll {
   position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 3;
   display: flex; flex-direction: column; align-items: center; gap: .5rem;
@@ -218,11 +204,6 @@ nav {
 .badge-orange { background: rgba(212,100,58,.12); color: var(--orange); }
 .badge-teal { background: rgba(20,184,166,.12); color: #14b8a6; }
 .badge-dim { background: var(--card); color: var(--dim); }
-
-/* Badge glow on service cards */
-.service-badge { box-shadow: 0 0 20px rgba(212,100,58,.1); }
-
-/* Status dot pulse on badges */
 .badge-green::before, .badge-orange::before, .badge-teal::before {
   content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%;
   margin-right: 5px; vertical-align: middle;
@@ -232,8 +213,8 @@ nav {
 .badge-orange::before { background: var(--orange); }
 .badge-teal::before { background: #14b8a6; }
 
-/* ═══ SECTION HEADERS ═══ */
-.section { padding: 6rem 0; border-top: 1px solid var(--card-hi); position: relative; overflow: hidden; }
+/* ═══ SECTION SPACING ═══ */
+.section { position: relative; }
 .section-head { margin-bottom: 3rem; }
 .section-head h2 {
   font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem);
@@ -243,79 +224,79 @@ nav {
   font-size: .95rem; color: var(--dim); margin-top: .5rem; max-width: 600px;
 }
 
-/* Section atmospheric glows */
-#cases::before {
-  content: ''; position: absolute; top: 30%; left: -10%;
-  width: 600px; height: 500px;
-  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
-  pointer-events: none;
-}
-#services::before {
-  content: ''; position: absolute; top: 50%; right: -15%;
-  width: 700px; height: 500px;
-  background: radial-gradient(circle, rgba(212,100,58,.035) 0%, transparent 55%);
-  pointer-events: none;
-}
-#vertical::before {
-  content: ''; position: absolute; bottom: 20%; left: 20%;
-  width: 600px; height: 500px;
-  background: radial-gradient(circle, rgba(212,100,58,.03) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-/* ═══ MANIFESTO BARS ═══ */
-.manifesto-bar {
-  background: var(--card); border-left: 3px solid var(--orange);
-  padding: 2rem 2.5rem; margin: 0 auto; max-width: 600px;
-  position: relative;
-}
-.manifesto-bar::after {
-  content: ''; position: absolute; top: 0; right: 0; width: 120px; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(212,100,58,.03));
-  pointer-events: none;
-}
-.manifesto-bar p {
-  font-family: var(--serif); font-size: clamp(1.1rem, 2vw, 1.35rem);
-  color: var(--cream); font-style: italic; line-height: 1.5; margin: 0;
-}
-.manifesto-section {
-  padding: 4rem 0; border-top: 1px solid var(--card-hi);
-}
+/* Hero → Cases: 3rem */
+#cases { padding-top: 3rem; padding-bottom: 6rem; }
+/* Cases → Services: 8rem */
+#services { padding-top: 8rem; padding-bottom: 6rem; border-top: 1px solid var(--card-hi); }
+/* Services → Process: 3rem */
+#process { padding-top: 3rem; padding-bottom: 6rem; }
+/* Process → Vertical: 6rem */
+#vertical { padding-top: 6rem; padding-bottom: 6rem; border-top: 1px solid var(--card-hi); }
+/* Vertical → Team: 8rem */
+#team { padding-top: 8rem; padding-bottom: 6rem; border-top: 1px solid var(--card-hi); }
+/* Team → CTA: 4rem */
+.cta { padding-top: 4rem; padding-bottom: 7rem; border-top: 1px solid var(--card-hi); }
 
 /* ═══ CASE STUDIES ═══ */
-.cases-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
-}
-.case-card {
-  background: var(--card); border: 1px solid var(--card-hi); padding: 2rem 1.75rem;
+
+/* Featured case — full width, two-column */
+.case-featured {
+  display: grid; grid-template-columns: 60% 40%; gap: 2.5rem;
+  align-items: start;
+  padding-bottom: 2.5rem;
   border-bottom: 2px solid var(--orange);
+  margin-bottom: 2rem;
   cursor: pointer;
-  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s, border-color .3s;
 }
-.case-card:hover {
-  transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.3);
-  border-color: rgba(212,100,58,.2);
-}
-.case-industry {
+.case-featured:hover .case-featured-name { color: var(--orange-lt); }
+.case-featured-left {}
+.case-featured-badge { margin-bottom: .75rem; }
+.case-featured-industry {
   font-family: var(--mono); font-size: .6rem; color: var(--dim);
-  letter-spacing: .1em; text-transform: uppercase; margin: .75rem 0 .5rem;
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
 }
-.case-name {
-  font-family: var(--serif); font-size: 1.3rem; color: var(--cream);
-  font-weight: 400; margin-bottom: .35rem;
+.case-featured-name {
+  font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.4rem); color: var(--cream);
+  font-weight: 400; line-height: 1.15; transition: color .3s;
 }
-.case-headline {
-  font-size: .88rem; color: var(--body); margin-bottom: .5rem; line-height: 1.6;
+.case-featured-right {}
+.case-featured-desc {
+  font-size: .9rem; color: var(--body); line-height: 1.7; margin-bottom: 1.25rem;
 }
-.case-result {
-  font-family: var(--mono); font-size: .78rem; color: var(--orange); margin-bottom: 1rem;
+.case-featured-result {
+  font-family: var(--mono); font-size: .85rem; color: var(--orange); margin-bottom: 1rem;
 }
-.case-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
-.case-tag {
+.case-featured-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.case-featured-tag {
   font-family: var(--mono); font-size: .55rem; color: var(--dim);
   letter-spacing: .06em; text-transform: uppercase;
   background: var(--card-hi); padding: 3px 10px; border-radius: 3px;
 }
+
+/* Compact case rows */
+.case-rows {}
+.case-row {
+  display: flex; align-items: center; gap: 1rem;
+  padding: .9rem 0;
+  border-bottom: 1px solid var(--card-hi);
+  cursor: pointer;
+  transition: background .2s;
+}
+.case-row:hover { background: rgba(255,255,255,.015); }
+.case-row:last-child { border-bottom: none; }
+.case-row .badge { flex-shrink: 0; }
+.case-row-name {
+  font-family: var(--serif); font-size: 1rem; color: var(--cream); font-weight: 400;
+  flex-shrink: 0; min-width: 180px;
+}
+.case-row-result {
+  font-size: .85rem; color: var(--dim); flex: 1;
+}
+.case-row-arrow {
+  font-size: 1rem; color: var(--dim); flex-shrink: 0;
+  transition: color .3s, transform .3s;
+}
+.case-row:hover .case-row-arrow { color: var(--orange); transform: translateX(3px); }
 
 /* Case detail view */
 .case-detail { display: none; }
@@ -337,17 +318,7 @@ nav {
 .case-metrics {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
   margin-bottom: 2rem; padding: 1.75rem; background: var(--card); border: 1px solid var(--card-hi);
-  position: relative; overflow: hidden;
 }
-/* Scan line on metric cards */
-.case-metrics::after {
-  content: ''; position: absolute; left: 0; right: 0; height: 1px; z-index: 1;
-  background: linear-gradient(90deg, transparent 0%, rgba(212,100,58,.08) 30%, rgba(212,100,58,.15) 50%, rgba(212,100,58,.08) 70%, transparent 100%);
-  animation: metricScan 6s linear infinite;
-  pointer-events: none;
-}
-@keyframes metricScan { 0% { top: -1px; } 100% { top: 100%; } }
-
 .case-metric-key {
   font-family: var(--mono); font-size: .6rem; color: var(--dim);
   letter-spacing: .08em; text-transform: uppercase; margin-bottom: .25rem;
@@ -362,101 +333,104 @@ nav {
   font-size: 1rem; color: var(--body); line-height: 1.8;
   margin-bottom: 1.5rem; max-width: 700px;
 }
+.case-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.case-tag {
+  font-family: var(--mono); font-size: .55rem; color: var(--dim);
+  letter-spacing: .06em; text-transform: uppercase;
+  background: var(--card-hi); padding: 3px 10px; border-radius: 3px;
+}
 
 /* ═══ SERVICES ═══ */
-.services-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+
+/* Discovery — highlighted standalone */
+.discovery-block {
+  background: rgba(40,200,64,.03);
+  padding: 2rem 2.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--card-hi);
 }
-.service-card {
-  background: var(--card); border: 1px solid var(--card-hi); padding: 2rem 1.75rem;
-  border-bottom: 2px solid var(--orange);
-  position: relative;
-  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s, border-color .3s;
+.discovery-top {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: .5rem;
 }
-.service-card:hover {
-  transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3);
-  border-color: rgba(212,100,58,.15);
+.discovery-name {
+  font-family: var(--serif); font-size: 1.5rem; color: var(--cream); font-weight: 400; font-style: italic;
 }
-.service-badge { position: absolute; top: 1.25rem; right: 1.25rem; }
-.service-duration {
-  font-family: var(--mono); font-size: .6rem; color: var(--dim);
-  letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
+.discovery-duration {
+  font-family: var(--mono); font-size: .65rem; color: var(--dim); letter-spacing: .08em;
 }
-.service-name {
-  font-family: var(--serif); font-size: 1.3rem; color: var(--cream);
-  font-weight: 400; margin-bottom: .75rem; font-style: italic;
+.discovery-desc {
+  font-size: 1rem; color: var(--body); line-height: 1.7; max-width: 600px;
 }
-.service-desc {
-  font-size: .88rem; color: var(--body); margin-bottom: 1rem; line-height: 1.65;
-}
-.service-list { list-style: none; margin-bottom: 1rem; }
-.service-list li {
-  font-size: .82rem; color: var(--body); padding: .3rem 0 .3rem 1.25rem;
-  position: relative;
-}
-.service-list li::before {
-  content: ''; position: absolute; left: 0; top: .6rem;
-  width: 5px; height: 5px; border-radius: 50%; background: var(--orange);
-}
-.service-who {
-  font-family: var(--mono); font-size: .68rem; color: var(--dim);
-  font-style: italic; line-height: 1.5;
+.discovery-who {
+  font-family: var(--mono); font-size: .72rem; color: var(--dim); font-style: italic;
+  margin-top: .75rem;
 }
 
-/* ═══ PROCESS ═══ */
-.process-wrapper { position: relative; }
-/* Connecting horizontal line */
-.process-line {
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: rgba(212,100,58,.15);
+/* Service table rows */
+.service-table {}
+.service-row {
+  display: grid; grid-template-columns: 280px 1fr;
+  gap: 2rem; padding: 1.25rem 0;
+  border-bottom: 1px solid var(--card-hi);
 }
-.process-line::after {
-  content: ''; position: absolute; top: -1px; left: 0; height: 4px; width: 100%;
-  background: linear-gradient(90deg, var(--orange), transparent 50%, var(--orange));
-  opacity: .3;
-  animation: processGlow 4s ease-in-out infinite alternate;
+.service-row:last-child { border-bottom: none; }
+.service-row-left {}
+.service-row-name {
+  font-family: var(--serif); font-size: 1.1rem; color: var(--cream); font-weight: 400; font-style: italic;
 }
-@keyframes processGlow {
-  0% { opacity: .15; }
-  100% { opacity: .4; }
+.service-row-duration {
+  font-family: var(--mono); font-size: .6rem; color: var(--dim); letter-spacing: .08em; margin-top: .15rem;
 }
-/* Orange dots on the line */
-.process-dot {
-  position: absolute; top: -4px; width: 10px; height: 10px;
-  background: var(--orange); border-radius: 50%;
-  box-shadow: 0 0 12px rgba(212,100,58,.3);
+.service-row-right {}
+.service-row-desc {
+  font-size: .88rem; color: var(--body); line-height: 1.6;
 }
-.process-dot:nth-child(2) { left: 0; }
-.process-dot:nth-child(3) { left: calc(25% - 5px); }
-.process-dot:nth-child(4) { left: calc(50% - 5px); }
-.process-dot:nth-child(5) { left: calc(75% - 5px); }
+.service-row-who {
+  font-family: var(--mono); font-size: .68rem; color: var(--dim); font-style: italic; margin-top: .35rem;
+}
+.service-row-badge {
+  margin-left: .75rem; vertical-align: middle;
+}
+/* Expandable detail */
+.service-row-detail {
+  display: none;
+  margin-top: .75rem;
+}
+.service-row-detail.open { display: block; }
+.service-row-detail ul {
+  list-style: none; margin: 0; padding: 0;
+}
+.service-row-detail li {
+  font-size: .82rem; color: var(--body); padding: .2rem 0 .2rem 1rem; position: relative;
+}
+.service-row-detail li::before {
+  content: ''; position: absolute; left: 0; top: .55rem;
+  width: 4px; height: 4px; border-radius: 50%; background: var(--orange);
+}
+.service-row { cursor: pointer; transition: background .2s; }
+.service-row:hover { background: rgba(255,255,255,.015); }
 
-.process-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem;
-  position: relative;
+/* ═══ PROCESS — inline flow ═══ */
+.process-flow {
+  display: flex; align-items: flex-start; gap: 0;
 }
-.process-card {
-  padding: 1.5rem 0; border-top: 2px solid var(--orange);
+.process-step { flex: 1; }
+.process-step-name {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--cream); font-weight: 400; font-style: italic;
 }
-.process-num {
-  font-family: var(--mono); font-size: 2rem; color: var(--card-hi);
-  font-weight: 600; margin-bottom: .5rem;
+.process-step-desc {
+  font-size: .82rem; color: var(--dim); line-height: 1.55; margin-top: .35rem; max-width: 220px;
 }
-.process-name {
-  font-family: var(--serif); font-size: 1.15rem; color: var(--cream);
-  font-weight: 400; font-style: italic; margin-bottom: .35rem;
-}
-.process-desc {
-  font-size: .85rem; color: var(--dim); line-height: 1.6;
+.process-arrow {
+  font-family: var(--mono); color: var(--orange); font-size: 1rem;
+  padding: .15rem 1rem 0; flex-shrink: 0;
 }
 
 /* ═══ VERTICAL PRODUCTS ═══ */
 .vp-main {
   background: var(--card); border: 1px solid var(--card-hi); padding: 2.5rem;
-  margin-bottom: 1.5rem;
-  transition: box-shadow .4s;
+  margin-bottom: 2rem;
 }
-.vp-main:hover { box-shadow: 0 16px 48px rgba(0,0,0,.3); }
 .vp-top {
   display: flex; justify-content: space-between; align-items: flex-start;
   margin-bottom: 1rem; flex-wrap: wrap; gap: .75rem;
@@ -464,24 +438,17 @@ nav {
 .vp-badges { display: flex; gap: .5rem; align-items: center; }
 .vp-meta { display: flex; gap: 1.25rem; align-items: center; }
 .vp-meta-item {
-  font-family: var(--mono); font-size: .6rem; color: var(--dim);
-  letter-spacing: .06em;
+  font-family: var(--mono); font-size: .6rem; color: var(--dim); letter-spacing: .06em;
 }
 .vp-name {
   font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2rem);
   color: var(--cream); font-weight: 400; margin-bottom: .35rem;
 }
-.vp-tagline {
-  font-size: .95rem; color: var(--body); margin-bottom: 2rem;
-}
-
+.vp-tagline { font-size: .95rem; color: var(--body); margin-bottom: 2rem; }
 .modes-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
-  margin-bottom: 2rem;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;
 }
-.mode-card {
-  background: var(--card-hi); border-radius: 6px; padding: 1.25rem;
-}
+.mode-card { background: var(--card-hi); border-radius: 6px; padding: 1.25rem; }
 .mode-label {
   font-family: var(--mono); font-size: .58rem; color: var(--orange);
   letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem;
@@ -490,25 +457,16 @@ nav {
   font-family: var(--serif); font-size: 1rem; color: var(--cream);
   font-weight: 400; font-style: italic; margin-bottom: .35rem;
 }
-.mode-desc {
-  font-size: .78rem; color: var(--dim); line-height: 1.55;
-}
-
+.mode-desc { font-size: .78rem; color: var(--dim); line-height: 1.55; }
 .agents-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem;
-  margin-bottom: 1.5rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin-bottom: 1.5rem;
 }
-.agent-card {
-  background: var(--card-hi); border-radius: 6px; padding: 1rem;
-}
+.agent-card { background: var(--card-hi); border-radius: 6px; padding: 1rem; }
 .agent-name {
   font-family: var(--mono); font-size: .6rem; color: #14b8a6;
   letter-spacing: .06em; margin-bottom: .25rem;
 }
-.agent-desc {
-  font-size: .75rem; color: var(--dim); line-height: 1.4;
-}
-
+.agent-desc { font-size: .75rem; color: var(--dim); line-height: 1.4; }
 .vp-footer {
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: .75rem; padding-top: 1.25rem;
@@ -517,93 +475,46 @@ nav {
 .vp-footer-tech { font-size: .75rem; color: var(--dim); }
 .vp-footer-advisor { font-size: .75rem; color: var(--dim); font-style: italic; }
 
-.planned-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
-  opacity: .5;
+/* Planned packs — simple text list */
+.planned-list {}
+.planned-item {
+  font-size: .9rem; color: var(--dim); padding: .4rem 0;
 }
-.planned-card {
-  background: var(--card); border: 1px solid var(--card-hi); padding: 1.75rem;
-}
-.planned-name {
-  font-family: var(--serif); font-size: 1.15rem; color: var(--cream);
-  font-weight: 400; margin-bottom: .35rem;
-}
-.planned-desc {
-  font-size: .8rem; color: var(--dim); line-height: 1.55; margin-bottom: .75rem;
-}
+.planned-item .badge { margin-left: .5rem; vertical-align: middle; }
 
-/* ═══ TEAM ═══ */
-.team-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-.team-card {
-  background: var(--card); border: 1px solid var(--card-hi); padding: 2rem 1.75rem;
-  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
-}
-.team-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
-.team-avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: linear-gradient(135deg, rgba(212,100,58,.3), rgba(212,100,58,.15));
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: .7rem; color: var(--orange); font-weight: 600;
-  margin-bottom: .75rem;
-}
+/* ═══ TEAM — simple stacked list ═══ */
+.team-list { display: flex; flex-direction: column; gap: 2.5rem; }
+.team-person {}
 .team-name {
-  font-family: var(--serif); font-size: 1.1rem; color: var(--cream);
-  font-weight: 400; margin-bottom: .25rem;
+  font-family: var(--serif); font-size: 1.35rem; color: var(--cream); font-weight: 400;
 }
 .team-role {
-  font-family: var(--mono); font-size: .58rem; color: var(--orange);
-  letter-spacing: .12em; text-transform: uppercase; margin-bottom: .75rem;
+  font-family: var(--mono); font-size: .6rem; color: var(--orange);
+  letter-spacing: .12em; text-transform: uppercase; margin-top: .15rem;
 }
 .team-desc {
-  font-size: .82rem; color: var(--dim); line-height: 1.55;
+  font-size: .88rem; color: var(--dim); line-height: 1.6; margin-top: .35rem; max-width: 600px;
 }
+.team-advisor {
+  margin-top: .5rem;
+}
+.team-advisor .team-name { font-size: 1.15rem; }
+.team-advisor .badge { margin-left: .75rem; vertical-align: middle; }
 
-.advisor-card {
-  background: var(--card); border: 1px solid var(--card-hi); padding: 1.75rem;
-  display: flex; align-items: center; gap: 1.25rem;
-  transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
-}
-.advisor-card:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,.3); }
-.advisor-info { flex: 1; }
-.advisor-row { display: flex; align-items: center; gap: .75rem; margin-bottom: .25rem; }
-.advisor-desc { font-size: .82rem; color: var(--dim); line-height: 1.55; }
-
-/* ═══ CTA ═══ */
-.cta {
-  padding: 7rem 0; border-top: 1px solid var(--card-hi);
-  text-align: center; position: relative; overflow: hidden;
-}
-.cta::before {
-  content: ''; position: absolute; top: -2rem; left: 50%; transform: translateX(-50%);
-  width: 600px; height: 500px;
-  background: radial-gradient(circle, rgba(212,100,58,.04) 0%, transparent 60%);
-  pointer-events: none;
-}
+/* ═══ CTA — left-aligned ═══ */
 .cta h2 {
   font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem);
-  color: var(--cream); font-weight: 400; margin-bottom: .5rem; position: relative;
-  display: inline-flex; align-items: center; gap: .75rem;
-}
-/* Pulsing orange dot next to "Let's build." */
-.cta-pulse {
-  display: inline-block; width: 10px; height: 10px;
-  background: var(--orange); border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-  flex-shrink: 0;
+  color: var(--cream); font-weight: 400; margin-bottom: .5rem;
 }
 .cta-sub {
   font-family: var(--mono); font-size: .75rem; color: var(--dim);
-  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 3rem; position: relative;
+  letter-spacing: .12em; text-transform: uppercase; margin-bottom: 2.5rem;
 }
-.cta-links {
-  display: flex; justify-content: center; gap: 3.5rem; position: relative;
-}
+.cta-links { display: flex; flex-direction: column; gap: 1rem; }
+.cta-link-item { display: flex; align-items: center; gap: 1rem; }
 .cta-link-label {
   font-family: var(--mono); font-size: .6rem; color: var(--dim);
-  letter-spacing: .1em; text-transform: uppercase; margin-bottom: .25rem;
+  letter-spacing: .1em; text-transform: uppercase; min-width: 70px;
 }
 .cta-link-val { font-size: 1rem; color: var(--orange); transition: color .3s; }
 .cta-link-val:hover { color: var(--orange-lt); }
@@ -620,16 +531,13 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 .anim { opacity: 0; transform: translateY(30px); transition: opacity .7s ease-out, transform .7s ease-out; }
 .anim.visible { opacity: 1; transform: translateY(0); }
-.anim-d1 { transition-delay: .1s; }
-.anim-d2 { transition-delay: .2s; }
-.anim-d3 { transition-delay: .3s; }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 1024px) {
-  .services-grid { grid-template-columns: 1fr; }
-  .cases-grid { grid-template-columns: 1fr; }
-  .modes-grid { grid-template-columns: 1fr; }
+  .case-featured { grid-template-columns: 1fr; }
   .case-metrics { grid-template-columns: 1fr 1fr; }
+  .modes-grid { grid-template-columns: 1fr; }
+  .service-row { grid-template-columns: 1fr; gap: .5rem; }
 }
 @media (max-width: 800px) {
   .c { padding: 0 1.5rem; }
@@ -639,20 +547,22 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   .hero { padding-bottom: 4rem; }
   .hero h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
   .hero-stats { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  .process-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-  .process-line, .process-dot { display: none; }
-  .team-grid { grid-template-columns: 1fr; }
-  .planned-grid { grid-template-columns: 1fr; }
+  .process-flow { flex-direction: column; gap: 1.5rem; }
+  .process-arrow { transform: rotate(90deg); padding: 0; }
+  .process-step-desc { max-width: none; }
   .agents-grid { grid-template-columns: 1fr 1fr; }
-  .advisor-card { flex-direction: column; align-items: flex-start; }
-  .cta-links { flex-direction: column; gap: 1.5rem; }
+  .case-row-name { min-width: 0; }
+  .case-row { flex-wrap: wrap; }
+  .cta-links { gap: .75rem; }
   .vp-top { flex-direction: column; }
   footer .c { flex-direction: column; gap: 1rem; text-align: center; }
   .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-  .section { padding: 4rem 0; }
+  #cases, #services, #process, #vertical, #team { padding-top: 4rem; padding-bottom: 4rem; }
+  .cta { padding-top: 3rem; padding-bottom: 5rem; }
   .btn { padding: .85rem 1.75rem; font-size: .78rem; }
   .mobile-menu { padding: 1.5rem; }
   .hero-scroll { display: none; }
+  .discovery-block { padding: 1.5rem; }
 }
 @media (max-width: 480px) {
   nav { padding: 1rem 1.25rem; }
@@ -692,7 +602,7 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   <div class="c">
     <p class="label" style="margin-bottom:1.5rem; opacity:0; animation: fadeUp .8s .1s forwards;">HEKLA &middot; AI CONSULTANCY &amp; ENTERPRISE SERVICES</p>
     <h1>We build AI systems<br><em>that run your business.</em></h1>
-    <p class="hero-sub">Working products from week one. Agents that run for under &euro;50/month. Full ownership when we're done.</p>
+    <p class="hero-sub">Working products from week one. Full ownership when we're done.</p>
     <div class="hero-stats" id="heroStats">
       <div class="hero-stat">
         <div class="hero-stat-num" data-count-to="12" data-suffix="+">12+</div>
@@ -707,8 +617,8 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
         <div class="hero-stat-label">Client time saved</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-num">&lt;&euro;50</div>
-        <div class="hero-stat-label">Avg monthly cost</div>
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Client ownership</div>
       </div>
     </div>
   </div>
@@ -723,72 +633,14 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
   <div class="c">
     <div class="section-head">
       <p class="label anim">01 / CASE STUDIES</p>
-      <h2 class="anim anim-d1">Shipped by HEKLA</h2>
-      <p class="section-sub anim anim-d2">All shipped. All running.</p>
+      <h2 class="anim">Shipped by HEKLA</h2>
+      <p class="section-sub anim">All shipped. All running.</p>
     </div>
 
-    <div class="cases-grid" id="casesGrid"></div>
+    <div id="casesGrid"></div>
     <div class="case-detail" id="caseDetail">
       <button class="case-detail-back" onclick="closeCaseDetail()">&larr; Back to cases</button>
       <div id="caseDetailContent"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ MANIFESTO BAR 1 ═══ -->
-<section class="manifesto-section">
-  <div class="c">
-    <div class="manifesto-bar anim">
-      <p>Working products from week one. Not decks. Not proposals. Code.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PROCESS ═══ -->
-<section class="section" id="process">
-  <div class="c">
-    <div class="section-head">
-      <p class="label anim">02 / PROCESS</p>
-      <h2 class="anim anim-d1">Working products from day one.</h2>
-    </div>
-    <div class="process-wrapper">
-      <div class="process-line">
-        <div class="process-dot"></div>
-        <div class="process-dot"></div>
-        <div class="process-dot"></div>
-        <div class="process-dot"></div>
-      </div>
-      <div class="process-grid">
-        <div class="process-card anim">
-          <div class="process-num">01</div>
-          <div class="process-name">Scope</div>
-          <div class="process-desc">Map your workflows. Identify the highest-leverage automation. Define success metrics.</div>
-        </div>
-        <div class="process-card anim anim-d1">
-          <div class="process-num">02</div>
-          <div class="process-name">Prototype</div>
-          <div class="process-desc">Working version within 48 hours. Real data, real integrations. Not a slide deck.</div>
-        </div>
-        <div class="process-card anim anim-d2">
-          <div class="process-num">03</div>
-          <div class="process-name">Iterate</div>
-          <div class="process-desc">Daily deploys. Tight feedback loops. Ship improvements until it runs itself.</div>
-        </div>
-        <div class="process-card anim anim-d3">
-          <div class="process-num">04</div>
-          <div class="process-name">Handoff</div>
-          <div class="process-desc">Your infrastructure. Your code. Documentation, training, 30-day support. You own everything.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ MANIFESTO BAR 2 ═══ -->
-<section class="manifesto-section">
-  <div class="c">
-    <div class="manifesto-bar anim">
-      <p>Zero lock-in. We build it. You own it. HEKLA walks away.</p>
     </div>
   </div>
 </section>
@@ -797,11 +649,40 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <section class="section" id="services">
   <div class="c">
     <div class="section-head">
-      <p class="label anim">03 / SERVICES</p>
-      <h2 class="anim anim-d1">How we engage</h2>
-      <p class="section-sub anim anim-d2">Seven models &mdash; from a free discovery call to a full AI platform replacement.</p>
+      <h2 class="anim">How we engage</h2>
+      <p class="section-sub anim">Seven models &mdash; from a discovery call to a full AI platform replacement.</p>
     </div>
-    <div class="services-grid" id="servicesGrid"></div>
+    <div id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ PROCESS ═══ -->
+<section class="section" id="process">
+  <div class="c">
+    <div class="section-head">
+      <h2 class="anim">Working products from day one.</h2>
+    </div>
+    <div class="process-flow anim">
+      <div class="process-step">
+        <div class="process-step-name">Scope</div>
+        <div class="process-step-desc">Map your workflows. Identify the highest-leverage automation. Define success metrics.</div>
+      </div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">
+        <div class="process-step-name">Prototype</div>
+        <div class="process-step-desc">Working version within 48 hours. Real data, real integrations. Not a slide deck.</div>
+      </div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">
+        <div class="process-step-name">Iterate</div>
+        <div class="process-step-desc">Daily deploys. Tight feedback loops. Ship improvements until it runs itself.</div>
+      </div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">
+        <div class="process-step-name">Handoff</div>
+        <div class="process-step-desc">Your infrastructure. Your code. Documentation, training, 30-day support. You own everything.</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -809,12 +690,11 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <section class="section" id="vertical">
   <div class="c">
     <div class="section-head">
-      <p class="label anim">04 / VERTICAL PRODUCTS</p>
-      <h2 class="anim anim-d1">Agent packs &mdash; full departments, not point solutions</h2>
-      <p class="section-sub anim anim-d2">Pre-built agent teams for specific functions. Deploy a full marketing department, finance ops, or sales pipeline in a day.</p>
+      <h2 class="anim">Agent packs &mdash; full departments, not point solutions</h2>
+      <p class="section-sub anim">Pre-built agent teams for specific functions. Deploy a full marketing department, finance ops, or sales pipeline in a day.</p>
     </div>
 
-    <div class="vp-main anim anim-d3">
+    <div class="vp-main anim">
       <div class="vp-top">
         <div class="vp-badges">
           <span class="badge badge-teal">Open source</span>
@@ -887,22 +767,10 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
       </div>
     </div>
 
-    <div class="planned-grid anim">
-      <div class="planned-card">
-        <div class="planned-name">Sales Pipeline Pack</div>
-        <div class="planned-desc">Lead qualification, outreach sequencing, follow-up automation, pipeline intelligence.</div>
-        <span class="badge badge-dim">Planned</span>
-      </div>
-      <div class="planned-card">
-        <div class="planned-name">Finance Ops Pack</div>
-        <div class="planned-desc">Invoice processing, expense categorization, cash flow forecasting, financial reporting.</div>
-        <span class="badge badge-dim">Planned</span>
-      </div>
-      <div class="planned-card">
-        <div class="planned-name">HR / Recruiting Pack</div>
-        <div class="planned-desc">Candidate screening, outreach drafting, interview prep, pipeline tracking.</div>
-        <span class="badge badge-dim">Planned</span>
-      </div>
+    <div class="planned-list anim">
+      <div class="planned-item">Sales Pipeline Pack <span class="badge badge-dim">Planned</span></div>
+      <div class="planned-item">Finance Ops Pack <span class="badge badge-dim">Planned</span></div>
+      <div class="planned-item">HR / Recruiting Pack <span class="badge badge-dim">Planned</span></div>
     </div>
   </div>
 </section>
@@ -911,39 +779,29 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <section class="section" id="team">
   <div class="c">
     <div class="section-head">
-      <p class="label anim">05 / TEAM</p>
-      <h2 class="anim anim-d1">Built by founders who ship.</h2>
+      <h2 class="anim">Built by founders who ship.</h2>
     </div>
 
-    <div class="team-grid anim anim-d2">
-      <div class="team-card">
-        <div class="team-avatar">SA</div>
+    <div class="team-list anim">
+      <div class="team-person">
         <div class="team-name">Sven Arnarsson</div>
         <div class="team-role">Teknologi og AI-infrastruktur</div>
         <div class="team-desc">Arkitektur, agenter og systemer i produktion. Ikke imponerende demos. Fungerende infrastrukturer.</div>
       </div>
-      <div class="team-card">
-        <div class="team-avatar">HHJ</div>
+      <div class="team-person">
         <div class="team-name">Hjalti H. Jonsson</div>
         <div class="team-role">Commercial og Operations</div>
         <div class="team-desc">Go-to-market og enterprise relationer p&aring; tv&aelig;rs af Norden. Ham der f&aring;r de rigtige mennesker ind i rummet.</div>
       </div>
-      <div class="team-card">
-        <div class="team-avatar">CJ</div>
+      <div class="team-person">
         <div class="team-name">Christoffer James</div>
         <div class="team-role">Product og Enterprise &middot; PhD, DTU</div>
         <div class="team-desc">IP-baggrund og dyb erfaring med enterprise AI-deployment. Fokus p&aring; det, der faktisk virker.</div>
       </div>
-    </div>
-
-    <div class="advisor-card anim anim-d3">
-      <div class="team-avatar">MK</div>
-      <div class="advisor-info">
-        <div class="advisor-row">
-          <span class="team-name">Mark Konrad</span>
-          <span class="badge badge-teal">AI Research &amp; Security</span>
-        </div>
-        <div class="advisor-desc">AI research, security architecture, and marketing agency vertical. Leads open-source marketing agent product development.</div>
+      <div class="team-person team-advisor">
+        <div class="team-name" style="display:inline">Mark Konrad</div> <span class="badge badge-teal">AI Research &amp; Security</span>
+        <div class="team-role">Advisor</div>
+        <div class="team-desc">AI research, security architecture, and marketing agency vertical. Leads open-source marketing agent product development.</div>
       </div>
     </div>
   </div>
@@ -952,18 +810,18 @@ footer .c { display: flex; justify-content: space-between; align-items: center; 
 <!-- ═══ CTA ═══ -->
 <section class="cta">
   <div class="c">
-    <h2 class="anim">Let's build. <span class="cta-pulse"></span></h2>
-    <p class="cta-sub anim anim-d1">Production, not prototypes.</p>
-    <div class="cta-links anim anim-d2">
-      <div>
+    <h2 class="anim">Let's build.</h2>
+    <p class="cta-sub anim">Production, not prototypes.</p>
+    <div class="cta-links anim">
+      <div class="cta-link-item">
         <div class="cta-link-label">Email</div>
         <a class="cta-link-val" href="mailto:sven@hekla.cc">sven@hekla.cc &rarr;</a>
       </div>
-      <div>
+      <div class="cta-link-item">
         <div class="cta-link-label">LinkedIn</div>
         <a class="cta-link-val" href="https://linkedin.com/company/hekla" target="_blank" rel="noopener">HEKLA &rarr;</a>
       </div>
-      <div>
+      <div class="cta-link-item">
         <div class="cta-link-label">Product</div>
         <a class="cta-link-val" href="/meet-hekla">hekla.cc &rarr;</a>
       </div>
@@ -1005,7 +863,7 @@ const cases = [
       { key: 'Reporting time', val: '-83%', sub: 'Days \u2192 hours' },
       { key: 'Bound capital', val: '-32%', sub: 'Freed for operations' },
       { key: 'Time to deploy', val: '3 wks', sub: 'Idea to production' },
-      { key: 'Running cost', val: '<\u20AC50/mo', sub: 'Post-handoff' }
+      { key: 'Ownership', val: '100%', sub: 'Full handoff' }
     ],
     services: ['Agent Build', 'Workshop', 'Advisory']
   },
@@ -1021,7 +879,7 @@ const cases = [
       { key: 'Hours saved', val: '15-20/wk', sub: 'Per sales rep' },
       { key: 'Lead quality', val: '+40%', sub: 'Qualification accuracy' },
       { key: 'Delivery', val: '2 wks', sub: 'To production' },
-      { key: 'Running cost', val: '<\u20AC30/mo', sub: 'n8n + API calls' }
+      { key: 'Maintenance', val: 'Minimal', sub: 'Autonomous' }
     ],
     services: ['Agent Build']
   },
@@ -1037,7 +895,7 @@ const cases = [
       { key: 'SaaS replaced', val: '5-7', sub: 'Into one platform' },
       { key: 'Sprint', val: '4 wks', sub: 'MVP to pilot' },
       { key: 'Users', val: 'Mobile', sub: 'Field workers' },
-      { key: 'Cost saved', val: '100K/mo', sub: 'DKK in SaaS fees' }
+      { key: 'SaaS replaced', val: '5-7', sub: 'Into one platform' }
     ],
     services: ['Product Sprint', 'Technical Advisory']
   },
@@ -1066,7 +924,8 @@ const services = [
     badge: { text: 'START HERE', cls: 'badge-green' },
     desc: 'We audit your workflows, identify where AI saves real time and money, and scope a potential engagement.',
     items: ['30-60 min video call with a HEKLA partner', 'Process audit across your current stack', 'Top 3 AI opportunity map', 'Written summary within 24 hours'],
-    who: 'Anyone exploring AI who wants to know where to start.'
+    who: 'Anyone exploring AI who wants to know where to start.',
+    isDiscovery: true
   },
   {
     duration: '1-2 days',
@@ -1078,7 +937,7 @@ const services = [
   {
     duration: '2-4 weeks',
     name: 'Agent Build',
-    desc: 'Custom AI agent integrated into your tools. Running cost under \u20AC50/month after handoff. You own everything.',
+    desc: 'Custom AI agent integrated into your tools. You own everything. Full handoff.',
     items: ['Custom agent architecture', 'Integration with your stack', 'Deployment on your infrastructure', 'Documentation + team training', '30-day support'],
     who: 'Companies with a specific workflow to automate.'
   },
@@ -1102,7 +961,7 @@ const services = [
     name: 'AI Platform aaS',
     badge: { text: 'REPLACE A HIRE', cls: 'badge-teal' },
     desc: 'The full AI platform engineer role \u2014 delivered as a managed service. Faster, cheaper, zero recruitment risk.',
-    items: ['Full agent infrastructure on your hardware', 'MCP connectors to your data warehouse', '2-3 agents deployed in first sprint', 'Security: RBAC, secrets management, GDPR', 'LLM routing, cost optimization, prompt versioning', 'New agents deployed monthly', 'Agent monitoring + alerting', 'Quarterly platform review + roadmap'],
+    items: ['Full agent infrastructure on your hardware', 'MCP connectors to your data warehouse', '2-3 agents deployed in first sprint', 'Security: RBAC, secrets management, GDPR', 'LLM routing, prompt versioning, optimization', 'New agents deployed monthly', 'Agent monitoring + alerting', 'Quarterly platform review + roadmap'],
     who: 'Scale-ups posting \u2018AI Platform Engineer\u2019 who want results in weeks, not months.'
   },
   {
@@ -1114,19 +973,43 @@ const services = [
   }
 ];
 
-// ═══ RENDER CASE CARDS ═══
-function renderCaseCards() {
-  const grid = document.getElementById('casesGrid');
-  grid.innerHTML = cases.map((c, i) => `
-    <div class="case-card anim" style="transition-delay:${i * .08}s" onclick="openCase(${c.id})">
-      <span class="badge ${c.statusClass}">${c.status}</span>
-      <div class="case-industry">${c.industry}</div>
-      <div class="case-name">${c.name}</div>
-      <div class="case-headline">${c.headline}</div>
-      <div class="case-result">${c.result}</div>
-      <div class="case-tags">${c.services.map(s => `<span class="case-tag">${s}</span>`).join('')}</div>
+// ═══ RENDER CASES ═══
+function renderCases() {
+  const container = document.getElementById('casesGrid');
+  const featured = cases[0];
+
+  // Featured case — full width two-column
+  let html = `
+    <div class="case-featured anim" onclick="openCase(${featured.id})">
+      <div class="case-featured-left">
+        <div class="case-featured-badge"><span class="badge ${featured.statusClass}">${featured.status}</span></div>
+        <div class="case-featured-industry">${featured.industry}</div>
+        <div class="case-featured-name">${featured.name}</div>
+      </div>
+      <div class="case-featured-right">
+        <div class="case-featured-desc">${featured.headline}</div>
+        <div class="case-featured-result">${featured.result}</div>
+        <div class="case-featured-tags">${featured.services.map(s => `<span class="case-featured-tag">${s}</span>`).join('')}</div>
+      </div>
     </div>
-  `).join('');
+  `;
+
+  // Remaining cases — compact rows
+  html += '<div class="case-rows">';
+  for (let i = 1; i < cases.length; i++) {
+    const c = cases[i];
+    html += `
+      <div class="case-row anim" onclick="openCase(${c.id})">
+        <span class="badge ${c.statusClass}">${c.status}</span>
+        <span class="case-row-name">${c.name}</span>
+        <span class="case-row-result">${c.result}</span>
+        <span class="case-row-arrow">&rarr;</span>
+      </div>
+    `;
+  }
+  html += '</div>';
+
+  container.innerHTML = html;
   observeReveals();
 }
 
@@ -1138,7 +1021,7 @@ function openCase(id) {
 
   content.innerHTML = `
     <span class="badge ${c.statusClass}">${c.status}</span>
-    <div class="case-industry" style="margin-top:.75rem">${c.industry}</div>
+    <div style="font-family:var(--mono);font-size:.6rem;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin:.75rem 0 .5rem">${c.industry}</div>
     <div class="case-detail-name">${c.name}</div>
     <div class="case-detail-result">${c.result}</div>
     <div class="case-metrics">
@@ -1164,25 +1047,52 @@ function closeCaseDetail() {
   document.getElementById('caseDetail').classList.remove('active');
 }
 
-// ═══ RENDER SERVICE CARDS ═══
-function renderServiceCards() {
-  const grid = document.getElementById('servicesGrid');
-  grid.innerHTML = services.map((s, i) => `
-    <div class="service-card anim" style="transition-delay:${i * .06}s">
-      ${s.badge ? `<span class="badge ${s.badge.cls} service-badge">${s.badge.text}</span>` : ''}
-      <div class="service-duration">${s.duration}</div>
-      <div class="service-name">${s.name}</div>
-      <div class="service-desc">${s.desc}</div>
-      <ul class="service-list">
-        ${s.items.map(item => `<li>${item}</li>`).join('')}
-      </ul>
-      <div class="service-who">${s.who}</div>
+// ═══ RENDER SERVICES ═══
+function renderServices() {
+  const container = document.getElementById('servicesGrid');
+  const discovery = services[0];
+  const rest = services.slice(1);
+
+  // Discovery — standalone highlighted block
+  let html = `
+    <div class="discovery-block anim">
+      <div class="discovery-top">
+        <span class="discovery-name">${discovery.name}</span>
+        <span class="badge ${discovery.badge.cls}">${discovery.badge.text}</span>
+        <span class="discovery-duration">${discovery.duration}</span>
+      </div>
+      <div class="discovery-desc">${discovery.desc}</div>
+      <div class="discovery-who">${discovery.who}</div>
     </div>
-  `).join('');
+  `;
+
+  // Remaining — compact table rows
+  html += '<div class="service-table">';
+  rest.forEach((s, i) => {
+    const badgeHtml = s.badge ? `<span class="badge ${s.badge.cls} service-row-badge">${s.badge.text}</span>` : '';
+    html += `
+      <div class="service-row anim" onclick="this.querySelector('.service-row-detail').classList.toggle('open')">
+        <div class="service-row-left">
+          <div class="service-row-name">${s.name}${badgeHtml}</div>
+          <div class="service-row-duration">${s.duration}</div>
+        </div>
+        <div class="service-row-right">
+          <div class="service-row-desc">${s.desc}</div>
+          <div class="service-row-who">${s.who}</div>
+          <div class="service-row-detail">
+            <ul>${s.items.map(item => `<li>${item}</li>`).join('')}</ul>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  html += '</div>';
+
+  container.innerHTML = html;
   observeReveals();
 }
 
-// ═══ SCROLL REVEAL (IntersectionObserver — same as launch.html) ═══
+// ═══ SCROLL REVEAL ═══
 function observeReveals() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1214,8 +1124,6 @@ function observeReveals() {
     container.appendChild(ember);
   }
 })();
-
-// Headline rotator removed — static headline
 
 // ═══ ANIMATED STAT COUNTERS ═══
 (function() {
@@ -1250,8 +1158,8 @@ function observeReveals() {
 })();
 
 // ═══ INIT ═══
-renderCaseCards();
-renderServiceCards();
+renderCases();
+renderServices();
 observeReveals();
 </script>
 
