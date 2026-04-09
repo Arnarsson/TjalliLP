@@ -1,6 +1,11 @@
 .vercel
 node_modules/
 .DS_Store
+.agent/
+.agents/
+.claude/skills/
+skills/
+skills-lock.json
 *.m4v
 *.pptx.pdf
 *.gif

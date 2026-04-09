@@ -1,11 +1,13 @@
 {
-  "redirects": [
-    { "source": "/", "destination": "/meet-hekla", "permanent": false }
-  ],
   "rewrites": [
-    { "source": "/meet-hekla", "destination": "/launch.html" },
-    { "source": "/platform", "destination": "/index.html" },
-    { "source": "/personal", "destination": "/personal.html" },
-    { "source": "/r/:code", "destination": "/launch.html?ref=:code" }
+    { "source": "/meet-hekla", "destination": "/launch.html" }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "/meet-hekla", "permanent": false },
+    { "source": "/personal", "destination": "/meet-hekla", "permanent": false },
+    { "source": "/demo-dashboard", "destination": "/meet-hekla", "permanent": false },
+    { "source": "/index.html", "destination": "/meet-hekla", "permanent": false },
+    { "source": "/personal.html", "destination": "/meet-hekla", "permanent": false },
+    { "source": "/demo-dashboard.html", "destination": "/meet-hekla", "permanent": false }
   ]
 }
