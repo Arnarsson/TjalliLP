@@ -6,7 +6,7 @@
     { "source": "/(.*)", "has": [{ "type": "host", "value": "theagent.hekla.cc" }], "destination": "/theagent.html" }
   ],
   "redirects": [
-    { "source": "/", "destination": "/meet-hekla", "permanent": false },
+    { "source": "/", "has": [{ "type": "host", "value": "(?!theagent\\.hekla\\.cc).*" }], "destination": "/meet-hekla", "permanent": false },
     { "source": "/personal", "destination": "/meet-hekla", "permanent": false },
     { "source": "/demo-dashboard", "destination": "/meet-hekla", "permanent": false },
     { "source": "/index.html", "destination": "/meet-hekla", "permanent": false },
