@@ -7,7 +7,8 @@
     { "source": "/demo-dashboard.html", "destination": "/meet-hekla", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/:path*", "has": [{ "type": "host", "value": "theagent.hekla.cc" }], "destination": "/theagent.html" },
+    { "source": "/", "has": [{ "type": "host", "value": "theagent.hekla.cc" }], "destination": "/theagent.html" },
+    { "source": "/:path(.*)", "has": [{ "type": "host", "value": "theagent.hekla.cc" }], "destination": "/theagent.html" },
     { "source": "/", "destination": "/launch.html" },
     { "source": "/meet-hekla", "destination": "/launch.html" },
     { "source": "/consultancy", "destination": "/consultancy.html" },
