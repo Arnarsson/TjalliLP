@@ -9,10 +9,39 @@ import {
 import { MemoryScreen } from "./MemoryScreen";
 import { AgentsScreen } from "./AgentsScreen";
 import { PrivateScreen } from "./PrivateScreen";
+import { HeklaPromo } from "./HeklaPromo";
+import { HeklaPromoMain } from "./HeklaPromoMain";
+import { HeklaMoodFilm } from "./HeklaMoodFilm";
+import { HeklaBrandReveal } from "./HeklaBrandReveal";
+import { HeklaTagline } from "./HeklaTagline";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="HeklaMoodFilm"
+        component={HeklaMoodFilm}
+        durationInFrames={876}
+        fps={30}
+        width={1440}
+        height={900}
+      />
+      <Composition
+        id="HeklaPromo"
+        component={HeklaPromo}
+        durationInFrames={750}
+        fps={30}
+        width={1440}
+        height={900}
+      />
+      <Composition
+        id="HeklaPromoMain"
+        component={HeklaPromoMain}
+        durationInFrames={300}
+        fps={30}
+        width={1440}
+        height={900}
+      />
       <Composition
         id="HeklaDashboard"
         component={HeklaDashboard}
@@ -65,6 +94,22 @@ export const RemotionRoot: React.FC = () => {
         id="PrivateScreen"
         component={PrivateScreen}
         durationInFrames={300}
+        fps={30}
+        width={1440}
+        height={900}
+      />
+      <Composition
+        id="HeklaBrandReveal"
+        component={HeklaBrandReveal}
+        durationInFrames={120}
+        fps={30}
+        width={1440}
+        height={900}
+      />
+      <Composition
+        id="HeklaTagline"
+        component={HeklaTagline}
+        durationInFrames={120}
         fps={30}
         width={1440}
         height={900}
