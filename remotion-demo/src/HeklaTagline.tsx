@@ -4,7 +4,6 @@ import { theme } from "./theme";
 
 interface HeklaTaglineProps {
   frame?: number;
-  fps?: number;
 }
 
 const scaleIn = (frame: number, delay: number): { opacity: number; scale: number; y: number } => {
