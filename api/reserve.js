@@ -35,15 +35,13 @@ export default async function handler(req, res) {
 
   const { name, email, referralCode } = req.body || {};
 
-  if (!name || typeof name !== "string" || !name.trim()) {
-    return res.status(400).json({ error: "Name is required." });
-  }
+  const fallbackName = (email && typeof email === "string") ? email.split("@")[0] : "anonymous";
+  const cleanName = (name && typeof name === "string" && name.trim()) ? name.trim() : fallbackName;
   if (!email || !isValidEmail(email)) {
     return res.status(400).json({ error: "Valid email is required." });
   }
 
   const cleanEmail = email.toLowerCase().trim();
-  const cleanName = name.trim();
 
   // Idempotent: return existing reservation
   const existing = await redis.get(`reservation:${cleanEmail}`);
