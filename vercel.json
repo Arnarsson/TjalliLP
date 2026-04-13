@@ -7,6 +7,8 @@
     { "source": "/demo-dashboard.html", "destination": "/meet-hekla", "permanent": false }
   ],
   "rewrites": [
+    { "source": "/gate", "destination": "/gate.html" },
+    { "source": "/consult", "destination": "/consult.html" },
     { "source": "/", "destination": "/launch.html" },
     { "source": "/meet-hekla", "destination": "/launch.html" },
     { "source": "/consultancy", "destination": "/consultancy.html" },

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HEKLA — AI Consultancy & Enterprise Services</title>
+<meta name="description" content="HEKLA builds AI systems that run your business. Working products from week one. Full ownership when we're done.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#131110">
+<link rel="canonical" href="https://www.hekla.cc/consultancy">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HEKLA — AI Consultancy & Enterprise Services">
+<meta property="og:description" content="Working products from week one. Full ownership when we're done.">
+<meta property="og:url" content="https://www.hekla.cc/consultancy">
+<meta property="og:site_name" content="HEKLA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HEKLA — AI Consultancy & Enterprise Services">
+<meta name="twitter:description" content="Working products from week one. Full ownership when we're done.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#131110;
+  color:#B8AFA2;
+  -webkit-font-smoothing:antialiased;
+}
+:root{
+  --bg:#131110;--card:#1E1D1B;--card-hi:#2A2826;
+  --orange:#D4643A;--orange-lt:#E8805A;
+  --cream:#F0E6D3;--body:#B8AFA2;--dim:#807A72;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'JetBrains Mono',Consolas,monospace;
+}
+
+/* grain */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.018;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem 2.5rem;
+  background:linear-gradient(var(--bg),transparent);
+}
+.logo{
+  display:flex;align-items:center;gap:.7rem;
+  font-family:var(--serif);font-size:1.5rem;
+  color:var(--cream);text-decoration:none;
+}
+.logo-dot{
+  width:9px;height:9px;background:var(--orange);
+  border-radius:50%;animation:pulse 2s ease-in-out infinite;flex-shrink:0;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav-link{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;
+  color:var(--dim);text-decoration:none;transition:color .3s;
+}
+.nav-link:hover{color:var(--cream)}
+
+/* layout */
+.wrap{max-width:960px;margin:0 auto;padding:0 2.5rem}
+section{padding:5rem 0}
+
+/* label */
+.label{
+  font-family:var(--mono);font-size:.68rem;font-weight:600;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:1.5rem;
+}
+
+/* hero */
+.hero{padding:8rem 0 4rem;text-align:center}
+.hero h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.12;
+  color:var(--cream);max-width:14em;margin:0 auto .8rem;
+}
+.hero h1 em{font-style:italic;color:var(--orange)}
+.hero .sub{
+  color:var(--dim);font-size:clamp(.85rem,1.2vw,1rem);
+  max-width:30em;margin:0 auto 2.5rem;line-height:1.6;
+}
+.stats{
+  display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.72rem;color:var(--dim);
+}
+.stats span{display:flex;align-items:center;gap:.5rem;white-space:nowrap}
+.stats strong{color:var(--cream);font-weight:600;font-size:.85rem}
+.stats span+span::before{content:'';width:1px;height:14px;background:var(--card-hi);margin-right:.0rem}
+
+/* services */
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+}
+.svc{
+  background:var(--card);border:1px solid var(--card-hi);
+  border-radius:6px;padding:1.6rem;transition:border-color .3s;
+}
+.svc:hover{border-color:var(--orange)}
+.svc .dur{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;
+}
+.svc .name{
+  font-family:var(--serif);font-size:1.15rem;
+  color:var(--cream);margin-bottom:.4rem;
+}
+.svc .badge{
+  display:inline-block;font-family:var(--mono);font-size:.56rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.15rem .5rem;border-radius:3px;margin-bottom:.6rem;
+  background:rgba(52,211,153,.12);color:#34d399;
+}
+.svc .desc{font-size:.82rem;line-height:1.5;color:var(--body)}
+
+/* cases */
+.case-row{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 0;border-bottom:1px solid var(--card-hi);
+}
+.case-row:first-child{border-top:1px solid var(--card-hi)}
+.case-badge{
+  font-family:var(--mono);font-size:.56rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.2rem .5rem;border-radius:3px;white-space:nowrap;flex-shrink:0;
+}
+.case-badge.live{background:rgba(52,211,153,.12);color:#34d399}
+.case-badge.mvp{background:rgba(212,100,58,.12);color:var(--orange)}
+.case-badge.oss{background:rgba(56,189,248,.12);color:#38bdf8}
+.case-name{color:var(--cream);font-size:.85rem;white-space:nowrap}
+.case-result{color:var(--dim);font-size:.82rem;margin-left:auto;text-align:right}
+
+/* team */
+.team-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+}
+.member .name{
+  font-family:var(--serif);font-size:1.05rem;color:var(--cream);margin-bottom:.2rem;
+}
+.member .role{font-size:.78rem;color:var(--dim);line-height:1.4}
+
+/* cta */
+.cta{text-align:center;padding:5rem 0}
+.cta h2{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  color:var(--cream);margin-bottom:.5rem;
+}
+.cta .sub{color:var(--dim);font-size:.9rem;margin-bottom:1.5rem}
+.cta a{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;
+  color:var(--orange);text-decoration:none;transition:color .3s;
+}
+.cta a:hover{color:var(--orange-lt)}
+
+/* footer */
+footer{
+  display:flex;justify-content:space-between;
+  padding:1.5rem 2.5rem;
+  font-family:var(--mono);font-size:.58rem;
+  letter-spacing:.04em;color:#4a4640;
+}
+footer a{color:#4a4640;text-decoration:none;transition:color .3s}
+footer a:hover{color:var(--cream)}
+
+/* fadeUp */
+.fade{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.fade.visible{opacity:1;transform:translateY(0)}
+
+/* mobile */
+@media(max-width:640px){
+  nav{padding:1.2rem 1.5rem}
+  .wrap{padding:0 1.5rem}
+  .hero{padding:6rem 0 3rem}
+  .services-grid{grid-template-columns:1fr}
+  .case-row{flex-direction:column;align-items:flex-start;gap:.4rem}
+  .case-result{margin-left:0;text-align:left}
+  .team-grid{grid-template-columns:1fr}
+  .stats span+span::before{display:none}
+  footer{flex-direction:column;align-items:center;gap:.3rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/"><span class="logo-dot"></span>Hekla</a>
+  <a class="nav-link" href="/">Beta login</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <p class="label fade">Hekla Consult</p>
+    <h1 class="fade">We build AI systems<br>that <em>run your business.</em></h1>
+    <p class="sub fade">Working products from week one. Full ownership when we're done.</p>
+    <div class="stats fade">
+      <span><strong>12+</strong> Products shipped</span>
+      <span><strong>3 wks</strong> Avg to production</span>
+      <span><strong>83%</strong> Client time saved</span>
+      <span><strong>100%</strong> Client ownership</span>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section>
+  <div class="wrap">
+    <p class="label fade">How We Engage</p>
+    <div class="services-grid">
+      <div class="svc fade">
+        <p class="dur">30-60 min</p>
+        <p class="name">Discovery Session</p>
+        <span class="badge">Free</span>
+        <p class="desc">We audit your workflows, identify where AI saves time, and scope a potential engagement.</p>
+      </div>
+      <div class="svc fade">
+        <p class="dur">2-8 weeks</p>
+        <p class="name">Agent Build / Sprint</p>
+        <p class="desc">Custom AI agents or full product sprints. Working code from day one. You own everything.</p>
+      </div>
+      <div class="svc fade">
+        <p class="dur">Monthly</p>
+        <p class="name">Managed + Advisory</p>
+        <p class="desc">We run your AI layer. Monitoring, optimization, new agents, priority support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cases -->
+<section>
+  <div class="wrap">
+    <p class="label fade">Shipped</p>
+    <div class="fade">
+      <div class="case-row">
+        <span class="case-badge live">Live</span>
+        <span class="case-name">AI Engine Evaluation System</span>
+        <span class="case-result">83% faster reporting. 32% freed capital.</span>
+      </div>
+      <div class="case-row">
+        <span class="case-badge live">Live</span>
+        <span class="case-name">Lead Intelligence Agent</span>
+        <span class="case-result">Qualified leads delivered overnight.</span>
+      </div>
+      <div class="case-row">
+        <span class="case-badge mvp">MVP</span>
+        <span class="case-name">Unified Contractor Platform</span>
+        <span class="case-result">One platform. Nordic contractors. Mobile-first.</span>
+      </div>
+      <div class="case-row">
+        <span class="case-badge oss">Open Source</span>
+        <span class="case-name">AI Marketing Agency</span>
+        <span class="case-result">Full marketing department as agents.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section>
+  <div class="wrap">
+    <p class="label fade">The Team</p>
+    <div class="team-grid fade">
+      <div class="member">
+        <p class="name">Sven Arnarsson</p>
+        <p class="role">Technology and AI infrastructure</p>
+      </div>
+      <div class="member">
+        <p class="name">Hjalti H. Jonsson</p>
+        <p class="role">Commercial and operations</p>
+      </div>
+      <div class="member">
+        <p class="name">Christoffer James</p>
+        <p class="role">Product and enterprise, PhD DTU</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap fade">
+    <h2>Let's build.</h2>
+    <p class="sub">Production, not prototypes.</p>
+    <a href="mailto:sven@hekla.cc">sven@hekla.cc &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 Hekla &middot; <a href="mailto:hello@hekla.cc">hello@hekla.cc</a></span>
+  <span><a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
+},{threshold:.15});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
