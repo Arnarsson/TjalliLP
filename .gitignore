@@ -1,11 +1,6 @@
 .vercel
 node_modules/
 .DS_Store
-.agent/
-.agents/
-.claude/skills/
-skills/
-skills-lock.json
 *.m4v
 *.pptx.pdf
 *.gif
@@ -15,4 +10,3 @@ capture-frames.mjs
 demo-dashboard-raw.mp4
 16296844-*.mp4
 5302616-*.mp4
-.gstack/

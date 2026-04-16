@@ -91,13 +91,128 @@ section{padding:5rem 0}
   color:var(--dim);font-size:clamp(.85rem,1.2vw,1rem);
   max-width:30em;margin:0 auto 2.5rem;line-height:1.6;
 }
-.stats{
-  display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
-  font-family:var(--mono);font-size:.72rem;color:var(--dim);
+/* process timeline */
+.process{
+  display:flex;justify-content:center;gap:0;
+  margin:2rem auto 1.5rem;max-width:700px;
+  position:relative;
 }
-.stats span{display:flex;align-items:center;gap:.5rem;white-space:nowrap}
-.stats strong{color:var(--cream);font-weight:600;font-size:.85rem}
-.stats span+span::before{content:'';width:1px;height:14px;background:var(--card-hi);margin-right:.0rem}
+.process::before{
+  content:'';position:absolute;top:4px;
+  left:calc(12.5% + 4px);right:calc(12.5% + 4px);
+  height:1px;background:var(--card-hi);
+}
+.process::after{
+  content:'';position:absolute;top:4px;
+  left:calc(12.5% + 4px);right:calc(12.5% + 4px);
+  height:1px;background:var(--orange);
+  transform-origin:left;transform:scaleX(0);
+  transition:transform 1.2s cubic-bezier(.22,1,.36,1);
+}
+.process.drawn::after{transform:scaleX(1)}
+.proc-step{
+  flex:1;text-align:center;position:relative;
+  padding-top:1.2rem;
+  opacity:0;transform:translateY(8px);
+  transition:opacity .4s ease,transform .4s ease;
+}
+.process.drawn .proc-step{opacity:1;transform:translateY(0)}
+.process.drawn .proc-step:nth-child(1){transition-delay:.1s}
+.process.drawn .proc-step:nth-child(2){transition-delay:.35s}
+.process.drawn .proc-step:nth-child(3){transition-delay:.6s}
+.process.drawn .proc-step:nth-child(4){transition-delay:.85s}
+.proc-dot{
+  width:9px;height:9px;background:var(--orange);
+  border-radius:50%;position:absolute;top:0;
+  left:50%;transform:translateX(-50%);
+}
+.process.drawn .proc-dot{animation:pulse 2s ease-in-out infinite}
+.process.drawn .proc-step:nth-child(1) .proc-dot{animation-delay:0s}
+.process.drawn .proc-step:nth-child(2) .proc-dot{animation-delay:.5s}
+.process.drawn .proc-step:nth-child(3) .proc-dot{animation-delay:1s}
+.process.drawn .proc-step:nth-child(4) .proc-dot{animation-delay:1.5s}
+.proc-phase{
+  font-family:var(--mono);font-size:.56rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:.2rem;
+}
+.proc-title{
+  font-family:var(--serif);font-size:1rem;
+  color:var(--cream);margin-bottom:.2rem;
+}
+.proc-desc{
+  font-size:.72rem;color:var(--dim);line-height:1.4;
+  max-width:10em;margin:0 auto;
+}
+/* contrast */
+.contrast{
+  display:flex;align-items:stretch;justify-content:center;
+  gap:1.5rem;margin:2.5rem auto 1.5rem;max-width:640px;
+}
+.contrast-col{
+  flex:1;padding:1.8rem 1.6rem;border-radius:6px;text-align:center;
+}
+.contrast-col.old{
+  background:var(--card);border:1px solid var(--card-hi);
+}
+.contrast-col.old .contrast-stat{
+  color:#5a564f;
+  text-decoration:line-through;
+  text-decoration-color:#D4643A44;
+}
+.contrast-col.old .contrast-label,
+.contrast-col.old .contrast-unit,
+.contrast-col.old .contrast-detail{opacity:.5}
+.contrast-col.new{
+  background:rgba(212,100,58,.06);border:1px solid var(--orange);
+}
+.contrast-label{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:.8rem;
+}
+.contrast-stat{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,2.8rem);
+  color:var(--cream);font-weight:400;line-height:1;
+  margin-bottom:.3rem;
+}
+.contrast-col.new .contrast-stat{color:var(--orange)}
+.contrast-unit{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;
+  color:var(--body);margin-bottom:.8rem;
+}
+.contrast-detail{
+  font-size:.78rem;color:var(--dim);line-height:1.5;
+}
+.contrast-vs{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;
+  color:#4a4640;flex-shrink:0;align-self:center;
+}
+.testimonial{
+  max-width:580px;margin:1.5rem auto 0;text-align:center;
+  position:relative;
+}
+.testimonial::before{
+  content:'\201C';position:absolute;
+  top:-.6rem;left:50%;transform:translateX(-50%);
+  font-family:var(--serif);font-size:5rem;
+  color:var(--orange);opacity:.1;line-height:1;
+  pointer-events:none;
+}
+.testimonial blockquote{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(.88rem,1.2vw,1rem);
+  color:var(--body);line-height:1.6;margin-bottom:.6rem;
+  position:relative;
+}
+.testimonial cite{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;
+  color:var(--dim);font-style:normal;
+}
+.services-line{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;
+  color:var(--dim);margin-top:.5rem;
+}
 
 /* services */
 .services-grid{
@@ -105,9 +220,14 @@ section{padding:5rem 0}
 }
 .svc{
   background:var(--card);border:1px solid var(--card-hi);
-  border-radius:6px;padding:1.6rem;transition:border-color .3s;
+  border-radius:6px;padding:1.6rem;
+  transition:border-color .3s,box-shadow .3s,transform .3s;
 }
-.svc:hover{border-color:var(--orange)}
+.svc:hover{
+  border-color:var(--orange);
+  box-shadow:0 0 20px rgba(212,100,58,.08),0 4px 16px rgba(0,0,0,.3);
+  transform:translateY(-2px);
+}
 .svc .dur{
   font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--dim);margin-bottom:.6rem;
@@ -125,30 +245,115 @@ section{padding:5rem 0}
 .svc .desc{font-size:.82rem;line-height:1.5;color:var(--body)}
 
 /* cases */
-.case-row{
-  display:flex;align-items:center;gap:1rem;
-  padding:1rem 0;border-bottom:1px solid var(--card-hi);
+.cases-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:2.5rem;
 }
-.case-row:first-child{border-top:1px solid var(--card-hi)}
+.cases-header .cases-hint{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;
+  text-transform:uppercase;color:rgba(232,220,200,.25);
+}
+.cases-list{border-top:1px solid rgba(232,220,200,.1)}
+.case{
+  border-bottom:1px solid rgba(232,220,200,.1);
+  position:relative;overflow:hidden;
+}
+.case-glow{
+  position:absolute;left:0;top:0;bottom:0;width:40%;
+  background:linear-gradient(90deg,rgba(212,100,58,.04),transparent);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.case:hover .case-glow,.case.open .case-glow{opacity:1}
+.case-header{
+  display:grid;grid-template-columns:1fr auto;gap:1.2rem;
+  padding:2rem 0;cursor:pointer;user-select:none;
+  position:relative;
+}
+.case-header:hover .case-title{color:var(--orange-lt)}
+.case-meta{display:flex;align-items:center;gap:.75rem;margin-bottom:.35rem}
+.case-title{
+  font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,2rem);
+  color:var(--cream);font-weight:400;transition:color .3s;
+  margin:0;
+}
 .case-badge{
-  font-family:var(--mono);font-size:.56rem;font-weight:600;
-  letter-spacing:.08em;text-transform:uppercase;
-  padding:.2rem .5rem;border-radius:3px;white-space:nowrap;flex-shrink:0;
+  font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:100px;white-space:nowrap;
 }
-.case-badge.live{background:rgba(52,211,153,.12);color:#34d399}
-.case-badge.mvp{background:rgba(212,100,58,.12);color:var(--orange)}
-.case-badge.oss{background:rgba(56,189,248,.12);color:#38bdf8}
-.case-name{color:var(--cream);font-size:.85rem;white-space:nowrap}
-.case-result{color:var(--dim);font-size:.82rem;margin-left:auto;text-align:right}
+.case-badge.live{color:#34d399;border:1px solid rgba(52,211,153,.2)}
+.case-badge.mvp{color:#60a5fa;border:1px solid rgba(96,165,250,.2)}
+.case-badge.beta{color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+.case-badge.cs{
+  font-size:.6rem;color:var(--orange);
+  border:1px solid rgba(212,100,58,.15);
+  border-radius:4px;padding:.12rem .5rem;
+}
+.case-desc{
+  font-size:.88rem;color:rgba(232,220,200,.5);line-height:1.5;margin:0;
+}
+.case-toggle{
+  font-family:var(--mono);font-size:1.25rem;
+  color:rgba(232,220,200,.25);padding-top:.4rem;
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+  user-select:none;line-height:1;
+}
+.case.open .case-toggle{transform:rotate(45deg)}
+.case:hover .case-toggle{color:var(--orange)}
+.case-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .6s cubic-bezier(.16,1,.3,1);
+}
+.case.open .case-body{max-height:600px}
+.case-body-inner{padding-bottom:2.5rem}
+.case-card{
+  background:rgba(232,220,200,.03);
+  border:1px solid rgba(232,220,200,.08);
+  border-radius:10px;padding:1.8rem 2rem;margin-bottom:1.2rem;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+}
+.case-psr{position:relative}
+.case-psr:not(:last-child)::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;width:1px;
+  background:rgba(232,220,200,.08);
+}
+.case-psr-label{
+  font-family:var(--mono);font-size:.58rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:.5rem;
+}
+.case-psr p{color:var(--body);font-size:.82rem;line-height:1.7}
+.case-tags{display:flex;gap:.5rem;flex-wrap:wrap}
+.case-tag{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.04em;
+  padding:.3rem .65rem;border-radius:4px;
+  border:1px solid rgba(232,220,200,.08);color:rgba(232,220,200,.4);
+  transition:all .25s ease;
+}
+.case-tag:hover{
+  border-color:var(--orange);color:var(--cream);
+}
 
 /* team */
 .team-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+}
+.member{
+  padding:1.8rem 0;border-top:1px solid rgba(232,220,200,.1);
 }
 .member .name{
-  font-family:var(--serif);font-size:1.05rem;color:var(--cream);margin-bottom:.2rem;
+  font-family:var(--serif);font-size:1.15rem;color:var(--cream);margin-bottom:.3rem;
 }
-.member .role{font-size:.78rem;color:var(--dim);line-height:1.4}
+.member .title{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--orange);margin-bottom:.5rem;
+}
+.member .role{font-size:.82rem;color:var(--dim);line-height:1.5;margin-bottom:.6rem}
+.member .member-link{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;
+  color:rgba(232,220,200,.3);text-decoration:none;transition:color .3s;
+}
+.member .member-link:hover{color:var(--orange)}
 
 /* cta */
 .cta{text-align:center;padding:5rem 0}
@@ -184,10 +389,17 @@ footer a:hover{color:var(--cream)}
   .wrap{padding:0 1.5rem}
   .hero{padding:6rem 0 3rem}
   .services-grid{grid-template-columns:1fr 1fr}
-  .case-row{flex-direction:column;align-items:flex-start;gap:.4rem}
-  .case-result{margin-left:0;text-align:left}
+  .case-card{padding:1.2rem 1.4rem;grid-template-columns:1fr;gap:1rem}
+  .case-psr:not(:last-child)::after{display:none}
+  .case-title{font-size:1.2rem}
+  .case-desc{font-size:.82rem}
   .team-grid{grid-template-columns:1fr}
-  .stats span+span::before{display:none}
+  .process{flex-wrap:wrap;gap:1rem}
+  .process::before{display:none}
+  .proc-step{flex:none;width:45%;padding-top:.8rem}
+  .proc-dot{position:static;transform:none;margin:0 auto .4rem}
+  .contrast{flex-direction:column;gap:.8rem}
+  .contrast-vs{display:none}
   footer{flex-direction:column;align-items:center;gap:.3rem}
 }
 </style>
@@ -204,13 +416,53 @@ footer a:hover{color:var(--cream)}
   <div class="wrap">
     <p class="label fade">Hekla Consult</p>
     <h1 class="fade">We build AI systems<br>that <em>run your business.</em></h1>
-    <p class="sub fade">Working products from week one. Full ownership when we're done.</p>
-    <div class="stats fade">
-      <span><strong>12+</strong> Products shipped</span>
-      <span><strong>3 wks</strong> Avg to production</span>
-      <span><strong>83%</strong> Client time saved</span>
-      <span><strong>100%</strong> Client ownership</span>
+    <p class="sub fade">No sketches. Working prototypes from day one.</p>
+    <div class="process fade">
+      <div class="proc-step">
+        <div class="proc-dot"></div>
+        <p class="proc-phase">Phase 1</p>
+        <p class="proc-title">We talk</p>
+        <p class="proc-desc">You explain the problem. We spec the solution.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-dot"></div>
+        <p class="proc-phase">Phase 2</p>
+        <p class="proc-title">You see it</p>
+        <p class="proc-desc">Working prototype. Not sketches, not mockups.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-dot"></div>
+        <p class="proc-phase">Phase 3</p>
+        <p class="proc-title">We iterate</p>
+        <p class="proc-desc">Your feedback shapes the product. Daily deploys.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-dot"></div>
+        <p class="proc-phase">Phase 4</p>
+        <p class="proc-title">You own it</p>
+        <p class="proc-desc">Production code. Full documentation. Zero lock-in.</p>
+      </div>
     </div>
+    <div class="contrast fade">
+      <div class="contrast-col old">
+        <p class="contrast-label">Traditional consultancy</p>
+        <p class="contrast-stat">663</p>
+        <p class="contrast-unit">man-hours for one phase</p>
+        <p class="contrast-detail">Months of analysis before you see a single screen. Multiple teams, handoffs, status meetings.</p>
+      </div>
+      <div class="contrast-vs">vs</div>
+      <div class="contrast-col new">
+        <p class="contrast-label">Hekla</p>
+        <p class="contrast-stat">2 wks</p>
+        <p class="contrast-unit">to clickable prototype</p>
+        <p class="contrast-detail">Working product you can click from week one. AI-native workflow. One team, no handoffs.</p>
+      </div>
+    </div>
+    <div class="testimonial fade">
+      <blockquote>"We got quoted 663 man-hours for the first phase alone. Hekla had a working prototype before the other company finished their project plan. Quick math: about 80% of the project in 10% of the time."</blockquote>
+      <cite>Founder, Patentopia</cite>
+    </div>
+    <p class="services-line fade">Workshops &nbsp;/&nbsp; Agent Builds &nbsp;/&nbsp; Product Sprints</p>
   </div>
 </section>
 
@@ -221,24 +473,24 @@ footer a:hover{color:var(--cream)}
     <div class="services-grid">
       <div class="svc fade">
         <p class="dur">30-60 min</p>
-        <p class="name">Discovery Session</p>
+        <p class="name">Discovery Call</p>
         <span class="badge">Free</span>
-        <p class="desc">We audit your workflows, identify where AI saves time, and scope a potential engagement.</p>
+        <p class="desc">We map your workflows, find where AI saves real time, and scope a project. No slides, just answers.</p>
       </div>
       <div class="svc fade">
         <p class="dur">1-2 days</p>
         <p class="name">Workshop</p>
-        <p class="desc">Your team builds working automations during the session. You leave with prototypes and a roadmap.</p>
+        <p class="desc">Your team builds working automations during the session. Video library, certificates, and 12 months of support.</p>
       </div>
       <div class="svc fade">
-        <p class="dur">2-8 weeks</p>
-        <p class="name">Agent Build / Sprint</p>
-        <p class="desc">Custom AI agents or full product sprints. Working code from day one. You own everything.</p>
+        <p class="dur">2-4 weeks</p>
+        <p class="name">Agent Build</p>
+        <p class="desc">Custom AI agents wired into your existing tools. Slack, CRM, WhatsApp, internal systems. You own and maintain it.</p>
       </div>
       <div class="svc fade">
-        <p class="dur">Monthly</p>
-        <p class="name">Managed + Advisory</p>
-        <p class="desc">We run your AI layer. Monitoring, optimization, new agents, priority support.</p>
+        <p class="dur">3-6 weeks</p>
+        <p class="name">Product Sprint</p>
+        <p class="desc">Full product from idea to production. Daily deploys, working code from day one. You own everything when we leave.</p>
       </div>
     </div>
   </div>
@@ -247,29 +499,206 @@ footer a:hover{color:var(--cream)}
 <!-- Cases -->
 <section>
   <div class="wrap">
-    <p class="label fade">Shipped</p>
-    <div class="fade">
-      <div class="case-row">
-        <span class="case-badge live">Live</span>
-        <span class="case-name">AI Engine Evaluation System</span>
-        <span class="case-result">83% faster reporting. 32% freed capital.</span>
+    <div class="cases-header fade">
+      <div>
+        <p class="label" style="margin-bottom:0">Shipped</p>
       </div>
-      <div class="case-row">
-        <span class="case-badge live">Live</span>
-        <span class="case-name">Lead Intelligence Agent</span>
-        <span class="case-result">Qualified leads delivered overnight.</span>
-      </div>
-      <div class="case-row">
-        <span class="case-badge mvp">MVP</span>
-        <span class="case-name">Unified Contractor Platform</span>
-        <span class="case-result">One platform. Nordic contractors. Mobile-first.</span>
-      </div>
-      <div class="case-row">
-        <span class="case-badge oss">Open Source</span>
-        <span class="case-name">AI Marketing Agency</span>
-        <span class="case-result">Full marketing department as agents.</span>
-      </div>
+      <span class="cases-hint">Click to expand</span>
     </div>
+
+    <div class="cases-list">
+
+    <div class="case fade" onclick="this.classList.toggle('open')">
+      <div class="case-glow"></div>
+      <div class="case-header">
+        <div>
+          <div class="case-meta">
+            <h3 class="case-title">Lead Agent</h3>
+            <span class="case-badge live">Live</span>
+            <span class="case-badge cs">Case Study</span>
+          </div>
+          <p class="case-desc">AI agent that replaced 15-20 hours/week of manual lead research. Scrapes, filters, enriches, and delivers qualified leads overnight.</p>
+        </div>
+        <div class="case-toggle">+</div>
+      </div>
+      <div class="case-body"><div class="case-body-inner">
+        <div class="case-card">
+          <div class="case-psr"><p class="case-psr-label">Problem</p><p>Manual lead research eating 15-20 hours per week. Inconsistent quality. Team spending mornings on Google instead of selling.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Solution</p><p>AI agent that scrapes, filters, enriches, and scores leads automatically. Runs overnight, delivers a ranked list by morning.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Result</p><p>15-20 hours/week freed. Higher lead quality. Team reviews leads over coffee instead of hunting them.</p></div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag">n8n</span>
+          <span class="case-tag">Claude API</span>
+          <span class="case-tag">Web Scraping</span>
+          <span class="case-tag">HubSpot</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case fade" onclick="this.classList.toggle('open')">
+      <div class="case-glow"></div>
+      <div class="case-header">
+        <div>
+          <div class="case-meta">
+            <h3 class="case-title">Maritime Client</h3>
+            <span class="case-badge live">Live</span>
+            <span class="case-badge cs">Case Study</span>
+          </div>
+          <p class="case-desc">AI system that evaluates used ship engines against 800-page manuals. Millions at stake per purchase.</p>
+        </div>
+        <div class="case-toggle">+</div>
+      </div>
+      <div class="case-body"><div class="case-body-inner">
+        <div class="case-card">
+          <div class="case-psr"><p class="case-psr-label">Problem</p><p>Evaluating used ship engines from South America against 800-page PDF manuals. Manual evaluation took weeks. Millions of DKK at risk if a defective motor gets purchased.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Solution</p><p>AI system analyzes photos and video of motors, cross-references against indexed service manuals, flags potential defects automatically, and produces risk assessment reports.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Result</p><p>Evaluation time from weeks to hours. Defects caught that would have been missed in manual review. Human sign-off stays, but the AI does 90% of the groundwork.</p></div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag">AI Vision</span>
+          <span class="case-tag">PDF Processing</span>
+          <span class="case-tag">Claude API</span>
+          <span class="case-tag">Custom Pipeline</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case fade" onclick="this.classList.toggle('open')">
+      <div class="case-glow"></div>
+      <div class="case-header">
+        <div>
+          <div class="case-meta">
+            <h3 class="case-title">SourceTrace</h3>
+            <span class="case-badge live">Live</span>
+          </div>
+          <p class="case-desc">Track when ChatGPT, Claude, and Perplexity send you traffic. Real-time attribution for the AI era.</p>
+        </div>
+        <div class="case-toggle">+</div>
+      </div>
+      <div class="case-body"><div class="case-body-inner">
+        <div class="case-card">
+          <div class="case-psr"><p class="case-psr-label">Problem</p><p>AI platforms are sending traffic to websites, but traditional analytics can't tell you which model, which query, or when it happened.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Solution</p><p>Real-time analytics pipeline that intercepts referral headers from AI platforms, enriches them with session data, and shows which AI models drive the most valuable traffic.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Result</p><p>Live dashboard tracking 3 AI platforms. Sub-50ms latency. Actionable data on AI-driven traffic that was previously invisible.</p></div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag">Next.js</span>
+          <span class="case-tag">Vercel Edge</span>
+          <span class="case-tag">Analytics</span>
+          <span class="case-tag">AI Attribution</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case fade" onclick="this.classList.toggle('open')">
+      <div class="case-glow"></div>
+      <div class="case-header">
+        <div>
+          <div class="case-meta">
+            <h3 class="case-title">Patentopia</h3>
+            <span class="case-badge live">Live</span>
+          </div>
+          <p class="case-desc">AI-powered patent tools that turn weeks of research into minutes. From idea to filed patent, fast.</p>
+        </div>
+        <div class="case-toggle">+</div>
+      </div>
+      <div class="case-body"><div class="case-body-inner">
+        <div class="case-card">
+          <div class="case-psr"><p class="case-psr-label">Problem</p><p>Patent research and drafting takes weeks. Inventors lose momentum between idea and filing. Traditional patent tools are slow, expensive, and built for lawyers, not founders.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Solution</p><p>AI platform that automates prior art search, generates patent drafts, and guides inventors through the filing process. Working prototype in 2 weeks while a competing firm was still writing their project plan.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Result</p><p>80% of the project delivered in 10% of the time compared to a traditional consultancy quote. 4 prototype iterations in 2 weeks. Platform live and in use.</p></div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag">Next.js</span>
+          <span class="case-tag">Vercel</span>
+          <span class="case-tag">UX Design</span>
+          <span class="case-tag">Rapid Prototyping</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case fade" onclick="this.classList.toggle('open')">
+      <div class="case-glow"></div>
+      <div class="case-header">
+        <div>
+          <div class="case-meta">
+            <h3 class="case-title">Production Coordinator</h3>
+            <span class="case-badge mvp">MVP</span>
+          </div>
+          <p class="case-desc">AI agent pipeline for a creative studio. Five specialized cores running locally on the client's own hardware.</p>
+        </div>
+        <div class="case-toggle">+</div>
+      </div>
+      <div class="case-body"><div class="case-body-inner">
+        <div class="case-card">
+          <div class="case-psr"><p class="case-psr-label">Problem</p><p>Solo creative managing art, animation, story, and production across dozens of assets. Everything manual, nothing connected.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Solution</p><p>Five AI cores (Data, Art, Animation, Coach, Story) orchestrated by a Production Coordinator agent. File watchers for human-in-the-loop control. Runs on a local RTX 5080.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Result</p><p>Reusable pipeline architecture. Markdown-based knowledge system. All IP stays on the client's machine. Template ready for other creative studios.</p></div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag">Local LLM</span>
+          <span class="case-tag">RAG</span>
+          <span class="case-tag">OpenClaw</span>
+          <span class="case-tag">Python</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case fade" onclick="this.classList.toggle('open')">
+      <div class="case-glow"></div>
+      <div class="case-header">
+        <div>
+          <div class="case-meta">
+            <h3 class="case-title">ALLIGN</h3>
+            <span class="case-badge mvp">MVP</span>
+          </div>
+          <p class="case-desc">Unified project management for Nordic contractors. Replacing fragmented SaaS with a single mobile-first platform.</p>
+        </div>
+        <div class="case-toggle">+</div>
+      </div>
+      <div class="case-body"><div class="case-body-inner">
+        <div class="case-card">
+          <div class="case-psr"><p class="case-psr-label">Problem</p><p>Nordic contractors using separate tools for time tracking, planning, procurement, quality control. No single source of truth.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Solution</p><p>Built a unified platform covering project and tender management, workforce planning with drag-drop shifts, quality control, procurement with PO matching, employee management, and time tracking. PWA for field use.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Result</p><p>MVP delivered. Six modules replacing five separate subscriptions. Full mobile PWA so foremen use it on-site. Integrated with E-conomic for accounting.</p></div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag">Next.js</span>
+          <span class="case-tag">Node.js</span>
+          <span class="case-tag">Supabase</span>
+          <span class="case-tag">PWA</span>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case fade" onclick="this.classList.toggle('open')">
+      <div class="case-glow"></div>
+      <div class="case-header">
+        <div>
+          <div class="case-meta">
+            <h3 class="case-title">RecruitOS</h3>
+            <span class="case-badge beta">Beta</span>
+          </div>
+          <p class="case-desc">Chrome extension that captures, enriches, and tracks candidates automatically. One-click from LinkedIn to pipeline.</p>
+        </div>
+        <div class="case-toggle">+</div>
+      </div>
+      <div class="case-body"><div class="case-body-inner">
+        <div class="case-card">
+          <div class="case-psr"><p class="case-psr-label">Problem</p><p>Recruiters copy-pasting between LinkedIn, spreadsheets, and ATS systems. Losing candidates in the process.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Solution</p><p>Browser extension that captures candidate profiles in one click, enriches with public data, and tracks through a lightweight pipeline. No context switching.</p></div>
+          <div class="case-psr"><p class="case-psr-label">Result</p><p>In beta with early users. Capture-to-pipeline in under 3 seconds. Automatic enrichment from public sources.</p></div>
+        </div>
+        <div class="case-tags">
+          <span class="case-tag">Chrome Extension</span>
+          <span class="case-tag">TypeScript</span>
+          <span class="case-tag">AI Enrichment</span>
+        </div>
+      </div></div>
+    </div>
+
+    </div><!-- /cases-list -->
   </div>
 </section>
 
@@ -280,15 +709,21 @@ footer a:hover{color:var(--cream)}
     <div class="team-grid fade">
       <div class="member">
         <p class="name">Sven Arnarsson</p>
-        <p class="role">Technology and AI infrastructure</p>
+        <p class="title">Technology</p>
+        <p class="role">Full-stack and AI infrastructure. 10 years shipping products. Barry Energy, Bright Star Studios, Seven ApS. Guest lecturer at DTU.</p>
+        <a class="member-link" href="https://www.linkedin.com/in/svenarnarsson" target="_blank">/in/svenarnarsson &rarr;</a>
       </div>
       <div class="member">
         <p class="name">Hjalti H. Jonsson</p>
-        <p class="role">Commercial and operations</p>
+        <p class="title">Commercial</p>
+        <p class="role">Business development and operations. Client relationships, project scoping, and commercial strategy.</p>
+        <a class="member-link" href="https://www.linkedin.com/in/hjalti-jonsson/" target="_blank">/in/hjalti-jonsson &rarr;</a>
       </div>
       <div class="member">
-        <p class="name">Christoffer James</p>
-        <p class="role">Product and enterprise, PhD DTU</p>
+        <p class="name">Christopher James L&uuml;scher</p>
+        <p class="title">Product</p>
+        <p class="role">Enterprise product and IP strategy. PhD from DTU. Founder of Patentopia. Deep domain expertise in research commercialization.</p>
+        <a class="member-link" href="https://www.linkedin.com/in/christopher-james-l%C3%BCscher/" target="_blank">/in/christopher-james &rarr;</a>
       </div>
     </div>
   </div>
@@ -309,10 +744,47 @@ footer a:hover{color:var(--cream)}
 </footer>
 
 <script>
+// fade-in observer
 const obs=new IntersectionObserver(es=>{
   es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
 },{threshold:.15});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+// process timeline draw
+const proc=document.querySelector('.process');
+if(proc){
+  const pobs=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('drawn');pobs.unobserve(e.target)}})
+  },{threshold:.3});
+  pobs.observe(proc);
+}
+
+// contrast 663 count-up
+const oldStat=document.querySelector('.contrast-col.old .contrast-stat');
+if(oldStat){
+  const cobs=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        cobs.unobserve(e.target);
+        let n=0;const target=663;const dur=1200;const start=performance.now();
+        oldStat.style.textDecoration='none';
+        function tick(now){
+          const p=Math.min((now-start)/dur,1);
+          const ease=1-Math.pow(1-p,3);
+          n=Math.round(target*ease);
+          oldStat.textContent=n;
+          if(p<1){requestAnimationFrame(tick)}
+          else{
+            oldStat.style.textDecoration='line-through';
+            oldStat.style.textDecorationColor='#D4643A44';
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+    })
+  },{threshold:.5});
+  cobs.observe(oldStat);
+}
 </script>
 
 </body>

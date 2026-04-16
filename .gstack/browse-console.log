@@ -1,0 +1,52 @@
+[2026-04-13T17:00:15.297Z] [error] Failed to load resource: the server responded with a status of 999 ()
+[2026-04-13T17:00:15.765Z] [log] Error
+[2026-04-13T17:00:16.443Z] [warning] [.WebGL-0x3d8400149c00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2026-04-13T17:00:16.444Z] [warning] [.WebGL-0x3d8400148a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2026-04-13T17:00:16.464Z] [warning] [.WebGL-0x3d8400144e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[2026-04-13T17:00:16.464Z] [warning] [.WebGL-0x3d84045ca400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[2026-04-13T17:00:16.468Z] [warning] Element with id: dust-var-locale not found
+[2026-04-13T17:00:16.602Z] [warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[2026-04-13T17:00:16.741Z] [log] %c EvalError
+    at oj (https://client.protechts.net/PXdOjV695v/main.min.js:2:73282)
+    at ql (https://client.protechts.net/PXdOjV695v/main.min.js:2:80164)
+    at Jk (https://client.protechts.net/PXdOjV695v/main.min.js:2:230727)
+    at Ji (https://client.protechts.net/PXdOjV695v/main.min.js:2:230338)
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:232090
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:232096
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:232561
+[2026-04-13T17:00:16.897Z] [warning] [GSI_LOGGER]: Your client application may not display the Google One Tap in its default position. When FedCM becomes mandatory, One Tap only displays in the default position. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#layout
+[2026-04-13T17:00:16.897Z] [warning] [GSI_LOGGER]: Your client application uses one of the Google One Tap prompt UI status methods that may stop functioning when FedCM becomes mandatory. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#display_moment and https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#skipped_moment
+[2026-04-13T17:00:16.897Z] [warning] [GSI_LOGGER]: Currently, you disable FedCM on Google One Tap. FedCM for One Tap will become mandatory starting Oct 2024, and you won’t be able to disable it. Refer to the migration guide to update your code accordingly to ensure users will not be blocked from logging in. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration
+[2026-04-13T17:00:16.900Z] [warning] [GSI_LOGGER]: Currently, you disable FedCM on Google One Tap. FedCM for One Tap will become mandatory starting Oct 2024, and you won’t be able to disable it. Refer to the migration guide to update your code accordingly to ensure users will not be blocked from logging in. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration
+[2026-04-13T17:00:16.901Z] [debug] TMS load event sent successfully: 
+[2026-04-13T17:00:16.929Z] [warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[2026-04-13T17:00:16.936Z] [warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[2026-04-13T17:00:17.009Z] [error] Access to XMLHttpRequest at 'https://ps.azurewaf.microsoft.com/event?correlationId=401125b1-6e23-46ff-ba52-9f0d0d7b8e04&type=ping' from origin 'https://www.linkedin.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+[2026-04-13T17:00:17.009Z] [error] Failed to load resource: net::ERR_FAILED
+[2026-04-13T17:00:31.987Z] [error] Access to XMLHttpRequest at 'https://ps.azurewaf.microsoft.com/event?correlationId=401125b1-6e23-46ff-ba52-9f0d0d7b8e04&type=data' from origin 'https://www.linkedin.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+[2026-04-13T17:00:31.987Z] [error] Failed to load resource: net::ERR_FAILED
+[2026-04-13T17:00:32.011Z] [error] Failed to load resource: the server responded with a status of 999 ()
+[2026-04-13T17:00:32.725Z] [log] Error
+[2026-04-13T17:00:33.273Z] [warning] Element with id: dust-var-locale not found
+[2026-04-13T17:00:33.328Z] [warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[2026-04-13T17:00:33.377Z] [warning] [GSI_LOGGER]: Your client application may not display the Google One Tap in its default position. When FedCM becomes mandatory, One Tap only displays in the default position. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#layout
+[2026-04-13T17:00:33.377Z] [warning] [GSI_LOGGER]: Your client application uses one of the Google One Tap prompt UI status methods that may stop functioning when FedCM becomes mandatory. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#display_moment and https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#skipped_moment
+[2026-04-13T17:00:33.380Z] [warning] [GSI_LOGGER]: Currently, you disable FedCM on Google One Tap. FedCM for One Tap will become mandatory starting Oct 2024, and you won’t be able to disable it. Refer to the migration guide to update your code accordingly to ensure users will not be blocked from logging in. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration
+[2026-04-13T17:00:33.383Z] [warning] [GSI_LOGGER]: Currently, you disable FedCM on Google One Tap. FedCM for One Tap will become mandatory starting Oct 2024, and you won’t be able to disable it. Refer to the migration guide to update your code accordingly to ensure users will not be blocked from logging in. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration
+[2026-04-13T17:00:33.395Z] [log] %c EvalError
+    at oj (https://client.protechts.net/PXdOjV695v/main.min.js:2:73282)
+    at ql (https://client.protechts.net/PXdOjV695v/main.min.js:2:80164)
+    at Jk (https://client.protechts.net/PXdOjV695v/main.min.js:2:230727)
+    at Ji (https://client.protechts.net/PXdOjV695v/main.min.js:2:230338)
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:232090
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:232096
+    at https://client.protechts.net/PXdOjV695v/main.min.js:2:232561
+[2026-04-13T17:00:33.595Z] [warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[2026-04-13T17:00:33.597Z] [warning] Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
+[2026-04-13T17:00:33.624Z] [error] Access to XMLHttpRequest at 'https://ps.azurewaf.microsoft.com/event?correlationId=a7ce426c-5427-43a0-83e4-8c54cfbe9ea5&type=ping' from origin 'https://www.linkedin.com' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+[2026-04-13T17:00:33.624Z] [error] Failed to load resource: net::ERR_FAILED
+[2026-04-13T17:00:33.649Z] [debug] TMS load event sent successfully: 
+[2026-04-13T17:00:41.618Z] [error] Failed to load resource: the server responded with a status of 429 ()
+[2026-04-13T17:00:41.915Z] [warning] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+[2026-04-13T17:00:42.418Z] [warning] An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+[2026-04-13T17:01:11.684Z] [error] Failed to load resource: the server responded with a status of 404 ()
